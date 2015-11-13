@@ -12,10 +12,34 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
+	
+	var _alarmTimeMonitor = AlarmTimeMonitor()
+	var _alarmPlayer      = AlarmPlayer()
 
-
-	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	func application(application: UIApplication, var didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
+		
+		// バックグラウンドオーディオ
+		let player = SoundPlayer()
+		player.backgroundAudioON()
+		// ローカル通知
+		application.registerUserNotificationSettings(UIUserNotificationSettings(
+			forTypes:  [UIUserNotificationType.Sound, UIUserNotificationType.Alert],
+			categories: nil))
+		
+		if (launchOptions != nil) {
+			let val = launchOptions![UIApplicationLaunchOptionsLocalNotificationKey]
+			print(val)
+			
+			let notif:UILocalNotification? = launchOptions?.removeValueForKey(UIApplicationLaunchOptionsLocalNotificationKey) as? UILocalNotification //launchOptions.objectForKey(UIApplicationLaunchOptionsLocalNotificationKey) as? UILocalNotification
+			if (notif != nil) {
+				print("通知から起動しました")
+				// 通知を受け取った時の処理
+				//NSNotificationCenter.defaultCenter().postNotificationName("alarm", object: nil)
+				UIApplication.sharedApplication().cancelLocalNotification(notif!)
+			}
+		}
+		
 		return true
 	}
 
@@ -31,10 +55,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func applicationWillEnterForeground(application: UIApplication) {
 		// Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+		print("enter foreground.")
+		
+		if _alarmPlayer.isAlarmRinging() {
+			_alarmPlayer.stopAlarm()
+		}
 	}
 
 	func applicationDidBecomeActive(application: UIApplication) {
 		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+		//print("become active.")
 	}
 
 	func applicationWillTerminate(application: UIApplication) {

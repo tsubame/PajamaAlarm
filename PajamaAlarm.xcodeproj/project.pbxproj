@@ -8,12 +8,56 @@
 
 /* Begin PBXBuildFile section */
 		B8274C9E1BEBA716000FEADE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274C9D1BEBA716000FEADE /* AppDelegate.swift */; };
-		B8274CA01BEBA716000FEADE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274C9F1BEBA716000FEADE /* ViewController.swift */; };
+		B8274CA01BEBA716000FEADE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274C9F1BEBA716000FEADE /* HomeViewController.swift */; };
 		B8274CA31BEBA716000FEADE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8274CA11BEBA716000FEADE /* Main.storyboard */; };
 		B8274CA51BEBA716000FEADE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8274CA41BEBA716000FEADE /* Assets.xcassets */; };
 		B8274CA81BEBA716000FEADE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8274CA61BEBA716000FEADE /* LaunchScreen.storyboard */; };
 		B8274CB31BEBA716000FEADE /* PajamaAlarmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CB21BEBA716000FEADE /* PajamaAlarmTests.swift */; };
 		B8274CBE1BEBA716000FEADE /* PajamaAlarmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CBD1BEBA716000FEADE /* PajamaAlarmUITests.swift */; };
+		B8274CD01BEBA78D000FEADE /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CCF1BEBA78D000FEADE /* SoundPlayer.swift */; };
+		B8274CD11BEBA78D000FEADE /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CCF1BEBA78D000FEADE /* SoundPlayer.swift */; };
+		B8274CD31BEBA79A000FEADE /* mail.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8274CD21BEBA79A000FEADE /* mail.mp3 */; };
+		B8274CD41BEBA79A000FEADE /* mail.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8274CD21BEBA79A000FEADE /* mail.mp3 */; };
+		B8274CD61BEBA7C3000FEADE /* WeatherGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CD51BEBA7C3000FEADE /* WeatherGetter.swift */; };
+		B8274CD71BEBA7C3000FEADE /* WeatherGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CD51BEBA7C3000FEADE /* WeatherGetter.swift */; };
+		B8274CD91BEBA7FE000FEADE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CD81BEBA7FE000FEADE /* SwiftyJSON.swift */; };
+		B8274CDA1BEBA7FE000FEADE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CD81BEBA7FE000FEADE /* SwiftyJSON.swift */; };
+		B8274CE01BEBA934000FEADE /* hotaruN.png in Resources */ = {isa = PBXBuildFile; fileRef = B8274CDD1BEBA934000FEADE /* hotaruN.png */; };
+		B8274CE11BEBA934000FEADE /* hotaruN.png in Resources */ = {isa = PBXBuildFile; fileRef = B8274CDD1BEBA934000FEADE /* hotaruN.png */; };
+		B8274CE31BEBAC6D000FEADE /* ConstantsAndFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CE21BEBAC6D000FEADE /* ConstantsAndFunctions.swift */; };
+		B8274CE41BEBAC6D000FEADE /* ConstantsAndFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CE21BEBAC6D000FEADE /* ConstantsAndFunctions.swift */; };
+		B8274CEF1BEBB64F000FEADE /* hotaruS.png in Resources */ = {isa = PBXBuildFile; fileRef = B8274CEE1BEBB64F000FEADE /* hotaruS.png */; };
+		B8274CF01BEBB64F000FEADE /* hotaruS.png in Resources */ = {isa = PBXBuildFile; fileRef = B8274CEE1BEBB64F000FEADE /* hotaruS.png */; };
+		B857076B1BF0BF1A000E6639 /* ホーム画面背景.png in Resources */ = {isa = PBXBuildFile; fileRef = B857076A1BF0BF1A000E6639 /* ホーム画面背景.png */; };
+		B857076E1BF1FD0E000E6639 /* buttonVoice.png in Resources */ = {isa = PBXBuildFile; fileRef = B857076C1BF1FD0E000E6639 /* buttonVoice.png */; };
+		B857076F1BF1FD0E000E6639 /* buttonAlarm.png in Resources */ = {isa = PBXBuildFile; fileRef = B857076D1BF1FD0E000E6639 /* buttonAlarm.png */; };
+		B85707741BF2034F000E6639 /* AutoLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85707731BF2034F000E6639 /* AutoLayoutHelper.swift */; };
+		B87DC8B41BF4D754005FBC8C /* AlarmTimeMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87DC8B31BF4D754005FBC8C /* AlarmTimeMonitor.swift */; };
+		B87DC8B51BF4D754005FBC8C /* AlarmTimeMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87DC8B31BF4D754005FBC8C /* AlarmTimeMonitor.swift */; };
+		B87DC8B81BF4D7FF005FBC8C /* nosound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B87DC8B71BF4D7FF005FBC8C /* nosound.mp3 */; };
+		B87DC8B91BF4D7FF005FBC8C /* nosound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B87DC8B71BF4D7FF005FBC8C /* nosound.mp3 */; };
+		B87DC8BD1BF4F4E4005FBC8C /* 森島はるか-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B87DC8BB1BF4F4E4005FBC8C /* 森島はるか-1.mp3 */; };
+		B87DC8BE1BF4F4E4005FBC8C /* 絢辻詞-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B87DC8BC1BF4F4E4005FBC8C /* 絢辻詞-1.mp3 */; };
+		B87DC8C11BF4F542005FBC8C /* AlarmPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87DC8C01BF4F542005FBC8C /* AlarmPlayer.swift */; };
+		B87DC8C31BF4FC5D005FBC8C /* koron.wav in Resources */ = {isa = PBXBuildFile; fileRef = B87DC8C21BF4FC5D005FBC8C /* koron.wav */; };
+		B87DC8C61BF5BD81005FBC8C /* 七咲逢-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B87DC8C41BF5BD81005FBC8C /* 七咲逢-1.mp3 */; };
+		B87DC8C71BF5BD81005FBC8C /* 七咲逢-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B87DC8C51BF5BD81005FBC8C /* 七咲逢-2.mp3 */; };
+		B883FF541BECE9410051F0F4 /* hotaruS-b1.png in Resources */ = {isa = PBXBuildFile; fileRef = B883FF521BECE9410051F0F4 /* hotaruS-b1.png */; };
+		B883FF551BECE9410051F0F4 /* hotaruS-b2.png in Resources */ = {isa = PBXBuildFile; fileRef = B883FF531BECE9410051F0F4 /* hotaruS-b2.png */; };
+		B8A7A4591BF4AF55003A8723 /* SetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7A4581BF4AF55003A8723 /* SetAlarmViewController.swift */; };
+		B8A7A45A1BF4AF55003A8723 /* SetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7A4581BF4AF55003A8723 /* SetAlarmViewController.swift */; };
+		B8A7A45C1BF4B2F5003A8723 /* アラームセット画面.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A7A45B1BF4B2F5003A8723 /* アラームセット画面.png */; };
+		B8A7A45D1BF4B2F5003A8723 /* アラームセット画面.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A7A45B1BF4B2F5003A8723 /* アラームセット画面.png */; };
+		B8A7A45F1BF4B3DD003A8723 /* AutoLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85707731BF2034F000E6639 /* AutoLayoutHelper.swift */; };
+		B8A7A4611BF4B3FF003A8723 /* AlarmTimePickersUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7A4601BF4B3FF003A8723 /* AlarmTimePickersUIView.swift */; };
+		B8A7A4621BF4B3FF003A8723 /* AlarmTimePickersUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7A4601BF4B3FF003A8723 /* AlarmTimePickersUIView.swift */; };
+		B8A7A4641BF4B968003A8723 /* set.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A7A4631BF4B968003A8723 /* set.png */; };
+		B8A7A4651BF4B968003A8723 /* set.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A7A4631BF4B968003A8723 /* set.png */; };
+		B8E1BCF91BEC4B14001C7C37 /* hotaruB1.png in Resources */ = {isa = PBXBuildFile; fileRef = B8E1BCF71BEC4B14001C7C37 /* hotaruB1.png */; };
+		B8E1BCFA1BEC4B14001C7C37 /* hotaruB2.png in Resources */ = {isa = PBXBuildFile; fileRef = B8E1BCF81BEC4B14001C7C37 /* hotaruB2.png */; };
+		B8E1BCFE1BECAB86001C7C37 /* hotaruS-a.png in Resources */ = {isa = PBXBuildFile; fileRef = B8E1BCFB1BECAB86001C7C37 /* hotaruS-a.png */; };
+		B8E1BCFF1BECAB86001C7C37 /* hotaruS-c.png in Resources */ = {isa = PBXBuildFile; fileRef = B8E1BCFC1BECAB86001C7C37 /* hotaruS-c.png */; };
+		B8E1BD001BECAB86001C7C37 /* hotaruS-b3.png in Resources */ = {isa = PBXBuildFile; fileRef = B8E1BCFD1BECAB86001C7C37 /* hotaruS-b3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +80,7 @@
 /* Begin PBXFileReference section */
 		B8274C9A1BEBA716000FEADE /* PajamaAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PajamaAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8274C9D1BEBA716000FEADE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B8274C9F1BEBA716000FEADE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B8274C9F1BEBA716000FEADE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B8274CA21BEBA716000FEADE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B8274CA41BEBA716000FEADE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8274CA71BEBA716000FEADE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +91,36 @@
 		B8274CB91BEBA716000FEADE /* PajamaAlarmUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PajamaAlarmUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8274CBD1BEBA716000FEADE /* PajamaAlarmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PajamaAlarmUITests.swift; sourceTree = "<group>"; };
 		B8274CBF1BEBA716000FEADE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8274CCF1BEBA78D000FEADE /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		B8274CD21BEBA79A000FEADE /* mail.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mail.mp3; sourceTree = "<group>"; };
+		B8274CD51BEBA7C3000FEADE /* WeatherGetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherGetter.swift; sourceTree = "<group>"; };
+		B8274CD81BEBA7FE000FEADE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		B8274CDD1BEBA934000FEADE /* hotaruN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotaruN.png; sourceTree = "<group>"; };
+		B8274CE21BEBAC6D000FEADE /* ConstantsAndFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsAndFunctions.swift; sourceTree = "<group>"; };
+		B8274CEE1BEBB64F000FEADE /* hotaruS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotaruS.png; sourceTree = "<group>"; };
+		B857076A1BF0BF1A000E6639 /* ホーム画面背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ホーム画面背景.png"; sourceTree = "<group>"; };
+		B857076C1BF1FD0E000E6639 /* buttonVoice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonVoice.png; sourceTree = "<group>"; };
+		B857076D1BF1FD0E000E6639 /* buttonAlarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonAlarm.png; sourceTree = "<group>"; };
+		B85707731BF2034F000E6639 /* AutoLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutHelper.swift; sourceTree = "<group>"; };
+		B87DC8B31BF4D754005FBC8C /* AlarmTimeMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTimeMonitor.swift; sourceTree = "<group>"; };
+		B87DC8B71BF4D7FF005FBC8C /* nosound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = nosound.mp3; sourceTree = "<group>"; };
+		B87DC8BB1BF4F4E4005FBC8C /* 森島はるか-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "森島はるか-1.mp3"; sourceTree = "<group>"; };
+		B87DC8BC1BF4F4E4005FBC8C /* 絢辻詞-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "絢辻詞-1.mp3"; sourceTree = "<group>"; };
+		B87DC8C01BF4F542005FBC8C /* AlarmPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmPlayer.swift; sourceTree = "<group>"; };
+		B87DC8C21BF4FC5D005FBC8C /* koron.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = koron.wav; sourceTree = "<group>"; };
+		B87DC8C41BF5BD81005FBC8C /* 七咲逢-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "七咲逢-1.mp3"; sourceTree = "<group>"; };
+		B87DC8C51BF5BD81005FBC8C /* 七咲逢-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "七咲逢-2.mp3"; sourceTree = "<group>"; };
+		B883FF521BECE9410051F0F4 /* hotaruS-b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hotaruS-b1.png"; sourceTree = "<group>"; };
+		B883FF531BECE9410051F0F4 /* hotaruS-b2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hotaruS-b2.png"; sourceTree = "<group>"; };
+		B8A7A4581BF4AF55003A8723 /* SetAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetAlarmViewController.swift; sourceTree = "<group>"; };
+		B8A7A45B1BF4B2F5003A8723 /* アラームセット画面.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "アラームセット画面.png"; sourceTree = "<group>"; };
+		B8A7A4601BF4B3FF003A8723 /* AlarmTimePickersUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTimePickersUIView.swift; sourceTree = "<group>"; };
+		B8A7A4631BF4B968003A8723 /* set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set.png; sourceTree = "<group>"; };
+		B8E1BCF71BEC4B14001C7C37 /* hotaruB1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotaruB1.png; sourceTree = "<group>"; };
+		B8E1BCF81BEC4B14001C7C37 /* hotaruB2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotaruB2.png; sourceTree = "<group>"; };
+		B8E1BCFB1BECAB86001C7C37 /* hotaruS-a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hotaruS-a.png"; sourceTree = "<group>"; };
+		B8E1BCFC1BECAB86001C7C37 /* hotaruS-c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hotaruS-c.png"; sourceTree = "<group>"; };
+		B8E1BCFD1BECAB86001C7C37 /* hotaruS-b3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hotaruS-b3.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +171,15 @@
 		B8274C9C1BEBA716000FEADE /* PajamaAlarm */ = {
 			isa = PBXGroup;
 			children = (
+				B85707721BF20317000E6639 /* View */,
+				B8274CCB1BEBA733000FEADE /* Controller */,
+				B8274CCC1BEBA73A000FEADE /* Model */,
 				B8274C9D1BEBA716000FEADE /* AppDelegate.swift */,
-				B8274C9F1BEBA716000FEADE /* ViewController.swift */,
+				B8274CE21BEBAC6D000FEADE /* ConstantsAndFunctions.swift */,
 				B8274CA11BEBA716000FEADE /* Main.storyboard */,
 				B8274CA41BEBA716000FEADE /* Assets.xcassets */,
 				B8274CA61BEBA716000FEADE /* LaunchScreen.storyboard */,
-				B8274CA91BEBA716000FEADE /* Info.plist */,
+				B8274CCD1BEBA740000FEADE /* Resources */,
 			);
 			path = PajamaAlarm;
 			sourceTree = "<group>";
@@ -123,6 +200,97 @@
 				B8274CBF1BEBA716000FEADE /* Info.plist */,
 			);
 			path = PajamaAlarmUITests;
+			sourceTree = "<group>";
+		};
+		B8274CCB1BEBA733000FEADE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B8274C9F1BEBA716000FEADE /* HomeViewController.swift */,
+				B8A7A4581BF4AF55003A8723 /* SetAlarmViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		B8274CCC1BEBA73A000FEADE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B8274CCF1BEBA78D000FEADE /* SoundPlayer.swift */,
+				B87DC8B31BF4D754005FBC8C /* AlarmTimeMonitor.swift */,
+				B87DC8C01BF4F542005FBC8C /* AlarmPlayer.swift */,
+				B8274CD51BEBA7C3000FEADE /* WeatherGetter.swift */,
+				B85707731BF2034F000E6639 /* AutoLayoutHelper.swift */,
+				B87DC8BF1BF4F4FE005FBC8C /* Vendor */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		B8274CCD1BEBA740000FEADE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B87DC8BA1BF4F4CD005FBC8C /* voice */,
+				B87DC8B61BF4D7D5005FBC8C /* se */,
+				B8274CDB1BEBA92C000FEADE /* img */,
+				B8274CA91BEBA716000FEADE /* Info.plist */,
+				B8274CD21BEBA79A000FEADE /* mail.mp3 */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		B8274CDB1BEBA92C000FEADE /* img */ = {
+			isa = PBXGroup;
+			children = (
+				B8A7A4631BF4B968003A8723 /* set.png */,
+				B8A7A45B1BF4B2F5003A8723 /* アラームセット画面.png */,
+				B857076C1BF1FD0E000E6639 /* buttonVoice.png */,
+				B857076D1BF1FD0E000E6639 /* buttonAlarm.png */,
+				B857076A1BF0BF1A000E6639 /* ホーム画面背景.png */,
+				B8E1BCFB1BECAB86001C7C37 /* hotaruS-a.png */,
+				B883FF521BECE9410051F0F4 /* hotaruS-b1.png */,
+				B883FF531BECE9410051F0F4 /* hotaruS-b2.png */,
+				B8E1BCFD1BECAB86001C7C37 /* hotaruS-b3.png */,
+				B8E1BCFC1BECAB86001C7C37 /* hotaruS-c.png */,
+				B8274CEE1BEBB64F000FEADE /* hotaruS.png */,
+				B8E1BCF71BEC4B14001C7C37 /* hotaruB1.png */,
+				B8E1BCF81BEC4B14001C7C37 /* hotaruB2.png */,
+				B8274CDD1BEBA934000FEADE /* hotaruN.png */,
+			);
+			name = img;
+			sourceTree = "<group>";
+		};
+		B85707721BF20317000E6639 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B8A7A4601BF4B3FF003A8723 /* AlarmTimePickersUIView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		B87DC8B61BF4D7D5005FBC8C /* se */ = {
+			isa = PBXGroup;
+			children = (
+				B87DC8B71BF4D7FF005FBC8C /* nosound.mp3 */,
+				B87DC8C21BF4FC5D005FBC8C /* koron.wav */,
+			);
+			name = se;
+			sourceTree = "<group>";
+		};
+		B87DC8BA1BF4F4CD005FBC8C /* voice */ = {
+			isa = PBXGroup;
+			children = (
+				B87DC8C41BF5BD81005FBC8C /* 七咲逢-1.mp3 */,
+				B87DC8C51BF5BD81005FBC8C /* 七咲逢-2.mp3 */,
+				B87DC8BB1BF4F4E4005FBC8C /* 森島はるか-1.mp3 */,
+				B87DC8BC1BF4F4E4005FBC8C /* 絢辻詞-1.mp3 */,
+			);
+			name = voice;
+			sourceTree = "<group>";
+		};
+		B87DC8BF1BF4F4FE005FBC8C /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				B8274CD81BEBA7FE000FEADE /* SwiftyJSON.swift */,
+			);
+			name = Vendor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +362,11 @@
 					B8274C991BEBA716000FEADE = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = AXM98ZS3RD;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					B8274CAD1BEBA716000FEADE = {
 						CreatedOnToolsVersion = 7.1;
@@ -232,9 +405,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B87DC8C31BF4FC5D005FBC8C /* koron.wav in Resources */,
+				B8A7A4641BF4B968003A8723 /* set.png in Resources */,
+				B8274CE01BEBA934000FEADE /* hotaruN.png in Resources */,
+				B8E1BCFF1BECAB86001C7C37 /* hotaruS-c.png in Resources */,
+				B883FF541BECE9410051F0F4 /* hotaruS-b1.png in Resources */,
+				B87DC8C71BF5BD81005FBC8C /* 七咲逢-2.mp3 in Resources */,
+				B87DC8BD1BF4F4E4005FBC8C /* 森島はるか-1.mp3 in Resources */,
+				B883FF551BECE9410051F0F4 /* hotaruS-b2.png in Resources */,
 				B8274CA81BEBA716000FEADE /* LaunchScreen.storyboard in Resources */,
+				B87DC8B81BF4D7FF005FBC8C /* nosound.mp3 in Resources */,
+				B8A7A45C1BF4B2F5003A8723 /* アラームセット画面.png in Resources */,
+				B8E1BCFE1BECAB86001C7C37 /* hotaruS-a.png in Resources */,
+				B8274CEF1BEBB64F000FEADE /* hotaruS.png in Resources */,
+				B857076E1BF1FD0E000E6639 /* buttonVoice.png in Resources */,
+				B857076B1BF0BF1A000E6639 /* ホーム画面背景.png in Resources */,
+				B87DC8C61BF5BD81005FBC8C /* 七咲逢-1.mp3 in Resources */,
+				B8274CD31BEBA79A000FEADE /* mail.mp3 in Resources */,
 				B8274CA51BEBA716000FEADE /* Assets.xcassets in Resources */,
+				B8E1BCFA1BEC4B14001C7C37 /* hotaruB2.png in Resources */,
+				B8E1BCF91BEC4B14001C7C37 /* hotaruB1.png in Resources */,
+				B857076F1BF1FD0E000E6639 /* buttonAlarm.png in Resources */,
 				B8274CA31BEBA716000FEADE /* Main.storyboard in Resources */,
+				B8E1BD001BECAB86001C7C37 /* hotaruS-b3.png in Resources */,
+				B87DC8BE1BF4F4E4005FBC8C /* 絢辻詞-1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +436,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8274CF01BEBB64F000FEADE /* hotaruS.png in Resources */,
+				B87DC8B91BF4D7FF005FBC8C /* nosound.mp3 in Resources */,
+				B8274CE11BEBA934000FEADE /* hotaruN.png in Resources */,
+				B8A7A45D1BF4B2F5003A8723 /* アラームセット画面.png in Resources */,
+				B8A7A4651BF4B968003A8723 /* set.png in Resources */,
+				B8274CD41BEBA79A000FEADE /* mail.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +459,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8274CA01BEBA716000FEADE /* ViewController.swift in Sources */,
+				B85707741BF2034F000E6639 /* AutoLayoutHelper.swift in Sources */,
+				B87DC8C11BF4F542005FBC8C /* AlarmPlayer.swift in Sources */,
+				B8274CA01BEBA716000FEADE /* HomeViewController.swift in Sources */,
+				B8274CD61BEBA7C3000FEADE /* WeatherGetter.swift in Sources */,
+				B8274CD01BEBA78D000FEADE /* SoundPlayer.swift in Sources */,
+				B8274CD91BEBA7FE000FEADE /* SwiftyJSON.swift in Sources */,
+				B87DC8B41BF4D754005FBC8C /* AlarmTimeMonitor.swift in Sources */,
+				B8A7A4591BF4AF55003A8723 /* SetAlarmViewController.swift in Sources */,
 				B8274C9E1BEBA716000FEADE /* AppDelegate.swift in Sources */,
+				B8A7A4611BF4B3FF003A8723 /* AlarmTimePickersUIView.swift in Sources */,
+				B8274CE31BEBAC6D000FEADE /* ConstantsAndFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +477,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8A7A45F1BF4B3DD003A8723 /* AutoLayoutHelper.swift in Sources */,
+				B8274CE41BEBAC6D000FEADE /* ConstantsAndFunctions.swift in Sources */,
+				B8274CD11BEBA78D000FEADE /* SoundPlayer.swift in Sources */,
+				B8274CD71BEBA7C3000FEADE /* WeatherGetter.swift in Sources */,
+				B87DC8B51BF4D754005FBC8C /* AlarmTimeMonitor.swift in Sources */,
+				B8A7A45A1BF4AF55003A8723 /* SetAlarmViewController.swift in Sources */,
+				B8A7A4621BF4B3FF003A8723 /* AlarmTimePickersUIView.swift in Sources */,
 				B8274CB31BEBA716000FEADE /* PajamaAlarmTests.swift in Sources */,
+				B8274CDA1BEBA7FE000FEADE /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +617,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = PajamaAlarm/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Ts.PajamaAlarm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -411,7 +630,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = PajamaAlarm/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Ts.PajamaAlarm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -485,6 +706,7 @@
 				B8274CC41BEBA716000FEADE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B8274CC51BEBA716000FEADE /* Build configuration list for PBXNativeTarget "PajamaAlarmTests" */ = {
 			isa = XCConfigurationList;
@@ -493,6 +715,7 @@
 				B8274CC71BEBA716000FEADE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B8274CC81BEBA716000FEADE /* Build configuration list for PBXNativeTarget "PajamaAlarmUITests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +724,7 @@
 				B8274CCA1BEBA716000FEADE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

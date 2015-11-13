@@ -1,25 +1,119 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="PajamaAlarm" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ホーム画面背景.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lwb-Qh-otz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="hotaruN.png" translatesAutoresizingMaskIntoConstraints="NO" id="4r1-T0-xg2">
+                                <rect key="frame" x="0.0" y="-44" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rw-YY-uo9">
+                                <rect key="frame" x="0.0" y="443" width="188" height="134"/>
+                                <state key="normal" image="buttonAlarm.png"/>
+                                <connections>
+                                    <segue destination="wtS-Wg-x38" kind="presentation" id="nDS-0i-jYu"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cPU-yr-XRE">
+                                <rect key="frame" x="48" y="106" width="269" height="293"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCe-7J-06R">
+                                <rect key="frame" x="187" y="443" width="188" height="134"/>
+                                <state key="normal" image="buttonVoice.png"/>
+                                <connections>
+                                    <action selector="AlarmButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LBa-AT-dcI"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4r1-T0-xg2" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="6xU-HK-msj"/>
+                            <constraint firstItem="cPU-yr-XRE" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="A8i-Ll-eqW"/>
+                            <constraint firstItem="4r1-T0-xg2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JMu-dQ-zlM"/>
+                            <constraint firstItem="4r1-T0-xg2" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="UE7-tj-EEt"/>
+                            <constraint firstItem="cPU-yr-XRE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rhK-yk-oyj"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="_charaImageView" destination="4r1-T0-xg2" id="wEP-hO-eYm"/>
+                        <outlet property="_sampleDialogUIView" destination="cPU-yr-XRE" id="HTf-OL-ZR0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="42.5" y="410.5"/>
+        </scene>
+        <!--Set Alarm View Controller-->
+        <scene sceneID="Ttq-nu-AdA">
+            <objects>
+                <viewController id="wtS-Wg-x38" customClass="SetAlarmViewController" customModule="PajamaAlarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BEg-1d-ZgC"/>
+                        <viewControllerLayoutGuide type="bottom" id="mnM-bN-lme"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ULO-y9-gwf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="アラームセット画面.png" translatesAutoresizingMaskIntoConstraints="NO" id="i85-5x-gFJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MR7-fH-frW" customClass="AlarmTimePickersUIView" customModule="PajamaAlarm" customModuleProvider="target">
+                                <rect key="frame" x="30" y="131" width="286" height="250"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMr-o3-iEs">
+                                <rect key="frame" x="102" y="389" width="143" height="63"/>
+                                <state key="normal" image="set.png"/>
+                                <connections>
+                                    <action selector="_setButtonClicked:" destination="wtS-Wg-x38" eventType="touchUpInside" id="yb0-Ir-JSG"/>
+                                    <segue destination="2hY-uV-3ih" kind="unwind" unwindAction="backToHome:" id="Sty-WL-6FU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MR7-fH-frW" firstAttribute="centerX" secondItem="ULO-y9-gwf" secondAttribute="centerX" id="4UP-kn-On0"/>
+                            <constraint firstItem="i85-5x-gFJ" firstAttribute="width" secondItem="ULO-y9-gwf" secondAttribute="width" id="eCH-w1-HEm"/>
+                            <constraint firstItem="i85-5x-gFJ" firstAttribute="height" secondItem="ULO-y9-gwf" secondAttribute="height" id="zOd-VK-v19"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="_timePickersView" destination="MR7-fH-frW" id="NDN-su-cPp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uxh-Ih-wqt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="2hY-uV-3ih" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="500.5" y="410.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="buttonAlarm.png" width="375" height="267"/>
+        <image name="buttonVoice.png" width="375" height="267"/>
+        <image name="hotaruN.png" width="750" height="992"/>
+        <image name="set.png" width="143" height="63"/>
+        <image name="アラームセット画面.png" width="750" height="1334"/>
+        <image name="ホーム画面背景.png" width="750" height="1334"/>
+    </resources>
 </document>
