@@ -18,7 +18,7 @@ class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSour
 	// 定数
 	let VIEW_BACKGROUND_COLOR   = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
 	let PICKER_LOOP_COUNT       = 30	// ピッカーの項目のループ回数 偶数を指定
-	let PICKER_MINUTE_INTERVAL  = 1 //5		// ピッカーの分の表示間隔
+	let PICKER_MINUTE_INTERVAL  = 5 //5		// ピッカーの分の表示間隔
 	let PICKER_BORDER_COLOR     = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.2).CGColor
 	let PICKER_LABEL_TEXT_COLOR = UIColorFromRGB(0x5f352f)
 	let PICKER_LABEL_FONT       = "Avenir"
@@ -66,7 +66,6 @@ class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSour
 		selectCenterOfPicker()
 
 		// ピッカーのインデックスをアラーム時刻に
-		_alarmTime = NSUserDefaults.standardUserDefaults().objectForKey(PREF_KEY_ALARM_TIME) as? NSDate
 		alarmTimeToPicker()
 	}
 	
@@ -123,9 +122,12 @@ class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSour
 			}
 		}
 		
+		var interval = PICKER_MINUTE_INTERVAL
+		interval = SET_ALARM_MINUTE_INTERVAL
+		
 		// 分 0〜59を数分刻みに × 数ループ分
 		for _ in 0..<PICKER_LOOP_COUNT {
-			for var m = 0; m < 60; m += PICKER_MINUTE_INTERVAL {
+			for var m = 0; m < 60; m += interval {
 				let minStr = NSString(format: "%02d", m)
 				
 				_mPickerItems.append(minStr as String)
@@ -169,6 +171,8 @@ class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSour
 	
 	// アラーム時刻をピッカービューの選択項目に反映
 	func alarmTimeToPicker() {
+		_alarmTime = NSUserDefaults.standardUserDefaults().objectForKey(PREF_KEY_ALARM_TIME) as? NSDate
+		
 		if _alarmTime == nil {
 			return
 		}

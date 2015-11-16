@@ -16,29 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var _alarmTimeMonitor = AlarmTimeMonitor()
 	var _alarmPlayer      = AlarmPlayer()
 
-	func application(application: UIApplication, var didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		
 		// バックグラウンドオーディオ
 		let player = SoundPlayer()
 		player.backgroundAudioON()
-		// ローカル通知
-		application.registerUserNotificationSettings(UIUserNotificationSettings(
-			forTypes:  [UIUserNotificationType.Sound, UIUserNotificationType.Alert],
-			categories: nil))
-		
-		if (launchOptions != nil) {
-			let val = launchOptions![UIApplicationLaunchOptionsLocalNotificationKey]
-			print(val)
-			
-			let notif:UILocalNotification? = launchOptions?.removeValueForKey(UIApplicationLaunchOptionsLocalNotificationKey) as? UILocalNotification //launchOptions.objectForKey(UIApplicationLaunchOptionsLocalNotificationKey) as? UILocalNotification
-			if (notif != nil) {
-				print("通知から起動しました")
-				// 通知を受け取った時の処理
-				//NSNotificationCenter.defaultCenter().postNotificationName("alarm", object: nil)
-				UIApplication.sharedApplication().cancelLocalNotification(notif!)
-			}
-		}
+
+		// 挨拶
+		//NSNotificationCenter.defaultCenter().postNotificationName(NOTIF_PLAY_GREETING_VOICE, object: nil)
 		
 		return true
 	}
@@ -59,7 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		if _alarmPlayer.isAlarmRinging() {
 			_alarmPlayer.stopAlarm()
+			NSNotificationCenter.defaultCenter().postNotificationName(NOTIF_START_MORNING_VOICE, object: nil)
+			
+			return
 		}
+		
+		// 挨拶
+		NSNotificationCenter.defaultCenter().postNotificationName(NOTIF_PLAY_GREETING_VOICE, object: nil)
 	}
 
 	func applicationDidBecomeActive(application: UIApplication) {

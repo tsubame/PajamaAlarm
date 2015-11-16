@@ -18,7 +18,7 @@ class AlarmPlayer: NSObject {
     //var _loopCount     = 30
     //var _ringtone: String = ""
 	
-	var _alarmFile = "七咲逢-2.mp3"
+	var _alarmFile = "alarm-1.mp3"
 	
     var _soundPlayer = SoundPlayer()
 	
@@ -26,6 +26,7 @@ class AlarmPlayer: NSObject {
 	
 	var _isPlaying = false
 	
+	var _vibeTimer: NSTimer?
 	
     // 初期化
     override init() {
@@ -47,7 +48,7 @@ class AlarmPlayer: NSObject {
     // アラームを鳴らす
     func startAlarm() {
         if _playsVibe == true {
-            _timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "playVibe:", userInfo: nil, repeats: true)
+            _vibeTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "viberation:", userInfo: nil, repeats: true)
         }
 		
         _soundPlayer.play(_alarmFile)
@@ -67,17 +68,16 @@ class AlarmPlayer: NSObject {
 		return false
 	}
 	
-    // バイブレーションスタート
-    func playVibe(timer: NSTimer) {
-        AudioServicesPlaySystemSound(1011)
-        //AudioServicesPlaySystemSound(1352)
+    // バイブレーション
+    func viberation(timer: NSTimer) {
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
 	
 	
     //
     func stopAlarm() {
-        _timer?.invalidate()
-        _timer = nil
+        _vibeTimer?.invalidate()
+        _vibeTimer = nil
 		
 		/*
         if _soundPlayer.isBgmPlaying() {

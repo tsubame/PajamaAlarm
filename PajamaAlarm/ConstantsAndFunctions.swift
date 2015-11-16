@@ -36,6 +36,8 @@ let NOTIF_SET_ALARM_OFF = "setAlarmOff" // アラームがオフになった
 let NOTIF_START_ALARM   = "startAlarm"  // アラームスタート
 let NOTIF_STOP_ALARM    = "stopAlarm"   // アラームストップ
 
+let NOTIF_START_MORNING_VOICE = "startMorningVoice"   // おはようボイススタート
+let NOTIF_PLAY_GREETING_VOICE = "playGreetingVoice"  // 挨拶
 /*
 // アラーム直前
 let NOTIF_JUST_BEFORE_ALARM = "justBeforeAlarm"
@@ -58,6 +60,8 @@ let NOTIF_STOP_ALL_SOUND = "stopAllSound"
 let MUTE_SOUND_FILENAME = "nosound.mp3"
 // サウンド
 let ALARM_SOUND = "kirakira"
+
+let SET_ALARM_MINUTE_INTERVAL = 2
 
 //======================================================
 // その他

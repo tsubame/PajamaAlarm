@@ -103,7 +103,9 @@ class AlarmTimeMonitor: NSObject {
 			startAlarm()
 		}
 		
-		print("　\(leftSecond)")
+		if leftSecond % 5 == 0 {
+			print("　\(leftSecond)")
+		}
 	}
 	
 	//======================================================
