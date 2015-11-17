@@ -20,7 +20,7 @@ class AlarmTimeMonitor: NSObject {
     var _monitorTimer: NSTimer?      // 時刻監視用タイマー
     var _countDownTimer: NSTimer?    // カウントダウンタイマー
     var _soundPlayer   = SoundPlayer() // サウンド再生用
-	var _weatherGetter = WeatherGetter()
+	//var _weatherGetter = WeatherGetter()
 	
 	var _alarmTime: NSDate!
 	
@@ -80,10 +80,8 @@ class AlarmTimeMonitor: NSObject {
 		_monitorTimer?.invalidate()
 		_monitorTimer = nil
 		
-		_weatherGetter.getCityGeo({lat, long, _ in
-			print("IPアドレス経由での位置情報:\(lat) \(long)")
-		})
-		_weatherGetter.updateWeather()
+		// 天気取得用通知
+		NSNotificationCenter.defaultCenter().postNotificationName(NOTIF_UPDATE_WEATHER, object: nil)
 		
 		if isNowEqualsAlarmTime() {
 			startAlarm()
@@ -227,6 +225,5 @@ class AlarmTimeMonitor: NSObject {
         print("割り込み終了")
     }
 	
-
 	
 }

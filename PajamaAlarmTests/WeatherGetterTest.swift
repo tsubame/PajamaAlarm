@@ -25,10 +25,29 @@ class WeatherGetterTest: XCTestCase {
     }
 
     func testPref() {
+		let user = [
+			"Name": "Siro Chro",
+			"Age": "20",
+			"Sex": "male",
+		]
 		
-		let pref = NSUserDefaults.standardUserDefaults()
-		pref.setObject(_sut, forKey: "testPref")
-		pref.synchronize()
+		let nsDic = user as NSDictionary
+		
+		var path = (NSHomeDirectory() as NSString).stringByAppendingPathComponent("Documents")
+		path = (path as NSString).stringByAppendingPathComponent("prefTest23")
+		//let res  = nsDic.writeToFile(path, atomically: true)
+		let data = NSKeyedArchiver.archivedDataWithRootObject(nsDic)
+		data.writeToFile(path, atomically: true)
+		
+		/*
+		if res == true {
+			print("success!")
+		} else {
+			print("failure!")
+		}*/
+		//let pref = NSUserDefaults.standardUserDefaults()
+		//pref.setObject(_sut, forKey: "testPref")
+		//pref.synchronize()
         /*
         var expectation = self.expectationWithDescription("fetch posts")
         

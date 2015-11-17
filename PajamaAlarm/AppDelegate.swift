@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	var _alarmTimeMonitor = AlarmTimeMonitor()
 	var _alarmPlayer      = AlarmPlayer()
-
-	var _geoGetter: GeoCodeGetter!
 	
 	var _g: LocationGetter!
 	

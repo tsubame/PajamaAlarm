@@ -22,14 +22,17 @@ class LocationGetter: NSObject, CLLocationManagerDelegate {
 	// 定数
 	let MAX_EXEC_SECOND    = 3		// この秒数以内に位置情報を取得できなければ終了
 	let LOC_TIMER_INTERVAL = 0.1	// タイマー実行間隔
+	let GEO_API_URL        = "http://taltal.catfood.jp/php/getCity.php"	 // 緯度、経度取得用API
 	
     var _latitude : CLLocationDegrees? = nil	// 緯度
     var _longitude: CLLocationDegrees? = nil	// 経度
     
     var _timer: NSTimer?
     var _timerExecCount = 0						// タイマー処理の実行回数
-    var _locManager     = CLLocationManager()
+	var _errorMessage: String?					// エラーメッセージ
 	
+	var _locManager     = CLLocationManager()
+
     
     // 初期処理
     override init() {
@@ -111,6 +114,32 @@ class LocationGetter: NSObject, CLLocationManagerDelegate {
         return (_latitude, _longitude)
     }
 
+	// 都市の緯度、経度を取得
+	func getCityGeoByIP(onComplete: (lat: String?, long: String?, eMessage: String?) -> ()) {
+		let nsUrl = NSURL(string: GEO_API_URL)
+		let req   = NSURLRequest(URL: nsUrl!)
+		
+		print("都市の緯度、経度を取得中...\(GEO_API_URL)")
+		
+		NSURLConnection.sendAsynchronousRequest(req, queue: NSOperationQueue.mainQueue()) {
+			res, data, error in
+			
+			var lat: String?  = nil
+			var long: String? = nil
+			
+			if error == nil {
+				self._errorMessage = nil
+				let json = JSON(data: data!)
+				lat  = json["cityLatitude"].stringValue
+				long = json["cityLongitude"].stringValue
+			} else {
+				self._errorMessage = error!.description
+				print("通信エラー\(self._errorMessage)")
+			}
+			
+			onComplete(lat: lat, long: long, eMessage: self._errorMessage)
+		}
+	}
     
     //===========================================================
     // CLLocationManagerDelegate

@@ -22,6 +22,11 @@ class HomeViewController: UIViewController {
 	
 	@IBOutlet weak var _voiceLabel: UILabel!
 	
+	var _weatherGetter = WeatherGetter()
+	
+	var _currentWeatherName = ""
+	var _todaysWeatherName = ""
+	
 	//
 	func checkBlink() {
 		// ランダムで瞬き
@@ -48,13 +53,21 @@ class HomeViewController: UIViewController {
 	}
 	
 	func displaySampleMsg() {
-		let text = "おはよう。\n気持ちいい朝だね。"
+		let text = "おはよう。\n現在の天気は\(_currentWeatherName)、今日は\(_todaysWeatherName)の予報になってるよ。"
 		displayVoiceMsg(text)
 	}
 	
 	func displaySampleGreeting() {
 		let text = "あ、こんにちは。\n兄さん♪"
 		displayVoiceMsg(text)
+	}
+	
+	func updateWeather() {
+		_weatherGetter.updateWeather( { wData, tData in
+			print(wData.weatherNameJp)
+			self._currentWeatherName = wData.weatherNameJp
+			self._todaysWeatherName  = tData.weatherNameJp
+		})
 	}
 	
 	//======================================================
@@ -91,8 +104,13 @@ class HomeViewController: UIViewController {
 			(notification: NSNotification!) in
 			self.displaySampleGreeting()
 		})
+		nc.addObserverForName(NOTIF_UPDATE_WEATHER, object: nil, queue: nil, usingBlock: {
+			(notification: NSNotification!) in
+			self.updateWeather()
+		})
 		
 		self.view.setNeedsDisplay()
+		
 		dispatchAfterByDouble(0.5, closure: {
 			self.displaySampleGreeting()
 		})

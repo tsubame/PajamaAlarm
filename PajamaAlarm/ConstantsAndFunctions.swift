@@ -20,6 +20,8 @@ let PREF_KEY_IS_ALARM_SET = "isAlarmSet" // アラームがセットされてい
 let PREF_KEY_LATITUDE  = "latitude"
 let PREF_KEY_LONGITUDE = "longitude"
 
+let NOTIF_UPDATE_WEATHER = "updateWeather"
+
 //======================================================
 // 通知センター　（ローカル通知）
 //======================================================
