@@ -165,7 +165,6 @@ class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSour
 		let res = cal.compareDate(_alarmTime!, toDate: NSDate(), toUnitGranularity: .Minute)
 		if res == NSComparisonResult.OrderedAscending {
 			_alarmTime = NSDate(timeInterval: 86400, sinceDate: _alarmTime!)
-			//print(_alarmTime)
 		}
 	}
 	

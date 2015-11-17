@@ -17,6 +17,9 @@ import UIKit
 let PREF_KEY_ALARM_TIME   = "alarmTime"  // 設定情報のキー アラーム時刻
 let PREF_KEY_IS_ALARM_SET = "isAlarmSet" // アラームがセットされているか Bool型
 
+let PREF_KEY_LATITUDE  = "latitude"
+let PREF_KEY_LONGITUDE = "longitude"
+
 //======================================================
 // 通知センター　（ローカル通知）
 //======================================================
@@ -70,6 +73,8 @@ let SET_ALARM_MINUTE_INTERVAL = 2
 // カレンダー
 let CALENDAR = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
 
+// エラーメッセージ
+let ERROR_MSG = "== ERROR!! == "
 
 
 
@@ -115,7 +120,7 @@ func UIColorFromRGB(rgbValue: UInt) -> UIColor {
 }
 
 // プリファレンスに書き込み
-func writePref(object: NSObject, key: String) {
+func writePref(object: NSObject?, key: String) {
 	let pref = NSUserDefaults.standardUserDefaults()
 	pref.setObject(object, forKey: key)
 	pref.synchronize()

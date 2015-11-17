@@ -10,6 +10,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct CurrentWeatherData {
 	// 更新日時
@@ -105,8 +106,11 @@ class WeatherGetter: NSObject {
 	// OpenWeatherMap API 3時間ごとの天気
 	let THREE_HOUR_WEATHER_API_URL = "http://api.openweathermap.org/data/2.5/forecast?mode=json&units=metric&"
 	
+	let OPENWEATHER_API_KEY = "appid=69f598f452dd4e049991200bc39b7aac&"
+	
 	// 緯度、経度取得用API
 	let GEO_API_URL = "http://taltal.catfood.jp/php/getCity.php"
+	let WEATHER_PHP_API_URL = "http://taltal.catfood.jp/php/getWeather.php?"
 	
 	// エラー
 	var _error: Bool = false
@@ -127,22 +131,36 @@ class WeatherGetter: NSObject {
 	
 	// 天気の更新　位置情報を受け取る
 	func updateWeather() {
-		
 		//var lGetter = LocationGetter()
 		//lGetter.startUpdateLocation()
 		
-		//let pref = NSUserDefaults.standardUserDefaults()
-		//var latitude: String?  = pref.stringForKey("latitude")
-		//var longitude: String? = pref.stringForKey("longitude")
+		let pref = NSUserDefaults.standardUserDefaults()
+		let lat: String?  = pref.stringForKey("latitude")
+		let long: String? = pref.stringForKey("longitude")
 		
-		/*
-		if latitude != nil {
-			_latitude  = latitude!
-			_longitude = longitude!
+		if lat != nil {
+			//_latitude  = latitude!
+			//_longitude = longitude!
 			
-			//getCurrentWeather()
+			//getCurrentWeather(lat!, long: long!) { w, error in
+			//	print(w)
+			//}
+			
+			getCurrentWeatherByPHP(lat!, long: long!) { w, error in
+				print(w)
+			}
+			
 			//getDailyWeather()
-		}*/
+		}
+	}
+	
+	func getGeoCode() {
+		let locManager = CLLocationManager()
+		locManager.requestAlwaysAuthorization()
+		//locManager.
+		if CLLocationManager.locationServicesEnabled() {
+			locManager.startUpdatingLocation()
+		}
 	}
 	
 	// 都市の緯度、経度を取得
@@ -173,8 +191,18 @@ class WeatherGetter: NSObject {
 	}
 	
 	// 現在の天気を取得　　使い方： getCurrentWeather(lat, long: long) { w, error in  終了後の処理 }
+	func getCurrentWeatherByPHP(lat: String, long: String, onComplete: (wData: CurrentWeatherData, eMessage: String?) -> ()) {
+		let url = WEATHER_PHP_API_URL + "lat=\(lat)&lon=\(long)"
+		print("現在のお天気取得中...\(url)")
+		
+		accessOpenWeatherAPI(url) {
+			onComplete(wData: self._currentWeather, eMessage: self._errorMessage)
+		}
+	}
+	
+	// 現在の天気を取得　　使い方： getCurrentWeather(lat, long: long) { w, error in  終了後の処理 }
 	func getCurrentWeather(lat: String, long: String, onComplete: (wData: CurrentWeatherData, eMessage: String?) -> ()) {
-		let url = CURRENT_WEATHER_API_URL + "lat=\(lat)&lon=\(long)"
+		let url = CURRENT_WEATHER_API_URL + OPENWEATHER_API_KEY + "lat=\(lat)&lon=\(long)"
 		print("現在のお天気取得中...\(url)")
 		
 		accessOpenWeatherAPI(url) {

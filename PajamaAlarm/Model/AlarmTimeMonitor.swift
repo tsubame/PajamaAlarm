@@ -19,8 +19,9 @@ class AlarmTimeMonitor: NSObject {
     //var _pref = NSUserDefaults.standardUserDefaults() // 設定情報
     var _monitorTimer: NSTimer?      // 時刻監視用タイマー
     var _countDownTimer: NSTimer?    // カウントダウンタイマー
-    var _soundPlayer = SoundPlayer() // サウンド再生用
-
+    var _soundPlayer   = SoundPlayer() // サウンド再生用
+	var _weatherGetter = WeatherGetter()
+	
 	var _alarmTime: NSDate!
 	
     // 初期化
@@ -78,6 +79,11 @@ class AlarmTimeMonitor: NSObject {
 	func startCountDown() {
 		_monitorTimer?.invalidate()
 		_monitorTimer = nil
+		
+		_weatherGetter.getCityGeo({lat, long, _ in
+			print("IPアドレス経由での位置情報:\(lat) \(long)")
+		})
+		_weatherGetter.updateWeather()
 		
 		if isNowEqualsAlarmTime() {
 			startAlarm()

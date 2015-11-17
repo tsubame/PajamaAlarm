@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var _alarmTimeMonitor = AlarmTimeMonitor()
 	var _alarmPlayer      = AlarmPlayer()
 
+	var _geoGetter: GeoCodeGetter!
+	
+	var _g: LocationGetter!
+	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		
@@ -23,8 +28,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let player = SoundPlayer()
 		player.backgroundAudioON()
 
+		application.registerUserNotificationSettings(UIUserNotificationSettings(
+			forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert],
+			categories: nil))
+		
 		// 挨拶
 		//NSNotificationCenter.defaultCenter().postNotificationName(NOTIF_PLAY_GREETING_VOICE, object: nil)
+		
+		//_geoGetter.getGeoCode()
+		
+		
+		//var locManager = CLLocationManager()
+		//_locManager.requestAlwaysAuthorization()
+		//locManager.requestWhenInUseAuthorization()
+		//locManager.respondsToSelector("requestWhenInUseAuthorization")
+		//_geoGetter = GeoCodeGetter()
+		//_geoGetter.getGeoCode()
+		
+		//_g = LocationGetter()
+		//_g.startUpdateLocation()
 		
 		return true
 	}

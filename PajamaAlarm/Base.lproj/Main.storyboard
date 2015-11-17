@@ -57,22 +57,12 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="R7P-JF-wFf" secondAttribute="height" multiplier="53:39" id="36y-jn-wCs"/>
-                                    <constraint firstItem="kgu-rl-MLY" firstAttribute="width" secondItem="R7P-JF-wFf" secondAttribute="width" multiplier="0.85" id="4Lw-5n-prr"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="YHY-fI-dGO" secondAttribute="bottom" constant="80" id="5Ub-hV-gTH"/>
                                     <constraint firstAttribute="bottom" secondItem="kgu-rl-MLY" secondAttribute="bottom" constant="20" id="7fg-Y3-lyM"/>
-                                    <constraint firstItem="YHY-fI-dGO" firstAttribute="width" secondItem="R7P-JF-wFf" secondAttribute="width" multiplier="0.8" id="GZk-OS-oYN"/>
                                     <constraint firstItem="kgu-rl-MLY" firstAttribute="centerX" secondItem="R7P-JF-wFf" secondAttribute="centerX" id="Gfc-SI-wO4"/>
                                     <constraint firstItem="YHY-fI-dGO" firstAttribute="centerX" secondItem="R7P-JF-wFf" secondAttribute="centerX" id="KTz-O6-W0q"/>
                                     <constraint firstItem="YHY-fI-dGO" firstAttribute="width" secondItem="R7P-JF-wFf" secondAttribute="width" multiplier="0.75" id="Mbu-FD-zeC"/>
-                                    <constraint firstItem="kgu-rl-MLY" firstAttribute="width" secondItem="R7P-JF-wFf" secondAttribute="width" multiplier="0.9" id="tvo-sM-3oY"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="36y-jn-wCs"/>
-                                        <exclude reference="GZk-OS-oYN"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -81,34 +71,23 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="R7P-JF-wFf" secondAttribute="bottom" id="4AL-da-ae6"/>
                             <constraint firstItem="4r1-T0-xg2" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="6xU-HK-msj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sCe-7J-06R" secondAttribute="trailing" constant="-14" id="ClA-Nx-tbG"/>
-                            <constraint firstItem="sCe-7J-06R" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="423" id="DnD-xf-0VD"/>
                             <constraint firstItem="4rw-YY-uo9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-14" id="HNu-VE-zLf"/>
-                            <constraint firstItem="4rw-YY-uo9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="423" id="HkF-v0-5ji"/>
-                            <constraint firstItem="sCe-7J-06R" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.25" id="Hsg-6F-Qfo"/>
                             <constraint firstItem="4r1-T0-xg2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JMu-dQ-zlM"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="R7P-JF-wFf" secondAttribute="bottom" constant="50" id="K7F-6Z-9xA"/>
                             <constraint firstItem="4r1-T0-xg2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-40" id="MA2-Pr-Rms"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sCe-7J-06R" secondAttribute="bottom" constant="65" id="SCH-OL-lTF"/>
                             <constraint firstItem="4r1-T0-xg2" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="UE7-tj-EEt"/>
-                            <constraint firstItem="4rw-YY-uo9" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="VFD-Nq-AKA"/>
-                            <constraint firstItem="4rw-YY-uo9" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="bac-gY-Vu1"/>
                             <constraint firstItem="4rw-YY-uo9" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="bmK-R6-AnH"/>
                             <constraint firstItem="bnS-29-hXQ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="fRj-Ru-Vbi"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4rw-YY-uo9" secondAttribute="bottom" constant="65" id="hj5-LW-qf1"/>
                             <constraint firstItem="bnS-29-hXQ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="hvp-zZ-tOX"/>
                             <constraint firstItem="R7P-JF-wFf" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="kCx-Qn-VKP"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sCe-7J-06R" secondAttribute="bottom" constant="90" id="orr-SM-vOn"/>
                             <constraint firstItem="sCe-7J-06R" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="qXx-Vo-REX"/>
                             <constraint firstItem="R7P-JF-wFf" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="zs9-4f-WMP"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="HkF-v0-5ji"/>
-                                <exclude reference="VFD-Nq-AKA"/>
-                                <exclude reference="bac-gY-Vu1"/>
-                                <exclude reference="DnD-xf-0VD"/>
-                                <exclude reference="Hsg-6F-Qfo"/>
-                                <exclude reference="orr-SM-vOn"/>
+                                <exclude reference="K7F-6Z-9xA"/>
                             </mask>
                         </variation>
                     </view>

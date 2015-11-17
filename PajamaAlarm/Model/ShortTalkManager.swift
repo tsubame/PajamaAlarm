@@ -30,7 +30,7 @@ class ShortTalkManager: NSObject {
 		
 		//loadTextFile()
 		loadTextFileAndSplit()
-		print(_allVoiceWords)
+		//print(_allVoiceWords)
 		let sec = getSectionFromTime()
 		let words = _allVoiceWords[sec]!
 		_voiceWords = words + _allVoiceWords["その他"]!
@@ -123,7 +123,7 @@ class ShortTalkManager: NSObject {
 			let r = Regexp(ptn).matches(text)! as [String]
 			_sectionName = r[0]
 		}*/
-		print(_sectionName)
+		//print(_sectionName)
 	}
 	
 	// テキストファイル読み込み

@@ -12,6 +12,7 @@ class SetAlarmViewController: UIViewController {
 
 	@IBOutlet weak var _timePickersView: AlarmTimePickersUIView!
 
+	var _locGetter = LocationGetter()
 	
 	// アラーム用ローカル通知の作成
 	func createLocalNotif(fireDate: NSDate) {
@@ -28,6 +29,17 @@ class SetAlarmViewController: UIViewController {
 		print(fireDate)
 	}
 	
+	// 位置情報を取得し、プリファレンスに書き込む
+	func updateLocation() {
+		let keyLat  = PREF_KEY_LATITUDE
+		let keyLong = PREF_KEY_LONGITUDE
+		
+		_locGetter.exec( {lat, long in
+			writePref(lat,  key: keyLat)
+			writePref(long, key: keyLong)
+		})
+	}
+	
 	//======================================================
 	// Action
 	//======================================================
@@ -36,6 +48,7 @@ class SetAlarmViewController: UIViewController {
 		let alarmTime = _timePickersView.getAlarmTime()
 		writePref(alarmTime!, key: PREF_KEY_ALARM_TIME)
 		
+		updateLocation()
 		//let pref = NSUserDefaults.standardUserDefaults()
 		//pref.setObject(alarmTime, forKey: PREF_KEY_ALARM_TIME)
 		//pref.synchronize()

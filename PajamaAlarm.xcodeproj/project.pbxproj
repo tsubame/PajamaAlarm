@@ -58,6 +58,13 @@
 		B89F08291BF9B45B00BEC64C /* voiceFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = B89F08271BF9B45B00BEC64C /* voiceFrame.png */; };
 		B89F082B1BF9C0DE00BEC64C /* alarm-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B89F082A1BF9C0DE00BEC64C /* alarm-1.mp3 */; };
 		B89F082C1BF9C0DE00BEC64C /* alarm-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B89F082A1BF9C0DE00BEC64C /* alarm-1.mp3 */; };
+		B89F08331BF9FAC100BEC64C /* WeatherGetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08321BF9FAC100BEC64C /* WeatherGetterTest.swift */; };
+		B89F08351BFA0A4E00BEC64C /* GeoCodeGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08341BFA0A4E00BEC64C /* GeoCodeGetter.swift */; };
+		B89F08361BFA0A4E00BEC64C /* GeoCodeGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08341BFA0A4E00BEC64C /* GeoCodeGetter.swift */; };
+		B89F08381BFA0C3500BEC64C /* GeoCodeGetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08371BFA0C3500BEC64C /* GeoCodeGetterTest.swift */; };
+		B89F083B1BFA140800BEC64C /* LocationGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F083A1BFA140700BEC64C /* LocationGetter.swift */; };
+		B89F083C1BFA140800BEC64C /* LocationGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F083A1BFA140700BEC64C /* LocationGetter.swift */; };
+		B89F083E1BFAA01B00BEC64C /* LocationGetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F083D1BFAA01B00BEC64C /* LocationGetterTest.swift */; };
 		B8A7A4591BF4AF55003A8723 /* SetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7A4581BF4AF55003A8723 /* SetAlarmViewController.swift */; };
 		B8A7A45A1BF4AF55003A8723 /* SetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7A4581BF4AF55003A8723 /* SetAlarmViewController.swift */; };
 		B8A7A45C1BF4B2F5003A8723 /* アラームセット画面.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A7A45B1BF4B2F5003A8723 /* アラームセット画面.png */; };
@@ -133,6 +140,11 @@
 		B89F08241BF9A60F00BEC64C /* Regexp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regexp.swift; sourceTree = "<group>"; };
 		B89F08271BF9B45B00BEC64C /* voiceFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voiceFrame.png; sourceTree = "<group>"; };
 		B89F082A1BF9C0DE00BEC64C /* alarm-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alarm-1.mp3"; sourceTree = "<group>"; };
+		B89F08321BF9FAC100BEC64C /* WeatherGetterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherGetterTest.swift; sourceTree = "<group>"; };
+		B89F08341BFA0A4E00BEC64C /* GeoCodeGetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoCodeGetter.swift; sourceTree = "<group>"; };
+		B89F08371BFA0C3500BEC64C /* GeoCodeGetterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeoCodeGetterTest.swift; path = ../PajamaAlarm/Model/GeoCodeGetterTest.swift; sourceTree = "<group>"; };
+		B89F083A1BFA140700BEC64C /* LocationGetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationGetter.swift; sourceTree = "<group>"; };
+		B89F083D1BFAA01B00BEC64C /* LocationGetterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationGetterTest.swift; sourceTree = "<group>"; };
 		B8A7A4581BF4AF55003A8723 /* SetAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetAlarmViewController.swift; sourceTree = "<group>"; };
 		B8A7A45B1BF4B2F5003A8723 /* アラームセット画面.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "アラームセット画面.png"; sourceTree = "<group>"; };
 		B8A7A4601BF4B3FF003A8723 /* AlarmTimePickersUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTimePickersUIView.swift; sourceTree = "<group>"; };
@@ -210,6 +222,9 @@
 			children = (
 				B8274CB41BEBA716000FEADE /* Info.plist */,
 				B8274CB21BEBA716000FEADE /* PajamaAlarmTests.swift */,
+				B89F08321BF9FAC100BEC64C /* WeatherGetterTest.swift */,
+				B89F08371BFA0C3500BEC64C /* GeoCodeGetterTest.swift */,
+				B89F083D1BFAA01B00BEC64C /* LocationGetterTest.swift */,
 			);
 			path = PajamaAlarmTests;
 			sourceTree = "<group>";
@@ -242,6 +257,8 @@
 				B89F08161BF99A8B00BEC64C /* ShortTalkManager.swift */,
 				B8274CCF1BEBA78D000FEADE /* SoundPlayer.swift */,
 				B8274CD51BEBA7C3000FEADE /* WeatherGetter.swift */,
+				B89F083A1BFA140700BEC64C /* LocationGetter.swift */,
+				B89F08341BFA0A4E00BEC64C /* GeoCodeGetter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -507,9 +524,11 @@
 			files = (
 				B85707741BF2034F000E6639 /* AutoLayoutHelper.swift in Sources */,
 				B87DC8C11BF4F542005FBC8C /* AlarmPlayer.swift in Sources */,
+				B89F083B1BFA140800BEC64C /* LocationGetter.swift in Sources */,
 				B8274CA01BEBA716000FEADE /* HomeViewController.swift in Sources */,
 				B8274CD61BEBA7C3000FEADE /* WeatherGetter.swift in Sources */,
 				B89F08171BF99A8B00BEC64C /* ShortTalkManager.swift in Sources */,
+				B89F08351BFA0A4E00BEC64C /* GeoCodeGetter.swift in Sources */,
 				B89F08251BF9A60F00BEC64C /* Regexp.swift in Sources */,
 				B8274CD01BEBA78D000FEADE /* SoundPlayer.swift in Sources */,
 				B8274CD91BEBA7FE000FEADE /* SwiftyJSON.swift in Sources */,
@@ -527,9 +546,14 @@
 			files = (
 				B8A7A45F1BF4B3DD003A8723 /* AutoLayoutHelper.swift in Sources */,
 				B8274CE41BEBAC6D000FEADE /* ConstantsAndFunctions.swift in Sources */,
+				B89F083C1BFA140800BEC64C /* LocationGetter.swift in Sources */,
 				B8274CD11BEBA78D000FEADE /* SoundPlayer.swift in Sources */,
+				B89F08381BFA0C3500BEC64C /* GeoCodeGetterTest.swift in Sources */,
 				B8274CD71BEBA7C3000FEADE /* WeatherGetter.swift in Sources */,
 				B89F08261BF9A60F00BEC64C /* Regexp.swift in Sources */,
+				B89F083E1BFAA01B00BEC64C /* LocationGetterTest.swift in Sources */,
+				B89F08361BFA0A4E00BEC64C /* GeoCodeGetter.swift in Sources */,
+				B89F08331BF9FAC100BEC64C /* WeatherGetterTest.swift in Sources */,
 				B89F08181BF99A8B00BEC64C /* ShortTalkManager.swift in Sources */,
 				B87DC8B51BF4D754005FBC8C /* AlarmTimeMonitor.swift in Sources */,
 				B8A7A45A1BF4AF55003A8723 /* SetAlarmViewController.swift in Sources */,
