@@ -41,24 +41,11 @@ class WeatherGetter: NSObject {
 	// OpenWeatherMap API
 	let CURRENT_WEATHER_API_URL    = "http://api.openweathermap.org/data/2.5/weather?units=metric&"					 // 現在の天気 lat=32.82&lon=129.991229726123"
 	let DAILY_WEATHER_API_URL      = "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=metric&" // 今日、明日の天気 lat=32.82&lon=129.991229726123"
-	//let THREE_HOUR_WEATHER_API_URL = "http://api.openweathermap.org/data/2.5/forecast?mode=json&units=metric&"	 // 3時間毎の天気
+	let THREE_HOUR_WEATHER_API_URL = "http://api.openweathermap.org/data/2.5/forecast?mode=json&units=metric&"	 // 3時間毎の天気
 	let OPENWEATHER_API_KEY        = "appid=69f598f452dd4e049991200bc39b7aac&"
 	
 	// 自作PHP API
 	let WEATHER_PHP_API_URL = "http://taltal.catfood.jp/php/getWeather.php?" // 天気取得用API
-	
-	// 変数
-	var _error: Bool = false	// エラーが有るか
-	var _errorMessage: String?	// エラーメッセージ
-	
-	var _latitude: String?
-	var _longiTude: String?
-	
-	var _currentWeather   = CurrentWeatherData()
-	var _todaysWeather    = DailyWeatherData()
-	var _tomorrowsWeather = DailyWeatherData()
-	
-	var _dailyWeatherDatas = [DailyWeatherData]()
 	
 	// OpenWeatherMap API お天気コード
 	let WEATHER_CODE = [
@@ -73,31 +60,43 @@ class WeatherGetter: NSObject {
 		"50": "霧"
 	]
 	
+	// 変数
+	var _error = false			// エラーが有るか
+	var _errorMessage: String?	// エラーメッセージ
+	
+	var _latitude : String?
+	var _longiTude: String?
+	
+	var _currentWeather   = WeatherData()
+	var _dailyWeatherDatas = [WeatherData]()
+	
+	var _todaysWeather    = DailyWeatherData()
+	var _tomorrowsWeather = DailyWeatherData()
 	
 	override init() {
 		super.init()
 	}
 	
 	// 天気の更新
-	func updateWeather(onComplete: (wData: CurrentWeatherData, tData: DailyWeatherData) -> () ) {
+	func updateWeather(onComplete: (wData: WeatherData, dDatas: [WeatherData]) -> () ) {
 		let pref   = NSUserDefaults.standardUserDefaults()
 		_latitude  = pref.stringForKey("latitude")
 		_longiTude = pref.stringForKey("longitude")
 		
 		if _latitude == nil {
-			print("位置情報のデータがないため、お天気情報の取得が出来ません。")
+			_errorMessage = "位置情報のデータがないため、お天気情報の取得が出来ません。"
 			return
 		}
 
-		getCurrentWeatherByPHP() { wData in
+		getCurrentWeather() {
 			self.getDailyWeather() {
-				onComplete(wData: self._currentWeather, tData: self._todaysWeather)
+				onComplete(wData: self._currentWeather, dDatas: self._dailyWeatherDatas)
 			}
 		}
 	}
 	
 	// 現在の天気を取得　　使い方： getCurrentWeather() { wData in  終了後の処理 }
-	func getCurrentWeatherByPHP(onComplete: () -> ()) {
+	func getCurrentWeather(onComplete: () -> ()) {
 		let url = WEATHER_PHP_API_URL + "lat=\(_latitude!)&lon=\(_longiTude!)"
 		print("現在のお天気取得中...\(url)")
 		
@@ -107,7 +106,7 @@ class WeatherGetter: NSObject {
 	}
 	
 	// 現在の天気を取得　　使い方： getCurrentWeather() { wData in  終了後の処理 }
-	func getCurrentWeather(onComplete: (wData: CurrentWeatherData) -> ()) {
+	func getCurrentWeatherOrg(onComplete: (wData: WeatherData) -> ()) {
 		let url = CURRENT_WEATHER_API_URL + OPENWEATHER_API_KEY + "lat=\(_latitude!)&lon=\(_longiTude!)"
 		print("現在のお天気取得中...\(url)")
 		
@@ -118,7 +117,7 @@ class WeatherGetter: NSObject {
 	
 	// 今日、明日の天気を取得 　使い方： getDailyWeather() { td, tm in  処理内容 }
 	func getDailyWeather(onComplete: () -> ()) {
-		let url = DAILY_WEATHER_API_URL + "lat=\(_latitude!)&lon=\(_longiTude!)"
+		let url = DAILY_WEATHER_API_URL + OPENWEATHER_API_KEY + "lat=\(_latitude!)&lon=\(_longiTude!)"
 		print("今日、明日のお天気取得中...\(url)")
 		
 		httpRequestAsync(url) {
@@ -127,7 +126,7 @@ class WeatherGetter: NSObject {
 	}
 	
 	func getDailyWeatherOrg(onComplete: (tdWeather: DailyWeatherData, tmWeather: DailyWeatherData) -> ()) {
-		let url = DAILY_WEATHER_API_URL + "lat=\(_latitude!)&lon=\(_longiTude!)"
+		let url = DAILY_WEATHER_API_URL + OPENWEATHER_API_KEY + "lat=\(_latitude!)&lon=\(_longiTude!)"
 		print("今日、明日のお天気取得中...\(url)")
 		
 		httpRequestAsync(url) {
@@ -137,55 +136,76 @@ class WeatherGetter: NSObject {
 	
 	// HTTP通信を非同期で行う
 	func httpRequestAsync(url: String, onComplete: () -> ()) {
+		_errorMessage = nil
+		
 		let nsUrl = NSURL(string: url)
 		let req   = NSURLRequest(URL: nsUrl!)
 
 		let task = NSURLSession.sharedSession().dataTaskWithRequest(req) {
 			data, response, error in
 			
-			self.fetchResponse(response, data: data, error: error)
+			self.jsonToWeatherData(response, data: data, error: error)
 			onComplete()
 		}
 		task.resume()
 	}
 	
-
-	
+	/*
 	// 通信終了後に呼び出す
-	func fetchResponse(res: NSURLResponse!, data: NSData!, error: NSError!) {
+	func jsonToCurrentWeatherData(res: NSURLResponse!, data: NSData!, error: NSError!) {
+		if error != nil {
+			_errorMessage = error.description
+			return
+		}
+		
+		getWeatherDataCurrent(JSON(data: data!))
+	}
+	
+	func jsonToDailyWeatherData(res: NSURLResponse!, data: NSData!, error: NSError!) {
 		if error == nil {
-			_error    = false
 			_errorMessage = nil
 			
 			let json = JSON(data: data!)
-			if !json["list"] {
-				getWeatherDataCurrent(json)
-			} else {
-				getWeatherDataDaily(json)
-			}
+			getWeatherDataDaily(json)
 		} else {
-			_error = true
 			_errorMessage = error.description
 			
 			print("通信エラー\(_errorMessage)")
 		}
 	}
+	*/
+	
+	// 通信終了後に呼び出す
+	func jsonToWeatherData(res: NSURLResponse!, data: NSData!, error: NSError!) {
+		if error != nil {
+			_errorMessage = error.description
+			return
+		}
+			
+		let json = JSON(data: data!)
+print(json["list"].isEmpty)
+		
+		if json["list"].isEmpty {
+			getWeatherDataCurrent(json)
+		} else {
+			getWeatherDataDaily(json)
+		}
+	}
 	
     func getWeatherDataCurrent(json: JSON) {
+		_currentWeather = WeatherData()
 		
-		_currentWeather = CurrentWeatherData()
-		
-		let weatherID: String? = json["weather"][0]["id"].stringValue
-		if weatherID == nil {
+		let wCode: String? = json["weather"][0]["id"].stringValue
+		if wCode == nil {
 			print("お天気を取得できませんでした")
 			return
 		}
 		
-		_currentWeather.weatherCode    = json["weather"][0]["id"].stringValue
-		_currentWeather.weatherCode    = json["weather"][0]["icon"].stringValue
-		_currentWeather.weather  = getJWeatherFromWImg(json["weather"][0]["icon"].stringValue)
-		_currentWeather.weatherEng = json["weather"][0]["main"].stringValue
-		_currentWeather.currentTemp           = json["main"]["temp"].doubleValue
+		_currentWeather.weatherEng  = json["weather"][0]["main"].stringValue
+		_currentWeather.weatherCode = json["weather"][0]["id"].stringValue
+		_currentWeather.weatherImg  = json["weather"][0]["icon"].stringValue
+		_currentWeather.currentTemp = json["main"]["temp"].doubleValue
+		_currentWeather.weather     = getJWeatherFromWImg(json["weather"][0]["icon"].stringValue)
 		
         print("お天気を取得しました。")
     }
@@ -200,13 +220,29 @@ class WeatherGetter: NSObject {
 			return
 		}
 		
+		_dailyWeatherDatas = [WeatherData]()
+		
+		for (i, _) in json["list"].enumerate() {
+			var wd = json["list"][i]
+			var wData = WeatherData()
+			wData.weatherEng  = wd["weather"][0]["description"].stringValue
+			wData.weatherImg  = wd["weather"][0]["icon"].stringValue
+			wData.weatherCode = wd["weather"][0]["id"].stringValue
+			wData.maxTemp     = wd["temp"]["max"].doubleValue
+			wData.minTemp     = wd["temp"]["min"].doubleValue
+			wData.weather     = getJWeatherFromWImg(wd["weather"][0]["icon"].stringValue)
+			
+			_dailyWeatherDatas.append(wData)
+		}
+		
+		/*
 		_todaysWeather = DailyWeatherData()
-		_todaysWeather.weather  = getJWeatherFromWImg(td["weather"][0]["icon"].stringValue)
-		_todaysWeather.weatherEng = td["weather"][0]["description"].stringValue
-		_todaysWeather.weatherImg     = td["weather"][0]["icon"].stringValue
-		_todaysWeather.weatherCode    = td["weather"][0]["id"].stringValue
-		_todaysWeather.maxTemp        = td["temp"]["max"].doubleValue
-		_todaysWeather.minTemp        = td["temp"]["min"].doubleValue
+		_todaysWeather.weather     = getJWeatherFromWImg(td["weather"][0]["icon"].stringValue)
+		_todaysWeather.weatherEng  = td["weather"][0]["description"].stringValue
+		_todaysWeather.weatherImg  = td["weather"][0]["icon"].stringValue
+		_todaysWeather.weatherCode = td["weather"][0]["id"].stringValue
+		_todaysWeather.maxTemp     = td["temp"]["max"].doubleValue
+		_todaysWeather.minTemp     = td["temp"]["min"].doubleValue
 		
         var tm = json["list"][1]
 		
@@ -217,10 +253,16 @@ class WeatherGetter: NSObject {
 		_tomorrowsWeather.weatherCode    = tm["weather"][0]["id"].stringValue
 		_tomorrowsWeather.maxTemp        = tm["temp"]["max"].doubleValue
 		_tomorrowsWeather.minTemp        = tm["temp"]["min"].doubleValue
+*/
     }
 	
     // 現在の天気を日本語の文字列で返す
 	func getJWeatherFromWImg(wImg: String) -> String {
+		if wImg.isEmpty {
+			_errorMessage = "天気コードが空です"
+			return ""
+		}
+		
 		let prefix: String = (wImg as NSString).substringToIndex(2)
 		var w: String = "よく分かりません"
 		

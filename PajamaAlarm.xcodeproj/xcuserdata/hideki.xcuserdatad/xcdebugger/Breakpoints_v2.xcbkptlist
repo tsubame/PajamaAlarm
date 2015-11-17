@@ -67,5 +67,293 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PajamaAlarm/Model/WeatherGetter.swift"
+            timestampString = "469468072.097604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "getJWeatherFromWImg(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PajamaAlarm/Model/WeatherGetter.swift"
+            timestampString = "469468072.097604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "getWeatherDataDaily(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PajamaAlarm/Model/WeatherGetter.swift"
+            timestampString = "469468072.097604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
+            landmarkName = "getWeatherDataDaily(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PajamaAlarm.WeatherGetter.getWeatherDataDaily (PajamaAlarm.WeatherGetter)(PajamaAlarm.JSON) -&gt; ()"
+                  moduleName = "PajamaAlarm"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hideki/Documents/workspace/Xcode/PajamaAlarm/PajamaAlarm/Model/WeatherGetter.swift"
+                  timestampString = "469465321.833653"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "207"
+                  endingLineNumber = "207"
+                  offsetFromSymbolStart = "5600">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PajamaAlarmTests.WeatherGetter.getWeatherDataDaily (PajamaAlarmTests.WeatherGetter)(PajamaAlarmTests.JSON) -&gt; ()"
+                  moduleName = "PajamaAlarmTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hideki/Documents/workspace/Xcode/PajamaAlarm/PajamaAlarm/Model/WeatherGetter.swift"
+                  timestampString = "469465323.3653"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "207"
+                  endingLineNumber = "207"
+                  offsetFromSymbolStart = "5600">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PajamaAlarm/Model/WeatherGetter.swift"
+            timestampString = "469468072.097604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "getWeatherDataDaily(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PajamaAlarm/Model/WeatherGetter.swift"
+            timestampString = "469468072.097604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "getWeatherDataCurrent(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PajamaAlarm.WeatherGetter.getWeatherDataCurrent (PajamaAlarm.WeatherGetter)(PajamaAlarm.JSON) -&gt; ()"
+                  moduleName = "PajamaAlarm"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hideki/Documents/workspace/Xcode/PajamaAlarm/PajamaAlarm/Model/WeatherGetter.swift"
+                  timestampString = "469465773.977404"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "7020">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PajamaAlarmTests.WeatherGetter.getWeatherDataCurrent (PajamaAlarmTests.WeatherGetter)(PajamaAlarmTests.JSON) -&gt; ()"
+                  moduleName = "PajamaAlarmTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hideki/Documents/workspace/Xcode/PajamaAlarm/PajamaAlarm/Model/WeatherGetter.swift"
+                  timestampString = "469465775.396214"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "7020">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PajamaAlarm/Model/WeatherGetter.swift"
+            timestampString = "469468072.097604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "getWeatherDataCurrent(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PajamaAlarm.WeatherGetter.getWeatherDataCurrent (PajamaAlarm.WeatherGetter)(PajamaAlarm.JSON) -&gt; ()"
+                  moduleName = "PajamaAlarm"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hideki/Documents/workspace/Xcode/PajamaAlarm/PajamaAlarm/Model/WeatherGetter.swift"
+                  timestampString = "469465751.711335"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "187"
+                  endingLineNumber = "187"
+                  offsetFromSymbolStart = "8108">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PajamaAlarmTests.WeatherGetter.getWeatherDataCurrent (PajamaAlarmTests.WeatherGetter)(PajamaAlarmTests.JSON) -&gt; ()"
+                  moduleName = "PajamaAlarmTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hideki/Documents/workspace/Xcode/PajamaAlarm/PajamaAlarm/Model/WeatherGetter.swift"
+                  timestampString = "469465751.711655"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "187"
+                  endingLineNumber = "187"
+                  offsetFromSymbolStart = "8108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PajamaAlarm/Model/WeatherGetter.swift"
+            timestampString = "469468072.097604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "getWeatherDataDaily(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PajamaAlarm.WeatherGetter.getWeatherDataDaily (PajamaAlarm.WeatherGetter)(PajamaAlarm.JSON) -&gt; ()"
+                  moduleName = "PajamaAlarm"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hideki/Documents/workspace/Xcode/PajamaAlarm/PajamaAlarm/Model/WeatherGetter.swift"
+                  timestampString = "469467711.144499"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "11800">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PajamaAlarmTests.WeatherGetter.getWeatherDataDaily (PajamaAlarmTests.WeatherGetter)(PajamaAlarmTests.JSON) -&gt; ()"
+                  moduleName = "PajamaAlarmTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hideki/Documents/workspace/Xcode/PajamaAlarm/PajamaAlarm/Model/WeatherGetter.swift"
+                  timestampString = "469467712.66703"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "11800">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PajamaAlarm/Model/WeatherGetter.swift"
+            timestampString = "469468072.097604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "jsonToWeatherData(_:data:error:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PajamaAlarm.WeatherGetter.jsonToWeatherData (PajamaAlarm.WeatherGetter)(Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSURLResponse&gt;, data : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSData&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSError&gt;) -&gt; ()"
+                  moduleName = "PajamaAlarm"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hideki/Documents/workspace/Xcode/PajamaAlarm/PajamaAlarm/Model/WeatherGetter.swift"
+                  timestampString = "469467592.190082"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "190"
+                  endingLineNumber = "190"
+                  offsetFromSymbolStart = "1556">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PajamaAlarmTests.WeatherGetter.jsonToWeatherData (PajamaAlarmTests.WeatherGetter)(Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSURLResponse&gt;, data : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSData&gt;, error : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSError&gt;) -&gt; ()"
+                  moduleName = "PajamaAlarmTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hideki/Documents/workspace/Xcode/PajamaAlarm/PajamaAlarm/Model/WeatherGetter.swift"
+                  timestampString = "469467593.700277"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "190"
+                  endingLineNumber = "190"
+                  offsetFromSymbolStart = "1556">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

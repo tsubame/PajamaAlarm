@@ -63,10 +63,10 @@ class HomeViewController: UIViewController {
 	}
 	
 	func updateWeather() {
-		_weatherGetter.updateWeather( { wData, tData in
-			print(wData.weatherNameJp)
-			self._currentWeatherName = wData.weatherNameJp
-			self._todaysWeatherName  = tData.weatherNameJp
+		_weatherGetter.updateWeather( { wData, dDatas in
+			print(wData.weather)
+			self._currentWeatherName = wData.weather
+			self._todaysWeatherName  = dDatas[0].weather
 		})
 	}
 	

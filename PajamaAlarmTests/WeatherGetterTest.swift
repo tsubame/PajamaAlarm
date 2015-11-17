@@ -23,6 +23,49 @@ class WeatherGetterTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+	
+	func testUpdateWeather() {
+		//_latitude  = "32.74"
+		//_longiTude = "129.87"
+		let expectation = self.expectationWithDescription("fetch posts")
+		
+		_sut.updateWeather({_, _ in
+			//XCTAssertNotNil(lat, "結果がnilではないこと")
+			expectation.fulfill()
+		})
+
+		self.waitForExpectationsWithTimeout(5.1, handler: nil)
+	}
+	
+	func testGetCurrentWeather() {
+		_sut._latitude  = "32.74"
+		_sut._longiTude = "129.87"
+		
+		let expectation = self.expectationWithDescription("")
+		
+		_sut.getCurrentWeather({
+			//XCTAssertNotNil(lat, "結果がnilではないこと")
+			print(self._sut._currentWeather)
+			expectation.fulfill()
+		})
+		
+		self.waitForExpectationsWithTimeout(5.1, handler: nil)
+	}
+	
+	func testGetDailyWeather() {
+		_sut._latitude  = "32.74"
+		_sut._longiTude = "129.87"
+		
+		let expectation = self.expectationWithDescription("")
+		
+		_sut.getDailyWeather({
+			//XCTAssertNotNil(lat, "結果がnilではないこと")
+			print(self._sut._dailyWeatherDatas)
+			expectation.fulfill()
+		})
+		
+		self.waitForExpectationsWithTimeout(5.1, handler: nil)
+	}
 
     func testPref() {
 		let user = [
