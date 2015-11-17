@@ -24,7 +24,11 @@ class WeatherGetterTest: XCTestCase {
         super.tearDown()
     }
 
-    func testGetWeatherOfTokyo() {
+    func testPref() {
+		
+		let pref = NSUserDefaults.standardUserDefaults()
+		pref.setObject(_sut, forKey: "testPref")
+		pref.synchronize()
         /*
         var expectation = self.expectationWithDescription("fetch posts")
         
