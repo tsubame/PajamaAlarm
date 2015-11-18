@@ -58,10 +58,61 @@ class WeatherGetterTest: XCTestCase {
 		
 		let expectation = self.expectationWithDescription("")
 		
-		_sut.getDailyWeather({
+		_sut.getDailyWeather({ wd in
 			//XCTAssertNotNil(lat, "結果がnilではないこと")
-			print(self._sut._dailyWeatherDatas)
+			print(wd)
 			expectation.fulfill()
+		})
+		
+		self.waitForExpectationsWithTimeout(5.1, handler: nil)
+	}
+	
+	func testConvertToDict() {
+		_sut._latitude  = "32.74"
+		_sut._longiTude = "129.87"
+		
+		let expectation = self.expectationWithDescription("")
+		
+		_sut.getDailyWeather({ wd in
+			wd.map{ w in
+				var dic = w.toDictionary()
+				print(dic)
+			}
+			expectation.fulfill()
+		})
+		
+		self.waitForExpectationsWithTimeout(5.1, handler: nil)
+	}
+	
+	func testWriteToPlist() {
+		var path = (NSHomeDirectory() as NSString).stringByAppendingPathComponent("Documents")
+		path = (path as NSString).stringByAppendingPathComponent("dailyWeather.plist")
+		
+		_sut._latitude  = "32.74"
+		_sut._longiTude = "129.87"
+		
+		let expectation = self.expectationWithDescription("")
+		
+		var weatherDicts = [String: [String: NSObject]]()
+		
+		_sut.getDailyWeather({ wd in
+			
+			wd.map{ w in
+				let dic = w.toDictionary()
+				let wDate = dic["weatherDate"]!
+				let wDateStr = "\(wDate)"
+				weatherDicts[wDateStr] = dic
+
+			}
+			print(weatherDicts)
+			var nsDict = weatherDicts as NSDictionary
+			let res = nsDict.writeToFile(path, atomically: true)
+			
+			if res == true {
+				expectation.fulfill()
+			}
+			
+			print("保存先: \(path)")
 		})
 		
 		self.waitForExpectationsWithTimeout(5.1, handler: nil)

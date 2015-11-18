@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/WeatherGetter.swift"
-            timestampString = "469468072.097604"
+            timestampString = "469520713.191162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "getJWeatherFromWImg(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/WeatherGetter.swift"
-            timestampString = "469468072.097604"
+            timestampString = "469520713.191162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "getWeatherDataDaily(_:)"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "jsonToDailyWeatherData(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/WeatherGetter.swift"
-            timestampString = "469468072.097604"
+            timestampString = "469520713.191162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "getWeatherDataDaily(_:)"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "jsonToDailyWeatherData(_:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -154,12 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/WeatherGetter.swift"
-            timestampString = "469468072.097604"
+            timestampString = "469520713.191162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
-            landmarkName = "getWeatherDataDaily(_:)"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "jsonToDailyWeatherData(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -170,12 +170,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/WeatherGetter.swift"
-            timestampString = "469468072.097604"
+            timestampString = "469520713.191162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
-            landmarkName = "getWeatherDataCurrent(_:)"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "jsonToCurrentWeatherData(_:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -218,12 +218,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/WeatherGetter.swift"
-            timestampString = "469468072.097604"
+            timestampString = "469520713.191162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "getWeatherDataCurrent(_:)"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "jsonToCurrentWeatherData(_:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -266,12 +266,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/WeatherGetter.swift"
-            timestampString = "469468072.097604"
+            timestampString = "469520713.191162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
-            landmarkName = "getWeatherDataDaily(_:)"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "jsonToDailyWeatherData(_:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/WeatherGetter.swift"
-            timestampString = "469468072.097604"
+            timestampString = "469520713.191162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "jsonToWeatherData(_:data:error:)"
             landmarkType = "5">
             <Locations>

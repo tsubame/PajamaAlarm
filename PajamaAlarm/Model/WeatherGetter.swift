@@ -10,9 +10,11 @@
 //
 
 import Foundation
-import CoreLocation
 
+// お天気データ保存用の構造体
 struct WeatherData {
+
+	var weatherDate   : NSDate  // お天気の日時
 	var updateDate    : NSDate	// 更新日時
 	var weather       : String	// 天気（日本語）
 	var weatherEng    : String	// 天気（英語）
@@ -23,6 +25,7 @@ struct WeatherData {
 	var minTemp       : Double  // 最低気温
 	
 	init() {
+		weatherDate    = NSDate()
 		updateDate     = NSDate()
 		weather        = ""
 		weatherEng     = ""
@@ -31,6 +34,21 @@ struct WeatherData {
 		currentTemp    = 0
 		maxTemp		   = 0
 		minTemp		   = 0
+	}
+	
+	// 辞書型に変換
+	func toDictionary() -> [String: NSObject] {
+		return [
+			"weatherDate" : weatherDate,
+			"updateDate"  : updateDate,
+			"weather"     : weather,
+			"weatherEng"  : weatherEng,
+			"weatherCode" : weatherCode,
+			"weatherImg"  : weatherImg,
+			"currentTemp" : currentTemp,
+			"maxTemp"	  : maxTemp,
+			"minTemp"     : minTemp
+		]
 	}
 }
 
@@ -73,23 +91,22 @@ class WeatherGetter: NSObject {
 	var _todaysWeather    = DailyWeatherData()
 	var _tomorrowsWeather = DailyWeatherData()
 	
+	
 	override init() {
 		super.init()
 	}
 	
-	// 天気の更新
-	func updateWeather(onComplete: (wData: WeatherData, dDatas: [WeatherData]) -> () ) {
+	// 緯度、経度をプリファレンスから取得
+	func getLocationFromPref() {
 		let pref   = NSUserDefaults.standardUserDefaults()
 		_latitude  = pref.stringForKey("latitude")
 		_longiTude = pref.stringForKey("longitude")
-		
-		if _latitude == nil {
-			_errorMessage = "位置情報のデータがないため、お天気情報の取得が出来ません。"
-			return
-		}
-
+	}
+	
+	// 現在、日別の天気を更新
+	func updateWeather(onComplete: (wData: WeatherData, dDatas: [WeatherData]) -> () ) {
 		getCurrentWeather() {
-			self.getDailyWeather() {
+			self.getDailyWeather() { _ in
 				onComplete(wData: self._currentWeather, dDatas: self._dailyWeatherDatas)
 			}
 		}
@@ -97,6 +114,12 @@ class WeatherGetter: NSObject {
 	
 	// 現在の天気を取得　　使い方： getCurrentWeather() { wData in  終了後の処理 }
 	func getCurrentWeather(onComplete: () -> ()) {
+		getLocationFromPref()
+		if _latitude == nil || _longiTude == nil {
+			_errorMessage = "位置情報のデータがないため、お天気情報の取得が出来ません。"
+			return
+		}
+		
 		let url = WEATHER_PHP_API_URL + "lat=\(_latitude!)&lon=\(_longiTude!)"
 		print("現在のお天気取得中...\(url)")
 		
@@ -105,32 +128,19 @@ class WeatherGetter: NSObject {
 		}
 	}
 	
-	// 現在の天気を取得　　使い方： getCurrentWeather() { wData in  終了後の処理 }
-	func getCurrentWeatherOrg(onComplete: (wData: WeatherData) -> ()) {
-		let url = CURRENT_WEATHER_API_URL + OPENWEATHER_API_KEY + "lat=\(_latitude!)&lon=\(_longiTude!)"
-		print("現在のお天気取得中...\(url)")
-		
-		httpRequestAsync(url) {
-			onComplete(wData: self._currentWeather)
+	// 日別の天気を取得 　使い方： getDailyWeather() { wds in  処理内容 }
+	func getDailyWeather(onComplete: (weatherDatas: [WeatherData]) -> ()) {
+		getLocationFromPref()
+		if _latitude == nil || _longiTude == nil {
+			_errorMessage = "位置情報のデータがないため、お天気情報の取得が出来ません。"
+			return
 		}
-	}
-	
-	// 今日、明日の天気を取得 　使い方： getDailyWeather() { td, tm in  処理内容 }
-	func getDailyWeather(onComplete: () -> ()) {
+
 		let url = DAILY_WEATHER_API_URL + OPENWEATHER_API_KEY + "lat=\(_latitude!)&lon=\(_longiTude!)"
 		print("今日、明日のお天気取得中...\(url)")
 		
 		httpRequestAsync(url) {
-			onComplete()
-		}
-	}
-	
-	func getDailyWeatherOrg(onComplete: (tdWeather: DailyWeatherData, tmWeather: DailyWeatherData) -> ()) {
-		let url = DAILY_WEATHER_API_URL + OPENWEATHER_API_KEY + "lat=\(_latitude!)&lon=\(_longiTude!)"
-		print("今日、明日のお天気取得中...\(url)")
-		
-		httpRequestAsync(url) {
-			onComplete(tdWeather: self._todaysWeather, tmWeather: self._tomorrowsWeather)
+			onComplete(weatherDatas: self._dailyWeatherDatas)
 		}
 	}
 	
@@ -150,31 +160,6 @@ class WeatherGetter: NSObject {
 		task.resume()
 	}
 	
-	/*
-	// 通信終了後に呼び出す
-	func jsonToCurrentWeatherData(res: NSURLResponse!, data: NSData!, error: NSError!) {
-		if error != nil {
-			_errorMessage = error.description
-			return
-		}
-		
-		getWeatherDataCurrent(JSON(data: data!))
-	}
-	
-	func jsonToDailyWeatherData(res: NSURLResponse!, data: NSData!, error: NSError!) {
-		if error == nil {
-			_errorMessage = nil
-			
-			let json = JSON(data: data!)
-			getWeatherDataDaily(json)
-		} else {
-			_errorMessage = error.description
-			
-			print("通信エラー\(_errorMessage)")
-		}
-	}
-	*/
-	
 	// 通信終了後に呼び出す
 	func jsonToWeatherData(res: NSURLResponse!, data: NSData!, error: NSError!) {
 		if error != nil {
@@ -183,16 +168,15 @@ class WeatherGetter: NSObject {
 		}
 			
 		let json = JSON(data: data!)
-print(json["list"].isEmpty)
 		
 		if json["list"].isEmpty {
-			getWeatherDataCurrent(json)
+			jsonToCurrentWeatherData(json)
 		} else {
-			getWeatherDataDaily(json)
+			jsonToDailyWeatherData(json)
 		}
 	}
 	
-    func getWeatherDataCurrent(json: JSON) {
+    func jsonToCurrentWeatherData(json: JSON) {
 		_currentWeather = WeatherData()
 		
 		let wCode: String? = json["weather"][0]["id"].stringValue
@@ -209,12 +193,9 @@ print(json["list"].isEmpty)
 		
         print("お天気を取得しました。")
     }
-    
-    func getWeatherDataDaily(json: JSON) {
-        var td = json["list"][0]
-
-		let weatherID: String? = td["weather"][0]["id"].stringValue
-		
+	
+    func jsonToDailyWeatherData(json: JSON) {
+		let weatherID: String? = json["list"][0]["weather"][0]["id"].stringValue
 		if weatherID == nil {
 			print("お天気を取得できませんでした")
 			return
@@ -225,6 +206,7 @@ print(json["list"].isEmpty)
 		for (i, _) in json["list"].enumerate() {
 			var wd = json["list"][i]
 			var wData = WeatherData()
+			wData.weatherDate = NSDate(timeIntervalSince1970: wd["dt"].doubleValue)
 			wData.weatherEng  = wd["weather"][0]["description"].stringValue
 			wData.weatherImg  = wd["weather"][0]["icon"].stringValue
 			wData.weatherCode = wd["weather"][0]["id"].stringValue
@@ -234,26 +216,6 @@ print(json["list"].isEmpty)
 			
 			_dailyWeatherDatas.append(wData)
 		}
-		
-		/*
-		_todaysWeather = DailyWeatherData()
-		_todaysWeather.weather     = getJWeatherFromWImg(td["weather"][0]["icon"].stringValue)
-		_todaysWeather.weatherEng  = td["weather"][0]["description"].stringValue
-		_todaysWeather.weatherImg  = td["weather"][0]["icon"].stringValue
-		_todaysWeather.weatherCode = td["weather"][0]["id"].stringValue
-		_todaysWeather.maxTemp     = td["temp"]["max"].doubleValue
-		_todaysWeather.minTemp     = td["temp"]["min"].doubleValue
-		
-        var tm = json["list"][1]
-		
-		_tomorrowsWeather = DailyWeatherData()
-		_tomorrowsWeather.weather  = getJWeatherFromWImg(tm["weather"][0]["icon"].stringValue)
-		_tomorrowsWeather.weatherEng = tm["weather"][0]["description"].stringValue
-		_tomorrowsWeather.weatherImg     = tm["weather"][0]["icon"].stringValue
-		_tomorrowsWeather.weatherCode    = tm["weather"][0]["id"].stringValue
-		_tomorrowsWeather.maxTemp        = tm["temp"]["max"].doubleValue
-		_tomorrowsWeather.minTemp        = tm["temp"]["min"].doubleValue
-*/
     }
 	
     // 現在の天気を日本語の文字列で返す
@@ -314,6 +276,26 @@ print(json["list"].isEmpty)
         
         return w
     }*/
+	
+	// 現在の天気を取得　　使い方： getCurrentWeather() { wData in  終了後の処理 }
+	func getCurrentWeatherOrg(onComplete: (wData: WeatherData) -> ()) {
+		let url = CURRENT_WEATHER_API_URL + OPENWEATHER_API_KEY + "lat=\(_latitude!)&lon=\(_longiTude!)"
+		print("現在のお天気取得中...\(url)")
+		
+		httpRequestAsync(url) {
+			onComplete(wData: self._currentWeather)
+		}
+	}
+	
+	func getDailyWeatherOrg(onComplete: (tdWeather: DailyWeatherData, tmWeather: DailyWeatherData) -> ()) {
+		let url = DAILY_WEATHER_API_URL + OPENWEATHER_API_KEY + "lat=\(_latitude!)&lon=\(_longiTude!)"
+		print("今日、明日のお天気取得中...\(url)")
+		
+		httpRequestAsync(url) {
+			onComplete(tdWeather: self._todaysWeather, tmWeather: self._tomorrowsWeather)
+		}
+	}
+	
 	/*
 	func accessOpenWeatherAPI(url: String, onComplete: () -> ()) {
 	let nsUrl = NSURL(string: url)
