@@ -22,7 +22,7 @@ func dispatchAfterByDouble(delay:Double, closure:()->()) {
         dispatch_get_main_queue(), closure)
 }
 
-// 乱数取得
+// 乱数取得 rand(3) → 0, 1, 2のどれかが返る
 func rand(num: Int) -> Int {
     var result:Int
     result = Int(arc4random() % UInt32(num))
@@ -56,8 +56,57 @@ func writePref(object: NSObject?, key: String) {
 	pref.synchronize()
 }
 
+// ファイルの存在確認
+func isFileExists(fileName: String) -> Bool {
+	let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "")
+	
+	if path == nil {
+		 return false
+	}
+	
+	return true
+}
+
+// リソースフォルダ内にあるファイルからテキストデータを読み込む
+func loadTextFromFile(fileName: String, encoding: UInt = NSUTF8StringEncoding) -> String {
+	var ofType = ""
+	if !fileName.containsString(".txt") {
+		ofType = ".txt"
+	}
+	
+	let file = NSBundle.mainBundle().pathForResource(fileName, ofType: ofType)
+	if file == nil {
+		return ""
+	}
+	
+	return NSString(data: NSData(contentsOfFile: file!)!, encoding: encoding) as! String
+}
 
 
+// 現在の時間帯を返す　早朝、朝、昼、夜、深夜
+func getTimezoneOfNow() -> String {
+	/* バグが有るため未使用
+	let TIME_ZONE_NAMES = ["早朝": 4...5, "朝": 6...11, "昼": 12...17, "お昼": 12...17, "夜": 18...23, "深夜": 0...3]
+	*/
+	
+	var tZones = ["早朝": 4...5]
+	tZones["朝"]		= 6...11
+	tZones["昼"]		= 12...17
+	tZones["お昼"]	= 12...17
+	tZones["夜"]		= 18...23
+	tZones["深夜"]	= 0...3
+	let comps = CALENDAR.components([NSCalendarUnit.Hour], fromDate: NSDate())
+	
+	for (time, timeRange) in tZones {
+		for h in timeRange {
+			if h == comps.hour {
+				return time
+			}
+		}
+	}
+	
+	return "昼"
+}
 
 /*
 //======================================================

@@ -20,7 +20,10 @@ let PREF_KEY_IS_ALARM_SET = "isAlarmSet" // アラームがセットされてい
 let PREF_KEY_LATITUDE  = "latitude"
 let PREF_KEY_LONGITUDE = "longitude"
 
+let PREF_KEY_NICKNAME  = "nickName"		 // ほたるからの呼び名
+
 let NOTIF_UPDATE_WEATHER = "updateWeather"
+
 
 //======================================================
 // 通知センター　（ローカル通知）
@@ -66,3 +69,8 @@ let ERROR_MSG = "== ERROR!! == "
 
 // Documentsへのパス
 let PATH_TO_DOCUMENTS = (NSHomeDirectory() as NSString).stringByAppendingPathComponent("Documents") as NSString
+
+
+let ERROR_MSG_PREFIX = "=== error! === "
+
+let NICKNAMES        = ["兄さん", "お姉ちゃん"]

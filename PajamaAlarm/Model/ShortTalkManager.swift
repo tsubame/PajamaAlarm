@@ -14,7 +14,7 @@ class ShortTalkManager: NSObject {
 	let TEXT_FILE_NAME = "sample-utf8.txt"		// 台本のファイル名
 	let ENCODING       = NSUTF8StringEncoding	// エンコーディング
 	
-	
+	// 変数
 	var _allVoiceWords = ["朝": ["「セリフ1」", "「セリフ2」"]] //[String: [String]]()
 	var _sectionName   = ""
 	

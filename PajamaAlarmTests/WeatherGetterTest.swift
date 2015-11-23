@@ -16,6 +16,11 @@ class WeatherGetterTest: XCTestCase {
     override func setUp() {
         super.setUp()
         _sut = WeatherGetter()
+		
+		let pref = NSUserDefaults.standardUserDefaults()
+		pref.setObject("32.74", forKey: "latitude")
+		pref.setObject("129.87", forKey: "longitude")
+		pref.synchronize()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -38,9 +43,6 @@ class WeatherGetterTest: XCTestCase {
 	}
 	
 	func testGetCurrentWeather() {
-		_sut._latitude  = "32.74"
-		_sut._longiTude = "129.87"
-		
 		let expectation = self.expectationWithDescription("")
 		
 		_sut.getCurrentWeather({
@@ -52,10 +54,19 @@ class WeatherGetterTest: XCTestCase {
 		self.waitForExpectationsWithTimeout(5.1, handler: nil)
 	}
 	
-	func testGetDailyWeather() {
-		_sut._latitude  = "32.74"
-		_sut._longiTude = "129.87"
+	func testGet3HourWeather() {
+		let expectation = self.expectationWithDescription("")
 		
+		_sut.get3HourWeather({ hd in
+			//XCTAssertNotNil(lat, "結果がnilではないこと")
+			print(hd)
+			expectation.fulfill()
+		})
+		
+		self.waitForExpectationsWithTimeout(5.1, handler: nil)
+	}
+	
+	func testGetDailyWeather() {
 		let expectation = self.expectationWithDescription("")
 		
 		_sut.getDailyWeather({ wd in

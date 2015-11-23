@@ -20,9 +20,9 @@ struct WeatherData {
 	var weatherEng    : String	// 天気（英語）
 	var weatherCode   : String	// 天気コード
 	var weatherImg    : String	// 天気画像
-	var currentTemp   : Double	// 現在の気温
 	var maxTemp		  : Double  // 最高気温
 	var minTemp       : Double  // 最低気温
+	var temp		  : Double  // 気温
 	
 	init() {
 		weatherDate    = NSDate()
@@ -31,9 +31,9 @@ struct WeatherData {
 		weatherEng     = ""
 		weatherCode    = ""
 		weatherImg     = ""
-		currentTemp    = 0
 		maxTemp		   = 0
 		minTemp		   = 0
+		temp		   = 0
 	}
 	
 	// 辞書型に変換
@@ -45,9 +45,9 @@ struct WeatherData {
 			"weatherEng"  : weatherEng,
 			"weatherCode" : weatherCode,
 			"weatherImg"  : weatherImg,
-			"currentTemp" : currentTemp,
 			"maxTemp"	  : maxTemp,
-			"minTemp"     : minTemp
+			"minTemp"     : minTemp,
+			"temp"		  : temp
 		]
 	}
 }
@@ -79,7 +79,7 @@ class WeatherGetter: NSObject {
 	]
 	
 	// 変数
-	var _error = false			// エラーが有るか
+	//var _error = false			// エラーが有るか
 	var _errorMessage: String?	// エラーメッセージ
 	
 	var _latitude : String?
@@ -87,9 +87,12 @@ class WeatherGetter: NSObject {
 	
 	var _currentWeather   = WeatherData()
 	var _dailyWeatherDatas = [WeatherData]()
+	var _3HourWeatherDatas = [WeatherData]()
 	
-	var _todaysWeather    = DailyWeatherData()
-	var _tomorrowsWeather = DailyWeatherData()
+	var _weatherDatas = [WeatherData]()
+	
+	//var _todaysWeather    = DailyWeatherData()
+	//var _tomorrowsWeather = DailyWeatherData()
 	
 	
 	override init() {
@@ -97,10 +100,17 @@ class WeatherGetter: NSObject {
 	}
 	
 	// 緯度、経度をプリファレンスから取得
-	func getLocationFromPref() {
+	func getLocationFromPref() -> Bool {
 		let pref   = NSUserDefaults.standardUserDefaults()
 		_latitude  = pref.stringForKey("latitude")
 		_longiTude = pref.stringForKey("longitude")
+
+		if _latitude == nil || _longiTude == nil {
+			_errorMessage = "位置情報のデータがないため、お天気情報の取得が出来ません。"
+			return false
+		}
+		
+		return true
 	}
 	
 	// 現在、日別の天気を更新
@@ -125,6 +135,20 @@ class WeatherGetter: NSObject {
 		
 		httpRequestAsync(url) {
 			onComplete()
+		}
+	}
+	
+	// 3時間毎の天気を取得 　使い方： getDailyWeather() { wds in  処理内容 }
+	func get3HourWeather(onComplete: (weatherDatas: [WeatherData]) -> ()) {
+		if getLocationFromPref() == false {
+			return
+		}
+		
+		let url = THREE_HOUR_WEATHER_API_URL + OPENWEATHER_API_KEY + "lat=\(_latitude!)&lon=\(_longiTude!)"
+		print("3時間毎のお天気取得中...\(url)")
+		
+		httpRequestAsync(url) {
+			onComplete(weatherDatas: self._weatherDatas)
 		}
 	}
 	
@@ -188,7 +212,7 @@ class WeatherGetter: NSObject {
 		_currentWeather.weatherEng  = json["weather"][0]["main"].stringValue
 		_currentWeather.weatherCode = json["weather"][0]["id"].stringValue
 		_currentWeather.weatherImg  = json["weather"][0]["icon"].stringValue
-		_currentWeather.currentTemp = json["main"]["temp"].doubleValue
+		_currentWeather.temp		= json["main"]["temp"].doubleValue
 		_currentWeather.weather     = getJWeatherFromWImg(json["weather"][0]["icon"].stringValue)
 		
         print("お天気を取得しました。")
@@ -202,6 +226,7 @@ class WeatherGetter: NSObject {
 		}
 		
 		_dailyWeatherDatas = [WeatherData]()
+		_weatherDatas = [WeatherData]()
 		
 		for (i, _) in json["list"].enumerate() {
 			var wd = json["list"][i]
@@ -212,9 +237,11 @@ class WeatherGetter: NSObject {
 			wData.weatherCode = wd["weather"][0]["id"].stringValue
 			wData.maxTemp     = wd["temp"]["max"].doubleValue
 			wData.minTemp     = wd["temp"]["min"].doubleValue
+			wData.temp        = wd["main"]["temp"].doubleValue
 			wData.weather     = getJWeatherFromWImg(wd["weather"][0]["icon"].stringValue)
 			
 			_dailyWeatherDatas.append(wData)
+			_weatherDatas.append(wData)
 		}
     }
 	
@@ -292,7 +319,7 @@ class WeatherGetter: NSObject {
 		print("今日、明日のお天気取得中...\(url)")
 		
 		httpRequestAsync(url) {
-			onComplete(tdWeather: self._todaysWeather, tmWeather: self._tomorrowsWeather)
+			//onComplete(tdWeather: self._todaysWeather, tmWeather: self._tomorrowsWeather)
 		}
 	}
 	
