@@ -63,7 +63,7 @@ class GreetingManager: NSObject {
 	
 	// 挨拶をランダムで返す
 	func getRandomGreeting() -> Greeting? {
-		let time = getTimezoneOfNow()
+		let time = getCurrentTimePeriod()
 		if _greetingTexts[time]!.isEmpty {
 			return nil
 		}

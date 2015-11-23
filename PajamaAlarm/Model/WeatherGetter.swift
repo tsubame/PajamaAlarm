@@ -79,7 +79,6 @@ class WeatherGetter: NSObject {
 	]
 	
 	// 変数
-	//var _error = false			// エラーが有るか
 	var _errorMessage: String?	// エラーメッセージ
 	
 	var _latitude : String?
@@ -90,10 +89,6 @@ class WeatherGetter: NSObject {
 	var _3HourWeatherDatas = [WeatherData]()
 	
 	var _weatherDatas = [WeatherData]()
-	
-	//var _todaysWeather    = DailyWeatherData()
-	//var _tomorrowsWeather = DailyWeatherData()
-	
 	
 	override init() {
 		super.init()

@@ -30,21 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert],
 			categories: nil))
 		
-		// 挨拶
-		//NSNotificationCenter.defaultCenter().postNotificationName(NOTIF_PLAY_GREETING_VOICE, object: nil)
-		
-		//_geoGetter.getGeoCode()
-		
-		
-		//var locManager = CLLocationManager()
-		//_locManager.requestAlwaysAuthorization()
-		//locManager.requestWhenInUseAuthorization()
-		//locManager.respondsToSelector("requestWhenInUseAuthorization")
-		//_geoGetter = GeoCodeGetter()
-		//_geoGetter.getGeoCode()
-		
-		//_g = LocationGetter()
-		//_g.startUpdateLocation()
+		writePref("兄さん", key: PREF_KEY_NICKNAME)
 		
 		return true
 	}

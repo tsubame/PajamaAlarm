@@ -8,7 +8,7 @@
 
 import XCTest
 
-class voiceFileManagerTest: XCTestCase {
+class VoiceFileManagerTest: XCTestCase {
 	
 	var _sut: VoiceFileManager!
 	
@@ -34,6 +34,10 @@ class voiceFileManagerTest: XCTestCase {
 			}
 		}
     }
+	
+	func testOutputNewFiles() {
+		_sut.outputNewFiles()
+	}
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

@@ -3,176 +3,119 @@
 //  PajamaAlarm
 //
 //  Created by hideki on 2015/11/16.
-//  Copyright © 2015年 Tsubaki. All rights reserved.
 //
+//  ひとことメッセージ、挨拶を管理するクラス。
+//
+//  （依存クラス）
+//		Constants.swift, Functions.swift, VoiceFileManager.swift
+//
+//  （使い方）
+//		let sm = ShortTalkManager()
+//		let g  = sm.getGreetingVoiceData()
+//		print(g.text)
+//
+//		let v = sm.getTalkVoiceData()
+//		print(v.fileName)
 
 import UIKit
 
 class ShortTalkManager: NSObject {
 
 	// 定数
-	let TEXT_FILE_NAME = "sample-utf8.txt"		// 台本のファイル名
-	let ENCODING       = NSUTF8StringEncoding	// エンコーディング
+	let TALK_TEXT_FILE_NAME     = "ひとこと"
+	let GREETING_TEXT_FILE_NAME = "挨拶"
 	
-	// 変数
-	var _allVoiceWords = ["朝": ["「セリフ1」", "「セリフ2」"]] //[String: [String]]()
-	var _sectionName   = ""
+	// プライベート変数
+	var _talkVoiceDatas     = [String: [VoiceData]]()
+	var _greetingVoiceDatas = [String: [VoiceData]]()
 	
-	var _voiceWords = [String]()
-	var _voiceIndex = 0
+	var _talkIndex  = 0  // ひとことのインデックス
+	var _timePeriod = "" // 時間帯
+	var _voiceFileManager = VoiceFileManager()
 	
-	
-	let KEYS = ["朝", "お昼", "夜", "雨の日", "その他", "眠そうな声"]
-
 	
 	override init() {
 		super.init()
 		
-		//loadTextFile()
-		loadTextFileAndSplit()
-		//print(_allVoiceWords)
-		let sec = getSectionFromTime()
-		let words = _allVoiceWords[sec]!
-		_voiceWords = words + _allVoiceWords["その他"]!
+		loadVoiceDatas()
 	}
 	
-	// 
-	func getTalkText() -> String {
-		let txt = _voiceWords[_voiceIndex]
-		
-		_voiceIndex++
-		if _voiceWords.count <= _voiceIndex {
-			_voiceIndex = 0
+	//
+	func loadVoiceDatas() {
+		_talkVoiceDatas     = _voiceFileManager.loadVoiceDatasFromFile(TALK_TEXT_FILE_NAME)
+		_greetingVoiceDatas = _voiceFileManager.loadVoiceDatasFromFile(GREETING_TEXT_FILE_NAME)
+	}
+	
+	//
+	func getTalkVoiceData(date: NSDate? = nil) -> VoiceData? {
+		let ctp = getCurrentTimePeriod(date)
+		if ctp != _timePeriod {
+			_timePeriod = ctp
+			_talkIndex  = 0
 		}
 		
-		return txt
-	}
-	
-	func getSectionFromTime() -> String {
-		var sec = "その他"
-		
-		let flags: NSCalendarUnit = [.Hour]
-		let cal   = CALENDAR
-		let comps = cal.components(flags, fromDate: NSDate())
-		let hour  = comps.hour
-		
-		switch hour {
-			case(6...11):
-				sec = "朝"
-			case(12...17):
-				sec = "お昼"
-			case(18...23):
-				sec = "夜"
-			case(0...5):
-				sec = "深夜"
-			default:
-				break
-		}
-		
-		return sec
-	}
-	
-	func clearNoUseChars(text: String) -> String {
-		var ptn = "（.+）"
-		var afterText = text.stringByReplacingOccurrencesOfString(
-			ptn, withString: "", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-		
-		ptn = "(\\r\\n)+[\\s　]+"
-		afterText = afterText.stringByReplacingOccurrencesOfString(
-			ptn, withString: "\r\n", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-		
-		return afterText
-	}
-	
-	func loadTextFile() -> String {
-		let data = resToData(TEXT_FILE_NAME)
-		
-		return dataToStr(data!)!
-	}
-	
-	func loadTextFileAndSplit() {
-		let allText = loadTextFile()
-		var texts = allText.componentsSeparatedByString("【")
-		texts.removeFirst()
-		
-		for text in texts {
-			// セクション名切り出し
-			getSectionName(text)
-			
-			var words = text.componentsSeparatedByString("「")
-			words.removeFirst()
-			_allVoiceWords[_sectionName] = [String]()
-			
-			for var word in words {
-				word = word.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-				word = clearNoUseChars(word)
-				var ws = word.componentsSeparatedByString("」")
-				_allVoiceWords[_sectionName]?.append(ws[0])
-			}
-		}
-	}
-	
-	func getSectionName(text: String) {
-		let ptn = "([^【】\\s]+)"
-		let r = Regexp(ptn).matches(text)! as [String]
-		_sectionName = r[0]
-		/*
-		let res = text.rangeOfString("】")
-		
-		if res != nil {
-			let r = Regexp(ptn).matches(text)! as [String]
-			_sectionName = r[0]
-		}*/
-		//print(_sectionName)
-	}
-	
-	// テキストファイル読み込み
-	func loadTextFileAndSplitLines() {
-		let data = resToData(TEXT_FILE_NAME)
-		
-		let text = dataToStr(data!)
-		
-		text!.enumerateLines { (line, stop) -> () in
-			self.lineToWordsArray(line)
-		}
-		
-		//print(_voiceWords)
-		
-		//for (key, words) in _voiceWords.enumerate() {
-		//}
-	}
-	
-	func lineToWordsArray(line: String) {
-		let ptn = "([^【】\\s]+)"
-		let res = line.rangeOfString("【")
-		
-		if res != nil {
-			let r = Regexp(ptn).matches(line)! as [String]
-			_sectionName = r[0]
-			_allVoiceWords[_sectionName] = [String]()
-		} else {
-			// 空白削除
-			let text = line.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-			
-			if !_sectionName.isEmpty && !text.isEmpty {
-				_allVoiceWords[_sectionName]?.append(text)
-			}
-		}
-	}
-	
-	func resToData(fileName: String) -> NSData? {
-		let file = NSBundle.mainBundle().pathForResource(fileName, ofType: "")
-		
-		if file == nil {
-			print("ERROR! ファイルが読み込めません")
-			
+		let voiceDatas = getTalkVoiceDatasForNow()
+		if voiceDatas.count == 0 {
 			return nil
 		}
 		
-		return NSData(contentsOfFile: file!)
+		if voiceDatas.count <= _talkIndex {
+			_talkIndex = 0
+		}
+		let vd = voiceDatas[_talkIndex]
+		_talkIndex++
+		
+		return vd
 	}
 	
-	func dataToStr(data: NSData) -> String? {
-		return NSString(data: data, encoding: ENCODING) as? String
+	//
+	func getTalkVoiceDatasForNow() -> [VoiceData] {
+		if _talkVoiceDatas[_timePeriod] == nil || _talkVoiceDatas["その他"] == nil {
+			print("ひとことファイルの書式エラーです")
+			return [VoiceData]()
+		}
+
+		var voiceDatas = _talkVoiceDatas[_timePeriod]!
+		voiceDatas = voiceDatas + _talkVoiceDatas["その他"]!
+		
+		return voiceDatas
 	}
+	
+	func getGreetingVoiceData(date: NSDate? = nil) -> VoiceData? {
+		_timePeriod = getCurrentTimePeriod(date)
+		if _greetingVoiceDatas[_timePeriod] == nil {
+			print("挨拶ファイルの書式エラーです。\(_timePeriod)の項目がありません")
+			return nil
+		}
+		
+		let vDatas = _greetingVoiceDatas[_timePeriod]!
+		var vData  = VoiceData()
+		
+		while true {
+			let n = rand(vDatas.count)
+			vData = vDatas[n]
+		
+			if hasTextOtherNickname(vData.text) == false {
+				break
+			}
+		}
+	
+		return vData
+	}
+	
+	func hasTextOtherNickname(text: String) -> Bool {
+		let currentNickname = NSUserDefaults.standardUserDefaults().objectForKey(PREF_KEY_NICKNAME) as? String
+		
+		for nickname in NICKNAMES {
+			if nickname == currentNickname {
+				continue
+			}
+			if text.containsString(nickname) {
+				return true
+			}
+		}
+		
+		return false
+	}
+
 }

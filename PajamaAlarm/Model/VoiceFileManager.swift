@@ -72,7 +72,20 @@ class VoiceFileManager: NSObject {
 	
 	// 元の台本ファイルを加工して別ファイルに出力　セリフの上にファイル名を付加する
 	func outputNewFiles() {
-		
+		for fileName in VOICE_TEXT_FILE_NAMES {
+			let voiceDatas = loadVoiceDatasFromFile(fileName)
+			var text = ""
+			
+			for (secName, vDatas) in voiceDatas {
+				text += "\n【 " + secName +  " 】\n\n"
+				for vData in vDatas {
+					text += "(" + vData.fileName + ")\n"
+					text += "「" + vData.text + "」\n\n"
+				}
+			}
+			
+			print(text)
+		}
 	}
 	
 	//
@@ -104,6 +117,7 @@ class VoiceFileManager: NSObject {
 		return vDatas
 	}
 	
+	//
 	func getVoiceFileName(prefix0: String, prefix1: String, prefix2: String?, index: Int) -> String {
 		
 		var fileName = prefix0 + "_" + prefix1
@@ -154,12 +168,28 @@ class VoiceFileManager: NSObject {
 		
 		// 空白、"」"以降を除去
 		for var v in strs {
-			v = v.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+			v = cutNoUseChars(v)
 			let res = v.componentsSeparatedByString("」")
 			
 			vTexts.append(res[0])
 		}
 		
 		return vTexts
+	}
+	
+	// 不要な文字を削除　全角空白の連続
+	func cutNoUseChars(text: String) -> String {
+		let ptn = "（.+）"
+		var afterText = text.stringByReplacingOccurrencesOfString(
+			ptn, withString: "", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+		
+		let ptn2 = "(\\r\\n)+[\\s　]+"
+		afterText = afterText.stringByReplacingOccurrencesOfString(
+			ptn2, withString: "\r\n", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+		
+		// 半角空白を削除
+		afterText = afterText.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+		
+		return afterText
 	}
 }

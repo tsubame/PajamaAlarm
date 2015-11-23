@@ -84,7 +84,7 @@ func loadTextFromFile(fileName: String, encoding: UInt = NSUTF8StringEncoding) -
 
 
 // 現在の時間帯を返す　早朝、朝、昼、夜、深夜
-func getTimezoneOfNow() -> String {
+func getCurrentTimePeriod(date: NSDate? = nil) -> String {
 	/* バグが有るため未使用
 	let TIME_ZONE_NAMES = ["早朝": 4...5, "朝": 6...11, "昼": 12...17, "お昼": 12...17, "夜": 18...23, "深夜": 0...3]
 	*/
@@ -92,10 +92,14 @@ func getTimezoneOfNow() -> String {
 	var tZones = ["早朝": 4...5]
 	tZones["朝"]		= 6...11
 	tZones["昼"]		= 12...17
-	tZones["お昼"]	= 12...17
+	//tZones["お昼"]	= 12...17
 	tZones["夜"]		= 18...23
 	tZones["深夜"]	= 0...3
-	let comps = CALENDAR.components([NSCalendarUnit.Hour], fromDate: NSDate())
+	
+	var comps = CALENDAR.components([NSCalendarUnit.Hour], fromDate: NSDate())
+	if date != nil {
+		comps = CALENDAR.components([NSCalendarUnit.Hour], fromDate: date!)
+	}
 	
 	for (time, timeRange) in tZones {
 		for h in timeRange {

@@ -10,30 +10,18 @@ import UIKit
 
 class HomeViewController: UIViewController {
 	
-	@IBOutlet weak var _charaImageView: UIImageView!
-	
-	@IBOutlet weak var _alarmButton: UIButton!
-	
-	@IBOutlet weak var _voiceButton: UIButton!
-
+	@IBOutlet weak var _charaImageView  : UIImageView!
+	@IBOutlet weak var _alarmButton     : UIButton!
+	@IBOutlet weak var _voiceButton     : UIButton!
 	@IBOutlet weak var _voiceFrameUIView: UIView!
+	@IBOutlet weak var _voiceLabel      : UILabel!
 	
+	// プライベート変数
 	var _shortTalkManager = ShortTalkManager()
-	
-	@IBOutlet weak var _voiceLabel: UILabel!
-	
-	var _weatherGetter = WeatherGetter()
-	
+	var _weatherGetter    = WeatherGetter()
 	var _currentWeatherName = ""
-	var _todaysWeatherName = ""
+	var _todaysWeatherName  = ""
 	
-	//
-	func checkBlink() {
-		// ランダムで瞬き
-		if rand(6) == 0 {
-			//blink()
-		}
-	}
 	
 	// 表情変更
 	func changeFacialEx(facialEx: String) {
@@ -45,22 +33,46 @@ class HomeViewController: UIViewController {
 		}
 	}
 	
-	// セリフ表示
+	// セリフを枠内に表示
 	func displayVoiceMsg(word: String) {
 		_voiceFrameUIView.hidden = false
 		_voiceLabel.text = word
 		changeFacialEx("笑")
 	}
 	
+	// 挨拶表示
+	func displayGreeting() {
+		let voiceData = _shortTalkManager.getGreetingVoiceData()
+		if voiceData == nil {
+			return
+		}
+		
+		displayVoiceMsg(voiceData!.text)
+	}
+	
+	// ひとこと表示
+	func displayShortTalk() {
+		let vd = _shortTalkManager.getTalkVoiceData()
+		if vd == nil {
+			return
+		}
+		_voiceFrameUIView.hidden = false
+		_voiceLabel.text = vd!.text
+		changeFacialEx("笑")
+	}
+	
+	
 	func displaySampleMsg() {
 		let text = "おはよう。\n現在の天気は\(_currentWeatherName)、今日は\(_todaysWeatherName)の予報になってるよ。"
 		displayVoiceMsg(text)
 	}
-	
+	/*
 	func displaySampleGreeting() {
 		let text = "あ、こんにちは。\n兄さん♪"
 		displayVoiceMsg(text)
 	}
+	*/
+
 	
 	func updateWeather() {
 		_weatherGetter.updateWeather( { wData, dDatas in
@@ -102,7 +114,7 @@ class HomeViewController: UIViewController {
 		})
 		nc.addObserverForName(NOTIF_PLAY_GREETING_VOICE, object: nil, queue: nil, usingBlock: {
 			(notification: NSNotification!) in
-			self.displaySampleGreeting()
+			self.displayGreeting()
 		})
 		nc.addObserverForName(NOTIF_UPDATE_WEATHER, object: nil, queue: nil, usingBlock: {
 			(notification: NSNotification!) in
@@ -112,7 +124,7 @@ class HomeViewController: UIViewController {
 		self.view.setNeedsDisplay()
 		
 		dispatchAfterByDouble(0.5, closure: {
-			self.displaySampleGreeting()
+			self.displayGreeting()
 		})
 	}
 
@@ -124,16 +136,12 @@ class HomeViewController: UIViewController {
 	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		if _voiceFrameUIView.hidden == false {
 			_voiceFrameUIView.hidden = true
-			changeFacialEx("")
+			//changeFacialEx("")
 			
 			return
 		}
 		
-		let txt = _shortTalkManager.getTalkText()
-		_voiceFrameUIView.hidden = false
-		_voiceLabel.text = txt
-		changeFacialEx("笑")
-		print(txt)
+		displayShortTalk()
 	}
 
 
