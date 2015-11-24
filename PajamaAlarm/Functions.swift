@@ -49,6 +49,32 @@ func UIColorFromRGB(rgbValue: UInt) -> UIColor {
 	)
 }
 
+// ローカル通知の発行
+func postLocalNotif(notifName: String) {
+	NSNotificationCenter.defaultCenter().postNotificationName(notifName, object: nil)
+}
+
+// ローカル通知のオブザーバーの追加
+func addNotifObserver(notifName: String, closure:()->() ) {
+	let notif = NSNotificationCenter.defaultCenter()
+	
+	notif.addObserverForName(notifName, object: nil, queue: nil, usingBlock: { _ in
+		closure()
+	})
+}
+
+// タイマーの作成
+func makeTimer(interval: Double, target: NSObject, selector: Selector, repeats: Bool) -> NSTimer? {
+	let timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: target, selector: selector, userInfo: nil, repeats: repeats)
+	
+	return timer
+}
+
+// プリファレンスから読み込み
+func readPref(key: String) -> AnyObject? {
+	return NSUserDefaults.standardUserDefaults().objectForKey(key)
+}
+
 // プリファレンスに書き込み
 func writePref(object: NSObject?, key: String) {
 	let pref = NSUserDefaults.standardUserDefaults()

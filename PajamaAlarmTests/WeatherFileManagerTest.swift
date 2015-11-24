@@ -34,10 +34,35 @@ class WeatherFileManagerTest: XCTestCase {
 		self.waitForExpectationsWithTimeout(5.0, handler: nil)
 	}
 	
+	func testUpdateDailyWeatherAndWriteFile() {
+		let expect = self.expectationWithDescription("")
+		
+		_sut.updateDailyWeatherAndWriteFile( { success in
+			XCTAssertTrue(success)
+			expect.fulfill()
+		})
+		
+		self.waitForExpectationsWithTimeout(5.0, handler: nil)
+	}
+	
 	func testRead() {
 		let res = _sut.read()
-		
+		print(res)
 		//XCTAssertTrue(res)
+	}
+	
+	func testReadWeatherDataAfterNow() {
+		let res = _sut.readWeatherDataAfterNow()
+		//print(res)
+		
+		for data in res {
+			print(data)
+		}
+		//XCTAssertTrue(res)
+	}
+	
+	func testReadArrayFromPlist() {
+		//let res = _sut.readArrayFromPlist()
 	}
 	
 	func testRenamePastFiles() {

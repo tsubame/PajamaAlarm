@@ -1,91 +1,79 @@
 //
 //  TimeMonitor.swift
-//  アラームセット時に時刻を監視するクラス
+//
+//  アラームセット後、時刻を監視するクラス。
 //
 //  Created by hideki on 2014/11/05.
-//  Copyright (c) 2014年 hideki. All rights reserved.
+//  
+//  （依存クラス）
+//		Constants.swist, Functions.swift, SoundPlayer.swift
 //
-
+//  （処理内容）
+//		1. アラームセットの通知を受け、時刻を監視するタイマーを起動
+//		2. 無音ファイルをループ再生
+//		3. 1分ごとに現在時刻とアラーム時刻を比較
+//		4. 残り1分以内になったらカウントダウンを開始
+//		5. 残り0秒になったらアラーム再生用の通知を発行
+//		6. 天気取得用のローカル通知を発行
+//
 
 import UIKit
 import Foundation
-import AVFoundation
 
 class AlarmTimeMonitor: NSObject {
-    
 	
-    let MONITOR_TIMER_INTERVAL: Double = 60.0 // タイマーの実行インターバル　（秒数）
+	// 定数
+    let MONITOR_TIMER_INTERVAL: Double = 60.0  // タイマーの実行インターバル（秒数）
 	
-    //var _pref = NSUserDefaults.standardUserDefaults() // 設定情報
-    var _monitorTimer: NSTimer?      // 時刻監視用タイマー
+	// プライベート変数
+    var _monitorTimer  : NSTimer?    // 時刻監視用タイマー
     var _countDownTimer: NSTimer?    // カウントダウンタイマー
-    var _soundPlayer   = SoundPlayer() // サウンド再生用
-	//var _weatherGetter = WeatherGetter()
+	var _alarmTime     : NSDate!     // アラームセット時間
+	var _soundPlayer = SoundPlayer() // 無音サウンド再生用
 	
-	var _alarmTime: NSDate!
 	
-    // 初期化
     override init() {
         super.init()
-
-        let nc :NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        
-        nc.addObserverForName(NOTIF_SET_ALARM_ON, object: nil, queue: nil, usingBlock: {
-            (notification: NSNotification!) in
-            self.startTimeMonitoring()
-        })
-        nc.addObserverForName(NOTIF_SET_ALARM_OFF, object: nil, queue: nil, usingBlock: {
-            (notification: NSNotification!) in
-            self.cancelAlarm()
-        })
+		
+		addNotifObserver(NOTIF_SET_ALARM_ON) {
+			self.startBGTask()
+		}
+		addNotifObserver(NOTIF_SET_ALARM_OFF) {
+			self.cancelAlarm()
+		}
     }
 	
-	// 監視用タイマー起動
-	func startTimeMonitoring() {
-		_alarmTime = NSUserDefaults.standardUserDefaults().objectForKey(PREF_KEY_ALARM_TIME) as! NSDate
-		self.cancelAlarm()
+	// アラームセット後、最初に行う処理。バックグラウンドで実行するタスクの開始
+	func startBGTask() {
+		_alarmTime = readPref(PREF_KEY_ALARM_TIME) as! NSDate
 		
 		// 無音ファイルを再生
 		_soundPlayer.playMuteSound(MUTE_SOUND_FILENAME)
 		
-		// タイマーを起動
-		_monitorTimer = NSTimer.scheduledTimerWithTimeInterval(MONITOR_TIMER_INTERVAL, target: self, selector: "compareTimes:", userInfo: nil, repeats: true)
-		compareTimes(_monitorTimer!)
-		
-		// 位置情報の取得
-		//NSNotificationCenter.defaultCenter().postNotificationName("startUpdateLocation", object: nil)
+		// 時刻監視タイマーを起動
+		_monitorTimer = NSTimer.scheduledTimerWithTimeInterval(MONITOR_TIMER_INTERVAL, target: self, selector: "checkCurrentTime:", userInfo: nil, repeats: true)
+		checkCurrentTime(_monitorTimer!)
 	}
 	
 	//======================================================
 	// タイマー処理
 	//======================================================
 	
-    // 現在時刻を確認し、アラーム時刻と比較。
-    func compareTimes(timer: NSTimer) {
-		printNowTimeAndAlarmTime()
-
-		let nowTs   = getTimestamp(NSDate())
-		let alarmTs = getTimestamp(_alarmTime)
-		let difSec  = Int(alarmTs - nowTs)
-		print("　残り\(difSec)秒")
-		
+    // 現在時刻を確認し、アラーム時刻と比較
+    func checkCurrentTime(timer: NSTimer) {
 		// 差が60秒以内であればカウントダウン開始
-		if -60 < difSec && difSec < 60 {
+		if compareTimeWithin60sec(_alarmTime) {
 			startCountDown()
 		}
 	}
 	
-	// カウントダウン開始
+	// カウントダウンを開始。アラーム時刻まで残り1分以内の時の処理
 	func startCountDown() {
-		_monitorTimer?.invalidate()
-		_monitorTimer = nil
-		
-		// 天気取得用通知
-		NSNotificationCenter.defaultCenter().postNotificationName(NOTIF_UPDATE_WEATHER, object: nil)
-		
+		// 天気取得用のローカル通知を発行
+		postLocalNotif(NOTIF_UPDATE_WEATHER)
+
 		if isNowEqualsAlarmTime() {
 			startAlarm()
-			
 			return
 		}
 		
@@ -94,35 +82,55 @@ class AlarmTimeMonitor: NSObject {
 	
 	// カウントダウン処理
 	func countDown(timer: NSTimer) {
-		// 現在の秒を取得
-		let flags: NSCalendarUnit = [.Hour, .Minute, .Second]
-		let cal    = CALENDAR
-		let comps  = cal.components(flags, fromDate: NSDate())
-		let second = comps.second
+		let leftSecond = getCountdownSecFromCurrentTime()
 		
-		// 60から現在の秒を引いた数を取得
-		let leftSecond = (60 - second) % 60
 		// カウントダウンが0になれば着信音を鳴らす
 		if leftSecond == 0 {
 			startAlarm()
 		}
+	}
+	
+	// タイマーストップ
+	func stopAllTimer() {
+		_monitorTimer?.invalidate()
+		_countDownTimer?.invalidate()
+	}
+	
+	//======================================================
+	// アラーム処理
+	//======================================================
+	
+	// アラームを鳴らす
+	func startAlarm() {
+		stopAllTimer()
 		
-		if leftSecond % 5 == 0 {
-			print("　\(leftSecond)")
-		}
+		// 通知発行
+		postLocalNotif(NOTIF_START_ALARM)
+		
+		dispatch_after(3, dispatch_get_main_queue(), {
+			self._soundPlayer.stopMuteSound()
+		})
+		
+		print("アラームの時間です。着信音を鳴らします")
+	}
+	
+	// アラームキャンセル　オフにした時の処理
+	func cancelAlarm() {
+		stopAllTimer()
+		
+		// ローカル通知を全て削除
+		UIApplication.sharedApplication().cancelAllLocalNotifications()
 	}
 	
 	//======================================================
 	// 時刻関連
 	//======================================================
 	
-	// タイムスタンプを取得
-	func getTimestamp(date: NSDate) -> NSTimeInterval {
+	// UNIXタイムスタンプを取得
+	func getUnixTimestamp(date: NSDate) -> NSTimeInterval {
 		let flags: NSCalendarUnit = [.Year, .Hour, .Minute, .Second]
-		let cal = CALENDAR
-		
-		let comps = cal.components(flags, fromDate: date)
-		let ts    = cal.dateFromComponents(comps)!.timeIntervalSince1970
+		let comps = CALENDAR.components(flags, fromDate: date)
+		let ts    = CALENDAR.dateFromComponents(comps)!.timeIntervalSince1970
 		
 		return ts
 	}
@@ -139,10 +147,9 @@ class AlarmTimeMonitor: NSObject {
 	// NSDate型同士を比較して、時、分が同じかを判定
 	func compareHourAndMinute(date1: NSDate, date2: NSDate) -> Bool {
 		let flags: NSCalendarUnit = [.Hour, .Minute]
-		let cal = CALENDAR
-		
-		let c1 = cal.components(flags, fromDate: date1)
-		let c2 = cal.components(flags, fromDate: date2)
+
+		let c1 = CALENDAR.components(flags, fromDate: date1)
+		let c2 = CALENDAR.components(flags, fromDate: date2)
 
 		if c1 == c2 {
 			return true
@@ -151,8 +158,8 @@ class AlarmTimeMonitor: NSObject {
 		return false
 	}
 	
-	// 現在時刻とアラーム時刻をprint
-	func printNowTimeAndAlarmTime() {
+	// 現在時刻とアラーム時刻を出力　デバッグ用
+	func outputTimes(difSec: Int) {
 		print("時刻監視用タイマー実行中...")
 		
 		let nTimeStr = getTimeStrFromDate(NSDate())
@@ -160,59 +167,49 @@ class AlarmTimeMonitor: NSObject {
 		
 		print("　ただいまの時刻は\(nTimeStr)です。")
 		print("　アラームの時刻は\(aTimeStr)です。")
+		print("　残り\(difSec)秒")
 	}
 	
 	// 時刻のみを文字列で取り出す （形式）"16:00"
 	func getTimeStrFromDate(date: NSDate) -> String {
-		let fmt    = NSDateFormatter()
-		fmt.locale = NSLocale(localeIdentifier: "ja_JP") // ロケールの設定
+		let fmt        = NSDateFormatter()
+		fmt.locale     = NSLocale(localeIdentifier: "ja_JP") // ロケールの設定
 		fmt.dateFormat = "HH:mm"
 		
 		return fmt.stringFromDate(date)
 	}
 	
-	//======================================================
-	// アラーム処理
-	//======================================================
+	//
+	func compareTimeWithin60sec(date: NSDate) -> Bool {
+		let nowTs   = getUnixTimestamp(NSDate())
+		let alarmTs = getUnixTimestamp(date)
+		let dSec    = Int(alarmTs - nowTs)
+		
+		outputTimes(dSec)
+		
+		// 差が60秒以内であればカウントダウン開始
+		if -60 < dSec && dSec < 60 {
+			return true
+		}
+		
+		return false
+	}
 	
-    // アラームを鳴らす
-    func startAlarm() {
-        // カウントダウンタイマーを停止
-        _countDownTimer?.invalidate()
-        _countDownTimer = nil
+	// 現在時刻からカウントダウン用の秒を取得
+	func getCountdownSecFromCurrentTime() -> Int {
+		let flags: NSCalendarUnit = [.Hour, .Minute, .Second]
+		let comps = CALENDAR.components(flags, fromDate: NSDate())
 		
-        // 通知発行
-        NSNotificationCenter.defaultCenter().postNotificationName(NOTIF_START_ALARM, object: nil)
-        //NSNotificationCenter.defaultCenter().postNotificationName("showRingingView", object: nil)
+		// 60から現在の秒を引いた数を取得
+		let leftSecond = (60 - comps.second) % 60
+		if leftSecond % 5 == 0 {
+			print("　\(leftSecond)")
+		}
 		
-        // アラームのセットをオフに
-        let pref = NSUserDefaults.standardUserDefaults()
-        pref.setObject("false", forKey: PREF_KEY_IS_ALARM_SET)
-        pref.synchronize()
-		
-        dispatch_after(3, dispatch_get_main_queue(), {
-            self._soundPlayer.stopMuteSound()
-        })
-		
-		print("アラームの時間です。着信音を鳴らします")
-    }
-    
-    // アラームキャンセル　オフにした時の処理
-    func cancelAlarm() {
-        //print("アラームをキャンセル")
-        /* if _alarmPlayer.playing {
-			_alarmPlayer.stop()
-        }*/
-        
-        _monitorTimer?.invalidate()
-        _monitorTimer = nil
-        _countDownTimer?.invalidate()
-        _countDownTimer = nil
-        //print("1、2つ目のタイマーを停止しました")
-        
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-    }
-    
+		return leftSecond
+	}
+	
+	/*
     //===========================================================
     // AVAudioSessionDelegate
     //===========================================================
@@ -223,7 +220,22 @@ class AlarmTimeMonitor: NSObject {
     
     func endInterruption() {
         print("割り込み終了")
-    }
+    }*/
 	
+	
+	
+	
+	
+	/*
+	// 時刻監視タイマーを起動し、無音ファイルを再生。アラームセット後、最初に行う処理
+	func startTimeMonitoring() {
+	_alarmTime = readPref(PREF_KEY_ALARM_TIME) as! NSDate
+	
+	// 無音ファイルを再生
+	_soundPlayer.playMuteSound(MUTE_SOUND_FILENAME)
+	
+	_monitorTimer = NSTimer.scheduledTimerWithTimeInterval(MONITOR_TIMER_INTERVAL, target: self, selector: "checkCurrentTime:", userInfo: nil, repeats: true)
+	checkCurrentTime(_monitorTimer!)
+	}*/
 	
 }

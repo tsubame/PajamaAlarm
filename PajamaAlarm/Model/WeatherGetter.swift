@@ -14,33 +14,21 @@ import Foundation
 // お天気データ保存用の構造体
 struct WeatherData {
 
-	var weatherDate   : NSDate  // お天気の日時
-	var updateDate    : NSDate	// 更新日時
-	var weather       : String	// 天気（日本語）
-	var weatherEng    : String	// 天気（英語）
-	var weatherCode   : String	// 天気コード
-	var weatherImg    : String	// 天気画像
-	var maxTemp		  : Double  // 最高気温
-	var minTemp       : Double  // 最低気温
-	var temp		  : Double  // 気温
-	
-	init() {
-		weatherDate    = NSDate()
-		updateDate     = NSDate()
-		weather        = ""
-		weatherEng     = ""
-		weatherCode    = ""
-		weatherImg     = ""
-		maxTemp		   = 0
-		minTemp		   = 0
-		temp		   = 0
-	}
+	var weatherDate: NSDate = NSDate() // お天気の日時
+	var updateDate : NSDate	= NSDate() // 更新日時
+	var weather    : String	= ""	   // 天気（日本語）
+	var weatherEng : String	= ""	   // 天気（英語）
+	var weatherCode: String	= ""	   // 天気コード
+	var weatherImg : String	= ""	   // 天気画像
+	var maxTemp	   : Double = 0 	   // 最高気温
+	var minTemp    : Double = 0 	   // 最低気温
+	var temp	   : Double = 0 	   // 気温
 	
 	// 辞書型に変換
 	func toDictionary() -> [String: NSObject] {
 		return [
-			"weatherDate" : weatherDate,
-			"updateDate"  : updateDate,
+			"weatherDate" : nsDateToJPDateStr(weatherDate),
+			"updateDate"  : nsDateToJPDateStr(updateDate),
 			"weather"     : weather,
 			"weatherEng"  : weatherEng,
 			"weatherCode" : weatherCode,
@@ -49,6 +37,15 @@ struct WeatherData {
 			"minTemp"     : minTemp,
 			"temp"		  : temp
 		]
+	}
+		
+	// 日本の日時に変換
+	func nsDateToJPDateStr(date: NSDate) -> String {
+		let fmt        = NSDateFormatter()
+		fmt.locale     = NSLocale(localeIdentifier: "ja")
+		fmt.dateFormat = "yyyy-MM-dd HH:mm:ss"
+		
+		return fmt.stringFromDate(date)
 	}
 }
 
@@ -78,18 +75,16 @@ class WeatherGetter: NSObject {
 		"50": "霧"
 	]
 	
-	// 変数
+	// プライベート変数
 	var _errorMessage: String?	// エラーメッセージ
-	
-	var _latitude : String?
-	var _longiTude: String?
-	
-	var _currentWeather   = WeatherData()
+	var _latitude : String?		// 緯度
+	var _longiTude: String?		// 経度
+	var _currentWeather    = WeatherData()
 	var _dailyWeatherDatas = [WeatherData]()
 	var _3HourWeatherDatas = [WeatherData]()
+	var _weatherDatas      = [WeatherData]()
 	
-	var _weatherDatas = [WeatherData]()
-	
+		
 	override init() {
 		super.init()
 	}
@@ -445,7 +440,56 @@ struct DailyWeatherData {
 	}
 }
 
+/*
+struct WeatherData {
 
+var weatherDate   : NSDate  // お天気の日時
+var updateDate    : NSDate	// 更新日時
+var weather       : String	// 天気（日本語）
+var weatherEng    : String	// 天気（英語）
+var weatherCode   : String	// 天気コード
+var weatherImg    : String	// 天気画像
+var maxTemp		  : Double  // 最高気温
+var minTemp       : Double  // 最低気温
+var temp		  : Double  // 気温
+
+init() {
+weatherDate    = NSDate()
+updateDate     = NSDate()
+weather        = ""
+weatherEng     = ""
+weatherCode    = ""
+weatherImg     = ""
+maxTemp		   = 0
+minTemp		   = 0
+temp		   = 0
+}
+
+// 辞書型に変換
+func toDictionary() -> [String: NSObject] {
+return [
+"weatherDate" : nsDateToJPDateStr(weatherDate),
+"updateDate"  : nsDateToJPDateStr(updateDate),
+"weather"     : weather,
+"weatherEng"  : weatherEng,
+"weatherCode" : weatherCode,
+"weatherImg"  : weatherImg,
+"maxTemp"	  : maxTemp,
+"minTemp"     : minTemp,
+"temp"		  : temp
+]
+}
+
+// 日本の日時に変換
+func nsDateToJPDateStr(date: NSDate) -> String {
+let fmt        = NSDateFormatter()
+fmt.locale     = NSLocale(localeIdentifier: "ja")
+fmt.dateFormat = "yyyy-MM-dd HH:mm:ss"
+return fmt.stringFromDate(date)
+}
+}
+
+*/
 
 /** 形式
 

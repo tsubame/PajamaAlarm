@@ -55,6 +55,9 @@ class SetAlarmViewController: UIViewController {
 		
 		// イベント通知の発行
 		NSNotificationCenter.defaultCenter().postNotificationName(NOTIF_SET_ALARM_ON, object: nil)
+		// プリファレンスに書き込み
+		writePref("true", key: PREF_KEY_IS_ALARM_SET)
+		
 		// ローカル通知の発行
 		createLocalNotif(alarmTime!)
 	}

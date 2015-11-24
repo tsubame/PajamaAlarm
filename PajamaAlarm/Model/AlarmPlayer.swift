@@ -12,82 +12,71 @@ import AudioToolbox
 
 class AlarmPlayer: NSObject {
 	
+	// 定数
+	
+	
+	// プライベート変数
     var _volume: Float = 0.8
-	var _playsVibe = true
+	var _isPlaying     = false
+	var _soundPlayer   = SoundPlayer()
 	
-    //var _loopCount     = 30
-    //var _ringtone: String = ""
-	
+	// 以下、テスト用
 	var _alarmFile = "alarm-1.mp3"
+	var _playsVibe = true
+	var _vibeTimer: NSTimer? // バイブレーション用 うまく動かない
+
 	
-    var _soundPlayer = SoundPlayer()
-	
-    var _timer: NSTimer?
-	
-	var _isPlaying = false
-	
-	var _vibeTimer: NSTimer?
-	
-    // 初期化
     override init() {
         super.init()
 		
-        let notif = NSNotificationCenter.defaultCenter()
-        
-        notif.addObserverForName(NOTIF_START_ALARM, object: nil, queue: nil, usingBlock: {
-            (notification: NSNotification!) in
-            self.startAlarm()
-        })
-        
-        notif.addObserverForName(NOTIF_STOP_ALARM, object: nil, queue: nil, usingBlock: {
-            (notification: NSNotification!) in
-            self.stopAlarm()
-        })
+		addNotifObserver(NOTIF_START_ALARM) {
+			self.startAlarm()
+		}
+		addNotifObserver(NOTIF_STOP_ALARM) {
+			self.stopAlarm()
+		}
     }
     
     // アラームを鳴らす
     func startAlarm() {
-        if _playsVibe == true {
-            _vibeTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "viberation:", userInfo: nil, repeats: true)
-        }
-		
         _soundPlayer.play(_alarmFile)
 		_isPlaying = true
+		
+		// プリファレンスに書き込み
+		writePref("false", key: PREF_KEY_IS_ALARM_SET)
+	}
+	
+    // アラームの停止
+    func stopAlarm() {
+        _vibeTimer?.invalidate()
+        _vibeTimer = nil
+		_soundPlayer.stopAll()
+		
+		//NSNotificationCenter.defaultCenter().postNotificationName("startMorningCall", object: nil)
     }
 	
 	// アラームが鳴っているか
 	func isAlarmRinging() -> Bool {
-		/*
-		if _soundPlayer.isBgmPlaying() {
-		return true
-		}*/
-		if _isPlaying == true {
-			return true
-		}
-		
-		return false
+		return _isPlaying
 	}
 	
-    // バイブレーション
-    func viberation(timer: NSTimer) {
-        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-    }
+	// バイブレーション
+	func viberation(timer: NSTimer) {
+		AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+	}
 	
-	
-    //
-    func stopAlarm() {
-        _vibeTimer?.invalidate()
-        _vibeTimer = nil
+	func addObervers() {
+		let notif = NSNotificationCenter.defaultCenter()
 		
-		/*
-        if _soundPlayer.isBgmPlaying() {
-            _soundPlayer.playVoice(RESPOND_PHONE_SE)
-            _soundPlayer.stopBgm()
-            // 通知作成
-
-            //NSNotificationCenter.defaultCenter().postNotificationName("startMorningCall", object: nil)
-        }*/
-		_soundPlayer.stopAll()
-    }
+		notif.addObserverForName(NOTIF_START_ALARM, object: nil, queue: nil, usingBlock: {
+			(notification: NSNotification!) in
+			self.startAlarm()
+		})
+		
+		notif.addObserverForName(NOTIF_STOP_ALARM, object: nil, queue: nil, usingBlock: {
+			(notification: NSNotification!) in
+			self.stopAlarm()
+		})
+	}
 
 }
