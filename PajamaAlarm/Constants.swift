@@ -22,7 +22,7 @@ let PREF_KEY_LONGITUDE = "longitude"
 
 let PREF_KEY_NICKNAME  = "nickName"		 // ほたるからの呼び名
 
-let NOTIF_UPDATE_WEATHER = "updateWeather"
+//let NOTIF_UPDATE_WEATHER = "updateWeather"
 
 
 //======================================================
@@ -31,7 +31,6 @@ let NOTIF_UPDATE_WEATHER = "updateWeather"
 
 let LOCAL_NOTIF_BODY   = "アラームの時間です" // ローカル通知メッセージ
 let LOCAL_NOTIF_ACTION = "アプリを起動"	   // ローカル通知アクション
-
 let LOCAL_NOTIF_SOUND  = "koron.wav"
 
 //======================================================
@@ -45,6 +44,9 @@ let NOTIF_STOP_ALARM    = "stopAlarm"   // アラームストップ
 
 let NOTIF_START_MORNING_VOICE = "startMorningVoice"   // おはようボイススタート
 let NOTIF_PLAY_GREETING_VOICE = "playGreetingVoice"  // 挨拶
+
+let NOTIF_UPDATE_WEATHER  = "updateWeather"
+let NOTIF_UPDATE_LOCATION = "updateLocation"
 
 //======================================================
 // アラーム関連

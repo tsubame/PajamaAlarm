@@ -21,7 +21,6 @@ class WeatherGetterTest: XCTestCase {
 		pref.setObject("32.74", forKey: "latitude")
 		pref.setObject("129.87", forKey: "longitude")
 		pref.synchronize()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
@@ -29,16 +28,54 @@ class WeatherGetterTest: XCTestCase {
         super.tearDown()
     }
 	
-	func testUpdateWeather() {
-		//_latitude  = "32.74"
-		//_longiTude = "129.87"
-		let expectation = self.expectationWithDescription("fetch posts")
+	func test_exec() {
+		let ex = self.expectationWithDescription("")
 		
-		_sut.updateWeather({_, _ in
-			//XCTAssertNotNil(lat, "結果がnilではないこと")
-			expectation.fulfill()
-		})
+		_sut.exec() { wDatas in
+			XCTAssertNotEqual(wDatas.count, 0)
+			ex.fulfill()
 
+			for data in wDatas {
+				print(data)
+			}
+		}
+
+		self.waitForExpectationsWithTimeout(5.0, handler: nil)
+	}
+	
+	func test_exec_forError() {
+		// 緯度、経度がない時
+		let pref = NSUserDefaults.standardUserDefaults()
+		pref.setObject(nil, forKey: "latitude")
+		pref.setObject(nil, forKey: "longitude")
+		pref.synchronize()
+		
+		let ex = self.expectationWithDescription("")
+		
+		_sut.exec() { wDatas in
+			XCTAssertEqual(wDatas.count, 0)
+			ex.fulfill()
+			
+			for data in wDatas {
+				print(data)
+			}
+		}
+		
+		self.waitForExpectationsWithTimeout(3.0, handler: nil)
+	}
+	
+	func test_getDailyWeather() {
+		let ex = self.expectationWithDescription("")
+		
+		_sut.getDailyWeather() { wd in
+			XCTAssertNotEqual(wd.count, 0, "結果が0件以上であること")
+			ex.fulfill()
+			
+			for data in wd {
+				print(data)
+			}
+		}
+		
 		self.waitForExpectationsWithTimeout(5.1, handler: nil)
 	}
 	
@@ -66,17 +103,7 @@ class WeatherGetterTest: XCTestCase {
 		self.waitForExpectationsWithTimeout(5.1, handler: nil)
 	}
 	
-	func testGetDailyWeather() {
-		let expectation = self.expectationWithDescription("")
-		
-		_sut.getDailyWeather({ wd in
-			//XCTAssertNotNil(lat, "結果がnilではないこと")
-			print(wd)
-			expectation.fulfill()
-		})
-		
-		self.waitForExpectationsWithTimeout(5.1, handler: nil)
-	}
+
 	
 	func testConvertToDict() {
 		_sut._latitude  = "32.74"

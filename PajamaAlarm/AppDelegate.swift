@@ -3,7 +3,11 @@
 //  PajamaAlarm
 //
 //  Created by hideki on 2015/11/06.
-//  Copyright © 2015年 Tsubaki. All rights reserved.
+//
+//  初期化処理、起動時の処理などを担当
+//
+//  （依存クラス）
+//  Constants.swift
 //
 
 import UIKit
@@ -14,39 +18,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	
+	// プライベート変数
 	var _alarmTimeMonitor = AlarmTimeMonitor()
 	var _alarmPlayer      = AlarmPlayer()
+
 	
-	var _g: LocationGetter!
+	// プリファレンスに初期データの登録
+	func writeInitialDataToPref() {
+		let pref = NSUserDefaults.standardUserDefaults()
+		pref.setObject("兄さん", forKey: PREF_KEY_NICKNAME)
+
+		#if DEBUG
+			print("位置情報を追加")
+			let lat  = "32.74"
+			let long = "129.87"
+			pref.setObject(lat,  forKey: PREF_KEY_LATITUDE)
+			pref.setObject(long, forKey: PREF_KEY_LONGITUDE)
+		#endif
+		
+		pref.synchronize()
+	}
 	
+	//======================================================
+	// UIApplicationDelegate
+	//======================================================
+	
+	// 起動時
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		// Override point for customization after application launch.
+		// 初期データの登録
+		writeInitialDataToPref()
 		
 		// バックグラウンドオーディオ
 		let player = SoundPlayer()
 		player.backgroundAudioON()
 
+		// 通知センターの使用許可
 		application.registerUserNotificationSettings(UIUserNotificationSettings(
 			forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert],
 			categories: nil))
-		
-		writePref("兄さん", key: PREF_KEY_NICKNAME)
-		
+		// 位置情報
+				
 		return true
 	}
 
-	func applicationWillResignActive(application: UIApplication) {
-		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-		// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-	}
-
-	func applicationDidEnterBackground(application: UIApplication) {
-		// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-		// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-	}
-
+	// フォアグラウンドに
 	func applicationWillEnterForeground(application: UIApplication) {
-		// Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 		print("enter foreground.")
 		
 		if _alarmPlayer.isAlarmRinging() {
@@ -59,10 +75,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// 挨拶
 		NSNotificationCenter.defaultCenter().postNotificationName(NOTIF_PLAY_GREETING_VOICE, object: nil)
 	}
+	
+	func applicationWillResignActive(application: UIApplication) {
+
+	}
+
+	// バックグラウンドに入った時
+	func applicationDidEnterBackground(application: UIApplication) {
+
+	}
+
+
 
 	func applicationDidBecomeActive(application: UIApplication) {
-		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-		//print("become active.")
+
 	}
 
 	func applicationWillTerminate(application: UIApplication) {

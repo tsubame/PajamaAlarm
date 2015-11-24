@@ -8,9 +8,74 @@
 import Foundation
 import UIKit
 
-//===========================================================
-// トップレベルで使える関数
-//===========================================================
+
+//======================================================
+// プリファレンス
+//======================================================
+
+// プリファレンスから読み込み
+func readPref(key: String) -> AnyObject? {
+	return NSUserDefaults.standardUserDefaults().objectForKey(key)
+}
+
+// プリファレンスに書き込み
+func writePref(object: NSObject?, key: String) {
+	let pref = NSUserDefaults.standardUserDefaults()
+	pref.setObject(object, forKey: key)
+	pref.synchronize()
+}
+
+//======================================================
+// ローカル通知
+//======================================================
+
+// ローカル通知の発行
+func postLocalNotif(notifName: String) {
+	NSNotificationCenter.defaultCenter().postNotificationName(notifName, object: nil)
+}
+
+// ローカル通知のオブザーバーの追加
+func addNotifObserver(notifName: String, closure:()->() ) {
+	let notif = NSNotificationCenter.defaultCenter()
+	
+	notif.addObserverForName(notifName, object: nil, queue: nil, usingBlock: { _ in
+		closure()
+	})
+}
+
+//======================================================
+// ファイル処理
+//======================================================
+
+// ファイルの存在確認
+func isFileExists(fileName: String) -> Bool {
+	let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "")
+	
+	if path == nil {
+		return false
+	}
+	
+	return true
+}
+
+// リソースフォルダ内にあるファイルからテキストデータを読み込む
+func loadTextFromFile(fileName: String, encoding: UInt = NSUTF8StringEncoding) -> String {
+	var ofType = ""
+	if !fileName.containsString(".txt") {
+		ofType = ".txt"
+	}
+	
+	let file = NSBundle.mainBundle().pathForResource(fileName, ofType: ofType)
+	if file == nil {
+		return ""
+	}
+	
+	return NSString(data: NSData(contentsOfFile: file!)!, encoding: encoding) as! String
+}
+
+//======================================================
+// その他
+//======================================================
 
 // Double型を指定できる dispatch_after   （使い方）dispatchAfterByDouble(2.0, { println("test.") })
 func dispatchAfterByDouble(delay:Double, closure:()->()) {
@@ -49,66 +114,6 @@ func UIColorFromRGB(rgbValue: UInt) -> UIColor {
 	)
 }
 
-// ローカル通知の発行
-func postLocalNotif(notifName: String) {
-	NSNotificationCenter.defaultCenter().postNotificationName(notifName, object: nil)
-}
-
-// ローカル通知のオブザーバーの追加
-func addNotifObserver(notifName: String, closure:()->() ) {
-	let notif = NSNotificationCenter.defaultCenter()
-	
-	notif.addObserverForName(notifName, object: nil, queue: nil, usingBlock: { _ in
-		closure()
-	})
-}
-
-// タイマーの作成
-func makeTimer(interval: Double, target: NSObject, selector: Selector, repeats: Bool) -> NSTimer? {
-	let timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: target, selector: selector, userInfo: nil, repeats: repeats)
-	
-	return timer
-}
-
-// プリファレンスから読み込み
-func readPref(key: String) -> AnyObject? {
-	return NSUserDefaults.standardUserDefaults().objectForKey(key)
-}
-
-// プリファレンスに書き込み
-func writePref(object: NSObject?, key: String) {
-	let pref = NSUserDefaults.standardUserDefaults()
-	pref.setObject(object, forKey: key)
-	pref.synchronize()
-}
-
-// ファイルの存在確認
-func isFileExists(fileName: String) -> Bool {
-	let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "")
-	
-	if path == nil {
-		 return false
-	}
-	
-	return true
-}
-
-// リソースフォルダ内にあるファイルからテキストデータを読み込む
-func loadTextFromFile(fileName: String, encoding: UInt = NSUTF8StringEncoding) -> String {
-	var ofType = ""
-	if !fileName.containsString(".txt") {
-		ofType = ".txt"
-	}
-	
-	let file = NSBundle.mainBundle().pathForResource(fileName, ofType: ofType)
-	if file == nil {
-		return ""
-	}
-	
-	return NSString(data: NSData(contentsOfFile: file!)!, encoding: encoding) as! String
-}
-
-
 // 現在の時間帯を返す　早朝、朝、昼、夜、深夜
 func getCurrentTimePeriod(date: NSDate? = nil) -> String {
 	/* バグが有るため未使用
@@ -137,76 +142,3 @@ func getCurrentTimePeriod(date: NSDate? = nil) -> String {
 	
 	return "昼"
 }
-
-/*
-//======================================================
-// プリファレンス
-//======================================================
-
-let PREF_KEY_ALARM_TIME   = "alarmTime"  // 設定情報のキー アラーム時刻
-let PREF_KEY_IS_ALARM_SET = "isAlarmSet" // アラームがセットされているか Bool型
-
-let PREF_KEY_LATITUDE  = "latitude"
-let PREF_KEY_LONGITUDE = "longitude"
-
-let NOTIF_UPDATE_WEATHER = "updateWeather"
-
-//======================================================
-// 通知センター　（ローカル通知）
-//======================================================
-
-let LOCAL_NOTIF_BODY   = "アラームの時間です" // ローカル通知メッセージ
-let LOCAL_NOTIF_ACTION = "アプリを起動"	   // ローカル通知アクション
-
-let LOCAL_NOTIF_SOUND  = "koron.wav"
-
-//======================================================
-// 通知センター
-//======================================================
-
-
-let NOTIF_SET_ALARM_ON  = "setAlarmOn"  // アラームがセットされた
-let NOTIF_SET_ALARM_OFF = "setAlarmOff" // アラームがオフになった
-let NOTIF_START_ALARM   = "startAlarm"  // アラームスタート
-let NOTIF_STOP_ALARM    = "stopAlarm"   // アラームストップ
-
-let NOTIF_START_MORNING_VOICE = "startMorningVoice"   // おはようボイススタート
-let NOTIF_PLAY_GREETING_VOICE = "playGreetingVoice"  // 挨拶
-/*
-// アラーム直前
-let NOTIF_JUST_BEFORE_ALARM = "justBeforeAlarm"
-// アラームセットダイアログの表示
-let NOTIF_SHOW_ALARM_DIALOG = "showAlarmDialog"
-
-// サウンドをすべて一時停止
-let NOTIF_PAUSE_ALL_SOUND  = "pauseAllSound"
-// サウンドをすべて再開
-let NOTIF_RESUME_ALL_SOUND = "resumeAllSound"
-// サウンドをすべて停止
-let NOTIF_STOP_ALL_SOUND = "stopAllSound"
-*/
-
-//======================================================
-// アラーム関連
-//======================================================
-
-// ダミーで流す無音サウンド
-let MUTE_SOUND_FILENAME = "nosound.mp3"
-// サウンド
-let ALARM_SOUND = "kirakira"
-
-let SET_ALARM_MINUTE_INTERVAL = 2
-
-//======================================================
-// その他
-//======================================================
-
-// カレンダー
-let CALENDAR = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-
-// エラーメッセージ
-let ERROR_MSG = "== ERROR!! == "
-
-// Documentsへのパス
-let PATH_TO_DOCUMENTS = (NSHomeDirectory() as NSString).stringByAppendingPathComponent("Documents") as NSString
-*/

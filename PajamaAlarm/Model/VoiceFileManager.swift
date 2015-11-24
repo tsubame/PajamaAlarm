@@ -26,9 +26,11 @@ class VoiceFileManager: NSObject {
 	
 	override init() {
 		super.init()
+		
+		//checkAllFileExists()
 	}
 	
-	//
+	// 全てのファイルの存在確認
 	func checkAllFileExists() {
 		checkTextFileExists()
 		
@@ -71,21 +73,36 @@ class VoiceFileManager: NSObject {
 	}
 	
 	// 元の台本ファイルを加工して別ファイルに出力　セリフの上にファイル名を付加する
-	func outputNewFiles() {
+	func outputNewFiles() -> Bool {
+		var success = true
+		
 		for fileName in VOICE_TEXT_FILE_NAMES {
 			let voiceDatas = loadVoiceDatasFromFile(fileName)
 			var text = ""
 			
 			for (secName, vDatas) in voiceDatas {
 				text += "\n【 " + secName +  " 】\n\n"
+			
 				for vData in vDatas {
-					text += "(" + vData.fileName + ")\n"
-					text += "「" + vData.text + "」\n\n"
+					text += "・\(vData.fileName)　　"
+					let ptn = "\r\n"
+					let vText = vData.text.stringByReplacingOccurrencesOfString(ptn, withString: "　", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+					text += "　「\(vText)」\n\n"
 				}
 			}
 			
-			print(text)
+			let path = PATH_TO_DOCUMENTS.stringByAppendingPathComponent(fileName + "_音声ファイルリスト" + ".txt")
+			let data = text.dataUsingEncoding(NSUTF8StringEncoding)
+			let res  = data?.writeToFile(path, atomically: true)
+			
+			if res == true {
+				print("\(path)に書き込みました。")
+			} else {
+				success = false
+			}
 		}
+		
+		return success
 	}
 	
 	//

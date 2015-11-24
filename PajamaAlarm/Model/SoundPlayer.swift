@@ -153,7 +153,7 @@ public class SoundPlayer: NSObject, AVAudioPlayerDelegate {
 		_muteSoundPlayer?.volume = 0
 		_muteSoundPlayer?.play()
 		
-		print("　ミュート再生します: " + fileName + "\(_muteSoundPlayer)")
+		print("　ミュート再生します: " + fileName)
 	}
 	
 	// 無音再生を停止
