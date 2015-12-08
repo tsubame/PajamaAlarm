@@ -3,10 +3,12 @@
 //
 //  Created by hideki on 2015/11/12.
 //
+//　アラームセット画面のピッカービュー2つを内包するView
 //
-//　アラームセット画面の時刻ピッカー2つを内包するView
+//	（依存クラス）
+//		Constants.swift
 //
-//　（使い方）　
+//  （使い方）
 //		view = AlarmTimePickersUIView(frame: CGRectMake(0, 0, 300, 300))
 //		parentView.addSubview(view)
 //
@@ -16,62 +18,38 @@ import UIKit
 class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
 	
 	// 定数
-	let VIEW_BACKGROUND_COLOR   = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-	let PICKER_LOOP_COUNT       = 30	// ピッカーの項目のループ回数 偶数を指定
-	let PICKER_MINUTE_INTERVAL  = 5 //5		// ピッカーの分の表示間隔
-	let PICKER_BORDER_COLOR     = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.2).CGColor
-	let PICKER_LABEL_TEXT_COLOR = UIColorFromRGB(0x5f352f)
-	let PICKER_LABEL_FONT       = "Avenir"
-	let ALARM_TIME_FLAGS: NSCalendarUnit = [.Year, .Month, .Day, .Hour, .Minute]
+	let VIEW_BG_COLOR              = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+	let PICKER_BORDER_COLOR        = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.2).CGColor
+	let PICKER_LABEL_TEXT_COLOR    = UIColorFromRGB(0x5f352f)
+	let PICKER_LOOP_COUNT          = 30						// ピッカーのアイテムのループ回数 偶数を指定
+	let PICKER_LABEL_FONT          = "Avenir"				// ピッカーのフォント
+	let TIME_FLAGS: NSCalendarUnit = [.Year, .Month,		// 時刻処理用のフラグ
+									  .Day, .Hour, .Minute]
 	
-	// 時刻選択用ピッカー
-	var _hPicker: UIPickerView!
-	var _mPicker: UIPickerView!
+	// プライベート変数
+	var _hPicker: UIPickerView!				// ピッカー（時間）
+	var _mPicker: UIPickerView!				// ピッカー（分）
+	var _hItems = [String]()				// ピッカー（時間）に表示する項目
+	var _mItems = [String]()				// ピッカー（分）に表示する項目
+	var _hIndex = 0							// ピッカー（時間）の選択インデックス
+	var _mIndex = 0							// ピッカー（分）の選択インデックス
 	
-	// ピッカーに表示する項目
-	var _hPickerItems = [String]()
-	var _mPickerItems = [String]()
+	var _pickerHeight   : CGFloat = 200		// ピッカーの高さ
+	var _pickerWidth    : CGFloat = 120		// ピッカーの幅
+	var _pickerRowHeight: CGFloat = 100		// ピッカーの行の高さ
+	var _pickerFontSize : CGFloat = 100		// ピッカーの文字サイズ
 	
-	// ピッカーの選択インデックス
-	var _hIndex = 0
-	var _mIndex = 0
+	var _alarmTime: NSDate?					// アラームのセット時刻
 	
-	// ピッカーの高さ、幅、行の高さ、文字サイズ。画面サイズによって可変にすべき
-	var _pickerHeight   : CGFloat = 200
-	var _pickerWidth    : CGFloat = 120
-	var _pickerRowHeight: CGFloat = 100
-	var _pickerFontSize : CGFloat = 100
-	
-	// アラームのセット時刻
-	var _alarmTime: NSDate?
-
-	
-	/*
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-		
-		self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0) //BACKGROUND_COLOR
-	}
-	*/
 	
 	// 描画時に呼ばれる
 	override func drawRect(rect: CGRect) {
-		// 背景色の設定
-		self.backgroundColor = VIEW_BACKGROUND_COLOR
-		
-		// ピッカー生成
-		setPickerSizeFromScreen()
-		makePickerItems()
-		makePickerViews()
-		selectCenterOfPicker()
-
-		// ピッカーのインデックスをアラーム時刻に
-		alarmTimeToPicker()
+		makeAll()
 	}
 	
 	// ピッカーに設定されたアラーム時刻を返す
 	func getAlarmTime() ->NSDate? {
-		pikcerToAlarmTime()
+		setAlarmTimeFromPicker()
 		
 		return _alarmTime
 	}
@@ -79,6 +57,19 @@ class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSour
 	//======================================================
 	// ピッカーの生成
 	//======================================================
+	
+	// 部品、ピッカーの生成
+	func makeAll() {
+		self.backgroundColor = VIEW_BG_COLOR
+		
+		// ピッカー生成
+		setPickerSizeFromScreen()
+		makePickerItems()
+		makePickerViews()
+		
+		// ピッカーのインデックスを適切な位置に移動
+		movePickerIndex()
+	}
 	
 	// ピッカーの高さ、文字サイズを画面サイズに比例して変更
 	func setPickerSizeFromScreen() {
@@ -114,23 +105,17 @@ class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSour
 		// 時刻 0〜23 × 数ループ分
 		for _ in 0..<PICKER_LOOP_COUNT {
 			for h in 0...23 {
-				if h < 10 {
-					_hPickerItems.append("0\(h)")
-				} else {
-					_hPickerItems.append("\(h)")
-				}
+				let str = NSString(format: "%02d", h)
+				_hItems.append(str as String)
 			}
 		}
 		
-		var interval = PICKER_MINUTE_INTERVAL
-		interval = SET_ALARM_MINUTE_INTERVAL
-		
 		// 分 0〜59を数分刻みに × 数ループ分
 		for _ in 0..<PICKER_LOOP_COUNT {
-			for var m = 0; m < 60; m += interval {
+			for var m = 0; m < 60; m += SET_ALARM_MINUTE_INTERVAL {
 				let minStr = NSString(format: "%02d", m)
 				
-				_mPickerItems.append(minStr as String)
+				_mItems.append(minStr as String)
 			}
 		}
 	}
@@ -141,52 +126,50 @@ class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSour
 	
 	// ピッカービューの中央付近の0:00を選択
 	func selectCenterOfPicker() {
-		_hIndex = _hPickerItems.count / 2
-		_mIndex = _mPickerItems.count / 2
+		_hIndex = _hItems.count / 2
+		_mIndex = _mItems.count / 2
 		
 		_hPicker.selectRow(_hIndex, inComponent: 0, animated: false)
 		_mPicker.selectRow(_mIndex, inComponent: 0, animated: false)
 	}
 	
 	// ピッカーの値を_alarmTimeにセット　時、分以外は適当な値
-	func pikcerToAlarmTime() {
-		let hStr = _hPickerItems[_hIndex]
-		let mStr = _mPickerItems[_mIndex]
-
-		let cal   = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-		let comps = cal.components(ALARM_TIME_FLAGS, fromDate: NSDate())
-		comps.hour   = Int(hStr)!
-		comps.minute = Int(mStr)!
+	func setAlarmTimeFromPicker() {
+		let comps    = CALENDAR.components(TIME_FLAGS, fromDate: NSDate())
+		comps.hour   = Int(_hItems[_hIndex])!
+		comps.minute = Int(_mItems[_mIndex])!
 		
-		_alarmTime = cal.dateFromComponents(comps)
-		print("\(hStr):\(mStr)にアラームをセットします")
-		//print(_alarmTime)
+		_alarmTime = CALENDAR.dateFromComponents(comps)
 
-		let res = cal.compareDate(_alarmTime!, toDate: NSDate(), toUnitGranularity: .Minute)
+		// 現在時刻より前なら明日の日付に変更
+		let res = CALENDAR.compareDate(_alarmTime!, toDate: NSDate(), toUnitGranularity: .Minute)
 		if res == NSComparisonResult.OrderedAscending {
 			_alarmTime = NSDate(timeInterval: 86400, sinceDate: _alarmTime!)
 		}
 	}
 	
 	// アラーム時刻をピッカービューの選択項目に反映
-	func alarmTimeToPicker() {
-		_alarmTime = NSUserDefaults.standardUserDefaults().objectForKey(PREF_KEY_ALARM_TIME) as? NSDate
-		
+	func setAlarmTimeToPicker() {
+		_alarmTime = readPref(PREF_KEY_ALARM_TIME) as? NSDate
 		if _alarmTime == nil {
 			return
 		}
 
-		let cal    = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-		let comps  = cal.components(ALARM_TIME_FLAGS, fromDate: _alarmTime!)
+		let comps  = CALENDAR.components(TIME_FLAGS, fromDate: _alarmTime!)
 		let hour   = comps.hour
 		let minute = comps.minute
 		
 		// デフォルトで0時が選択されているのでインデックス、ピッカーの値を変更
 		_hIndex += hour
-		_mIndex += minute / PICKER_MINUTE_INTERVAL
+		_mIndex += minute / SET_ALARM_MINUTE_INTERVAL
 		
 		_hPicker.selectRow(_hIndex, inComponent: 0, animated: false)
 		_mPicker.selectRow(_mIndex, inComponent: 0, animated: false)
+	}
+	
+	func movePickerIndex() {
+		selectCenterOfPicker()
+		setAlarmTimeToPicker()
 	}
 	
 	//===========================================================
@@ -210,9 +193,9 @@ class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSour
 		label.textColor     = PICKER_LABEL_TEXT_COLOR
 		
 		if pickerView == _hPicker {
-			label.text = _hPickerItems[row]
+			label.text = _hItems[row]
 		} else {
-			label.text = _mPickerItems[row]
+			label.text = _mItems[row]
 		}
 		cell.addSubview(label)
 		
@@ -237,9 +220,9 @@ class AlarmTimePickersUIView: UIView, UIPickerViewDelegate, UIPickerViewDataSour
 		var count = 0
 		
 		if pickerView == _hPicker {
-			count = _hPickerItems.count
+			count = _hItems.count
 		} else {
-			count = _mPickerItems.count
+			count = _mItems.count
 		}
 		
 		return count

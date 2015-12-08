@@ -1,29 +1,14 @@
 //
-//  ShortTalkManager.swift
+//  ShortTalkBuilder.swift
+//  PajamaAlarm
 //
-//  Created by hideki on 2015/11/16.
-//
-//  ひとことメッセージ、挨拶を管理するクラス。
-//  Resources/text 内にある台本データを読み込んで VoiceData 形式のデータを返す。
-//
-//  （依存クラス）
-//	  ・Constants.swift
-//	  ・Functions.swift
-//	  ・VoiceFileManager.swift
-//
-//  （使い方）
-//		let sm = ShortTalkManager()
-//		let g  = sm.getGreetingVoiceData()
-//		let v  = sm.getTalkVoiceData()
-//		
-//		print(g.text)
-//		print(v.fileName)
+//  Created by hideki on 2015/12/05.
+//  Copyright © 2015年 Tsubaki. All rights reserved.
 //
 
 import UIKit
 
-class ShortTalkManager {
-
+class ShortTalkBuilder {
 	// 定数
 	let SHORT_TALK_TEXT_FILE_NAME = "ひとこと"	// ひとことデータのファイル名
 	let GREETING_TEXT_FILE_NAME   = "挨拶"		// 挨拶データのファイル名
@@ -34,11 +19,32 @@ class ShortTalkManager {
 	var _gVoices    = [String: [VoiceData]]()	// 挨拶データの配列
 	var _talkIndex  = 0							// ひとことデータのインデックス
 	var _timePeriod = ""						// 時間帯
+	var _voiceUtil		  = VoiceUtil()
 	
 	
 	// 初期化
 	init() {
 		loadVoiceDataFromFile()
+	}
+	
+	// 処理実行
+	func getShortTalkDatas() -> [VoiceData] {
+		let v = getShortTalkData()
+		if v == nil {
+			return [VoiceData]()
+		}
+		
+		return _voiceUtil.splitVoices(v!)
+	}
+	
+	// 処理実行
+	func getGreetingDatas() -> [VoiceData] {
+		let v = getGreetingData()
+		if v == nil {
+			return [VoiceData]()
+		}
+		
+		return _voiceUtil.splitVoices(v!)
 	}
 	
 	//======================================================
@@ -69,7 +75,7 @@ class ShortTalkManager {
 			print(ERROR_MSG + "ひとことファイルの書式エラーです")
 			return [VoiceData]()
 		}
-
+		
 		return _stVoices[_timePeriod]!
 	}
 	
@@ -97,7 +103,7 @@ class ShortTalkManager {
 				break
 			}
 		}
-	
+		
 		return vData
 	}
 	
@@ -108,8 +114,8 @@ class ShortTalkManager {
 	// 台本からデータを読み込む
 	func loadVoiceDataFromFile() {
 		let vfm   = VoiceFileManager()
-		_stVoices = vfm.loadDatasFromVoiceTextFile(SHORT_TALK_TEXT_FILE_NAME)
-		_gVoices  = vfm.loadDatasFromVoiceTextFile(GREETING_TEXT_FILE_NAME)
+		_stVoices = vfm.loadDatasFromVoiceListFile(SHORT_TALK_TEXT_FILE_NAME)
+		_gVoices  = vfm.loadDatasFromVoiceListFile(GREETING_TEXT_FILE_NAME)
 	}
 	
 	// 現在の呼び名以外を含んでいるか

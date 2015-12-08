@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	// プライベート変数
 	var _alarmTimeMonitor = AlarmTimeMonitor()
 	var _alarmPlayer      = AlarmPlayer()
-
+	var _locationGetter   = LocationGetter()
+	var _weatherGetter    = WeatherGetter()
 	
 	// プリファレンスに初期データの登録
 	func writeInitialDataToPref() {
@@ -38,6 +39,75 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		pref.synchronize()
 	}
+	
+	// 位置情報の更新
+	func updateLocation() {
+		_locationGetter.exec() { lat, long in
+			if lat == nil || long == nil {
+				return
+			}
+			
+			writePref(lat,  key: PREF_KEY_LATITUDE)
+			writePref(long, key: PREF_KEY_LONGITUDE)
+		}
+	}
+	
+	//======================================================
+	// 天気関連
+	//======================================================
+	
+	// 天気の更新
+	func updateWeather() {
+		print("お天気を取得します")
+		_weatherGetter.exec() { dDatas in
+			if dDatas.count == 0 {
+				return
+			}
+			
+			//self._todaysWeatherData = dDatas[0]
+			self.writeWeatherToPref(dDatas[0])
+			
+			print(dDatas[0].weather)
+		}
+	}
+	
+	// 今日の天気をプリファレンスに保存
+	func writeWeatherToPref(wData: WeatherData) {
+		writeLastWeatherToPref()
+		
+		writePref(wData.weather,	 key: PREF_KEY_T_WEATHER)
+		writePref(wData.minTemp,	 key: PREF_KEY_T_MIN_TEMP)
+		writePref(wData.maxTemp,	 key: PREF_KEY_T_MAX_TEMP)
+		writePref(wData.pop,		 key: PREF_KEY_T_POP)
+		writePref(wData.weatherDate, key: PREF_KEY_T_WEATHER_DATE)
+	}
+	
+	// 昨日の天気をプリファレンスに保存
+	func writeLastWeatherToPref() {
+		// プリファレンスのお天気データを取得
+		let pwDate = readPref(PREF_KEY_T_WEATHER_DATE) as? NSDate
+		print(pwDate)
+		if pwDate == nil {
+			return
+		}
+		
+		// 昨日の日付なら保存
+		let fmt        = NSDateFormatter()
+		fmt.locale     = NSLocale(localeIdentifier: "ja")
+		fmt.dateFormat = "yyyy-MM-dd"
+		let y = fmt.stringFromDate(NSDate(timeIntervalSinceNow: -86400))
+		let p = fmt.stringFromDate(pwDate!)
+		
+		if y == p {
+			writePref(readPref(PREF_KEY_T_WEATHER)  as? String, key: PREF_KEY_Y_WEATHER)
+			writePref(readPref(PREF_KEY_T_MIN_TEMP) as? Int,	key: PREF_KEY_Y_MIN_TEMP)
+			writePref(readPref(PREF_KEY_T_MAX_TEMP) as? Int,	key: PREF_KEY_Y_MAX_TEMP)
+			writePref(pwDate,  key: PREF_KEY_Y_WEATHER_DATE)
+			
+			print("昨日のお天気データを保存します")
+		}
+	}
+
 	
 	//======================================================
 	// UIApplicationDelegate
@@ -57,7 +127,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert],
 			categories: nil))
 		// 位置情報
-				
+		
+		addNotifObserver(NOTIF_UPDATE_LOCATION) {
+			self.updateLocation()
+		}
+		addNotifObserver(NOTIF_UPDATE_WEATHER) {
+			self.updateWeather()
+		}
+		
+// ローカル通知を全て削除
+		UIApplication.sharedApplication().cancelAllLocalNotifications()
+		
 		return true
 	}
 

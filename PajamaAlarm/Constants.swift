@@ -22,8 +22,18 @@ let PREF_KEY_LONGITUDE = "longitude"
 
 let PREF_KEY_NICKNAME  = "nickName"		 // ほたるからの呼び名
 
-//let NOTIF_UPDATE_WEATHER = "updateWeather"
+let PREF_KEY_T_WEATHER      = "tWeather"	 // 本日のお天気
+let PREF_KEY_T_MIN_TEMP     = "tMinTemp"	 // 本日の最低気温
+let PREF_KEY_T_MAX_TEMP     = "tMaxTemp"	 // 本日の最高気温
+let PREF_KEY_T_WEATHER_DATE = "tWeatherDate" // 本日のお天気の日時
+let PREF_KEY_T_POP			= "tWeatherPop"  // 本日の降水確率
 
+let PREF_KEY_Y_WEATHER      = "yWeather"	 // 昨日のお天気
+let PREF_KEY_Y_MIN_TEMP     = "yMinTemp"	 // 昨日の最低気温
+let PREF_KEY_Y_MAX_TEMP     = "yMaxTemp"	 // 昨日の最高気温
+let PREF_KEY_Y_WEATHER_DATE = "yWeatherDate" // 昨日のお天気の日時
+
+let PREF_KEY_CHECK_FILES    = "checkFileExists" // ファイルの存在確認を行うか
 
 //======================================================
 // 通知センター　（ローカル通知）

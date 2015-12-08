@@ -136,7 +136,7 @@ class WeatherFileManager: NSObject {
 		let ud = String(data["updateDate"]!)
 		
 		wData.weather     = w
-		wData.temp        = Double(t)!
+		wData.temp        = Int(t)!
 		wData.weatherDate = fmt.dateFromString(wd)!
 		wData.updateDate  = fmt.dateFromString(ud)!
 		
@@ -170,7 +170,7 @@ class WeatherFileManager: NSObject {
 			let fmt         = NSDateFormatter()
 			fmt.dateFormat  = "yyyy-MM-dd HH:mm:ss"
 			
-			wData.temp        = Double(temp)!
+			wData.temp        = Int(temp)!
 			wData.weather     = weather
 			wData.weatherDate = fmt.dateFromString(weatherDate)!
 			wData.updateDate  = fmt.dateFromString(updateDate)!
@@ -278,5 +278,47 @@ class WeatherFileManager: NSObject {
 		
 		return true
 	}
+	
+	func gatherWeatherDatasAndWrite(onComplete: (success: Bool) -> ()) {
+		var owData = WeatherData()
+		var ugData = WeatherData()
+		
+		_wGetter.getDailyWeather() { wds in
+			owData = wds[0]
+			
+			self._wGetter.getFromWG() { wd in
+				ugData = wd
+				let dic = owData.toDictionary()
+				//var text = "\(dic["weatherDate"]!)\n"
+				var text = "　\(owData.cityName)\n　　"
+				text += " \(owData.maxTemp)℃ \(owData.minTemp)℃ \(owData.weather) \(owData.pop)mm "
+				text += " \(ugData.weather) \(ugData.pop)% \n"
+				
+				let res = self.noteWeatherDatas(text)
+				onComplete(success: res)
+			}
+		}
+	}
+	
+	func noteWeatherDatas(text: String) -> Bool {
+		let fileName = "お天気データの記録.txt"
+		let path = PATH_TO_DOCUMENTS.stringByAppendingPathComponent(fileName)
+		var output = text
+		
+		if NSData(contentsOfFile: path) != nil {
+			output += NSString(data: NSData(contentsOfFile: path)!, encoding: NSUTF8StringEncoding) as! String
+		}
+		
+		do {
+			try output.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+		} catch {
+			print("error.");
+			return false
+		}
+		
+		print("\(path)に書き込みました。")
 
+		return true
+	}
+	
 }

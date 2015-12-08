@@ -24,10 +24,11 @@ class ShortTalkManagerTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+	
+	/*
     func testGetTalkVoiceData() {
 		for _ in 0...20 {
-			let vd = _sut.getTalkVoiceData()
+			let vd = _sut.getShortTalkData()()
 			XCTAssertNotNil(vd)
 			print("「\(vd!.text)」")
 		}
@@ -43,7 +44,7 @@ class ShortTalkManagerTest: XCTestCase {
 				print("「\(vd!.text)」")
 			}
 		}
-	}
+	}*/
 	
     func testPerformanceExample() {
         // This is an example of a performance test case.

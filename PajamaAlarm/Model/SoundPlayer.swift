@@ -51,8 +51,6 @@ public class SoundPlayer: NSObject, AVAudioPlayerDelegate {
 			_players.append(nil)
 			_subPlayers.append(nil)
 		}
-		
-
 	}
 	
 	deinit {
@@ -329,7 +327,6 @@ public class SoundPlayer: NSObject, AVAudioPlayerDelegate {
 		let userInfo = ["ch": ch, "volume": volume, "player": _players[ch]!, "subPlayer": _subPlayers[ch]!]
 	
 		_gaplessTimer = NSTimer.scheduledTimerWithTimeInterval(ti, target: self, selector: "playAlternately:", userInfo: userInfo, repeats: true)
-		//controlPlayersAsCrossFade(_players[ch]!, nextPlayer: _subPlayers[ch], ch: ch, volume: volume)
 		playAlternately(_gaplessTimer!)
 	}
 	
@@ -479,34 +476,6 @@ print("\(dispTime)秒後にフェードアウトします")
 		return result
 	}
 	
-	/*
-	// 音声レベルが一定以上かを判定　最初のやつ
-	
-	// 音声レベル取得用　音声ファイルの冒頭かどうか 再生開始時はレベルが低いため必要
-	//var _atStartOfVoice = false
-	
-	func isSoundLevelOverThresholdOrg(threshold: Float = 120.0) -> Bool {
-	var result = false
-	
-	let level = monitorVoiceLevel()
-	if _lastVoiceLevel == 0 && 40 < level {
-	_atStartOfVoice = true
-	}
-	
-	if threshold < level {
-	_atStartOfVoice = false
-	result = true
-	} else if _atStartOfVoice == true {
-	result = true
-	}
-	
-	outputVoiceMeter(level, threshold: threshold)
-	
-	_lastVoiceLevel = level
-	
-	return result
-	}*/
-	
 	// 音声レベルを測定
 	func monitorVoiceLevel() -> Float {
 		_voicePlayer?.updateMeters()
@@ -614,7 +583,7 @@ print("\(dispTime)秒後にフェードアウトします")
 		let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "")
 		if path == nil {
 			_errorCode = SoundPlayerErrorCode.FileNotFound
-			_errorMessage += "=== error! === ファイルがありません！: " + fileName + "\n"
+			_errorMessage = "=== error! === ファイルがありません！: " + fileName + "\n"
 			print(_errorMessage)
 			
 			return nil

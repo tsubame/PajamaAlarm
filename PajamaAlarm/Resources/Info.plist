@@ -46,8 +46,42 @@
 	
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>taltal.catfood.jp</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true />
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true />
+			</dict>
+			<key>api.openweathermap.org</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true />
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true />
+			</dict>
+			<key>api.wunderground.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true />
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true />
+			</dict>
+			<key>catfood-taltal.ssl-lolipop.jp</key>
+			<dict>
+				<key>NSIncludesSubdomains</key><true/>
+				<!--<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key><true/>-->
+				<key>NSExceptionRequiresForwardSecrecy</key><false/>
+			</dict>
+		</dict>
+		<key>NSTemporaryExceptionMinimumTLSVersion</key>
+		<string>TLSv1.1</string>
+<!--
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+-->
 	</dict>
 </dict>
 </plist>

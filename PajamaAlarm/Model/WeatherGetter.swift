@@ -2,7 +2,8 @@
 //  WheatherGetter.swift
 //
 //  お天気データを取得するライブラリ
-//  要： SwiftyJSON
+//
+//  要： SwiftyJSON, SWXMLHash
 //
 //  使い方：
 //      var _weatherGetter = WheatherGetter()
@@ -20,15 +21,18 @@ import Foundation
 // お天気データ保存用の構造体
 struct WeatherData {
 
-	var weatherDate: NSDate = NSDate() // お天気の日時
-	var updateDate : NSDate	= NSDate() // 更新日時
-	var weather    : String	= ""	   // 天気（日本語）
-	var weatherEng : String	= ""	   // 天気（英語）
-	var weatherCode: String	= ""	   // 天気コード
-	var weatherImg : String	= ""	   // 天気画像
-	var maxTemp	   : Double = 0 	   // 最高気温
-	var minTemp    : Double = 0 	   // 最低気温
-	var temp	   : Double = 0 	   // 気温
+	var weatherDate  : NSDate = NSDate() // お天気の日時
+	var updateDate   : NSDate = NSDate() // 更新日時
+	var weather      : String = ""	   // 天気（日本語）
+	var weatherCode  : String = ""	   // 天気コード
+	var weatherImg   : String = ""	   // 天気画像
+	var maxTemp	     : Int = 0		   // 最高気温
+	var minTemp      : Int = 0		   // 最低気温
+	var temp	     : Int = 0		   // 気温
+	var pop		     : Int = 0		   // 降水確率
+	var precipitation: Int = 0		   // 降水量
+	var clouds       : Int = 0		   // 雲量（%）
+	var cityName     : String = ""	   // 都市名
 	
 	// 辞書型に変換
 	func toDictionary() -> [String: NSObject] {
@@ -36,12 +40,14 @@ struct WeatherData {
 			"weatherDate" : nsDateToJPDateStr(weatherDate),
 			"updateDate"  : nsDateToJPDateStr(updateDate),
 			"weather"     : weather,
-			"weatherEng"  : weatherEng,
+			//"weatherEng"  : weatherEng,
 			"weatherCode" : weatherCode,
 			"weatherImg"  : weatherImg,
 			"maxTemp"	  : maxTemp,
 			"minTemp"     : minTemp,
-			"temp"		  : temp
+			"temp"		  : temp,
+			"pop"		  : pop,
+			"clouds"	  : clouds
 		]
 	}
 		
@@ -67,7 +73,7 @@ class WeatherGetter {
 	let OPENWEATHER_API_KEY  = "appid=69f598f452dd4e049991200bc39b7aac&" //
 	
 	// 自作PHP API
-	let WEATHER_PHP_API_URL = "http://taltal.catfood.jp/php/getWeather.php?" // 天気取得用API
+	let WEATHER_PHP_API_URL = "https://catfood-taltal.ssl-lolipop.jp/php/getWeather.php?" //"http://taltal.catfood.jp/php/getWeather.php?" // 天気取得用API
 	
 	// OpenWeatherMap API お天気コード
 	let WEATHER_CODE = [ "01": "晴れ", "02": "晴れ",
@@ -80,6 +86,7 @@ class WeatherGetter {
 	var _longiTude: String?				  // 経度
 	var _weatherDatas   = [WeatherData]() // お天気データ保存用
 	var _currentWeather = WeatherData()   // 同上
+	var _cityName = ""					  // 都市名
 	
 
 	// 天気を取得　　使い方： exec() { wDatas in  終了後の処理 }
@@ -104,7 +111,10 @@ class WeatherGetter {
 		
 		let url = OPEN_WEATHER_API_URL + DAILY_API_STR + API_PARAM + OPENWEATHER_API_KEY + "lat=\(_latitude!)&lon=\(_longiTude!)"
 		httpRequestAsync(url) {
-			onComplete(weatherDatas: self._weatherDatas)
+			self.getFromWG() { wd in
+				self._weatherDatas[0].pop = wd.pop
+				onComplete(weatherDatas: self._weatherDatas)
+			}
 		}
 	}
 	
@@ -199,20 +209,25 @@ class WeatherGetter {
 		
 		//_dailyWeatherDatas = [WeatherData]()
 		_weatherDatas = [WeatherData]()
+		_cityName = json["city"]["name"].stringValue
 		
 		for (i, _) in json["list"].enumerate() {
 			var wd = json["list"][i]
 			var wData = WeatherData()
-			wData.weatherDate = NSDate(timeIntervalSince1970: wd["dt"].doubleValue)
-			wData.weatherEng  = wd["weather"][0]["description"].stringValue
-			wData.weatherImg  = wd["weather"][0]["icon"].stringValue
-			wData.weatherCode = wd["weather"][0]["id"].stringValue
-			wData.maxTemp     = wd["temp"]["max"].doubleValue
-			wData.minTemp     = wd["temp"]["min"].doubleValue
-			wData.temp        = wd["main"]["temp"].doubleValue
-			wData.weather     = getJWeatherFromWImg(wd["weather"][0]["icon"].stringValue)
+			wData.weatherDate   = NSDate(timeIntervalSince1970: wd["dt"].doubleValue)
+			wData.weather       = getJWeatherFromWImg(wd["weather"][0]["icon"].stringValue)
+			wData.maxTemp       = Int(round(wd["temp"]["max"].doubleValue))
+			wData.minTemp       = Int(round(wd["temp"]["min"].doubleValue))
+			wData.temp          = Int(round(wd["main"]["temp"].doubleValue))
+			wData.precipitation = wd["rain"].intValue
+			wData.clouds	    = wd["clouds"].intValue
+			wData.cityName	    = _cityName
 			
 			//_dailyWeatherDatas.append(wData)
+			//wData.weatherEng  = wd["weather"][0]["description"].stringValue
+			//wData.weatherImg  = wd["weather"][0]["icon"].stringValue
+			//wData.weatherCode = wd["weather"][0]["id"].stringValue
+			
 			_weatherDatas.append(wData)
 		}
     }
@@ -226,10 +241,11 @@ class WeatherGetter {
 			return
 		}
 		
-		_currentWeather.weatherEng  = json["weather"][0]["main"].stringValue
-		_currentWeather.weatherCode = json["weather"][0]["id"].stringValue
-		_currentWeather.weatherImg  = json["weather"][0]["icon"].stringValue
-		_currentWeather.temp		= json["main"]["temp"].doubleValue
+		_cityName					= json["name"].stringValue
+		//_currentWeather.weatherEng  = json["weather"][0]["main"].stringValue
+		//_currentWeather.weatherCode = json["weather"][0]["id"].stringValue
+		//_currentWeather.weatherImg  = json["weather"][0]["icon"].stringValue
+		_currentWeather.temp		= json["main"]["temp"].intValue// .doubleValue
 		_currentWeather.weather     = getJWeatherFromWImg(json["weather"][0]["icon"].stringValue)
 		
 		print("お天気を取得しました。")
@@ -258,6 +274,54 @@ class WeatherGetter {
 		return w
 	}
 
+	//======================================================
+	// Wunderground 関連
+	//======================================================
+	
+	func getFromWG(onComplete: (weather: WeatherData) -> ()) {
+		let API_KEY = "e0286d331896d3b3"
+		let lat     = readPref(PREF_KEY_LATITUDE)
+		let long    = readPref(PREF_KEY_LONGITUDE)
+		
+		let url = "http://api.wunderground.com/api/" + API_KEY + "/forecast/lang:JP/q/\(lat!),\(long!).xml"
+		
+		print("\(url)にアクセス……")
+		let req   = NSURLRequest(URL: NSURL(string: url)!)
+		
+		let task = NSURLSession.sharedSession().dataTaskWithRequest(req) { data, response, error in
+			if error != nil {
+				print(error!.description)
+				return
+			}
+			
+			let xml = SWXMLHash.parse(data!)
+			print(xml["response"]["forecast"]["txt_forecast"]["forecastdays"])
+			print(xml["response"]["forecast"]["txt_forecast"]["forecastdays"]["forecastday"][0]["fcttext_metric"].element?.text)
+			
+			var weather = WeatherData()
+			weather.weather = (xml["response"]["forecast"]["txt_forecast"]["forecastdays"]["forecastday"][0]["fcttext_metric"].element?.text)!
+			weather.pop = Int((xml["response"]["forecast"]["txt_forecast"]["forecastdays"]["forecastday"][0]["pop"].element?.text)!)!
+			onComplete(weather: weather)
+		}
+		task.resume()
+	}
+	
+	func sslTest(onComplete: (data: NSData) -> ()) {
+		let url = "https://catfood-taltal.ssl-lolipop.jp/"
+		let nsUrl = NSURL(string: url)
+		let req   = NSURLRequest(URL: nsUrl!)
+		
+		let task = NSURLSession.sharedSession().dataTaskWithRequest(req) { data, response, error in
+			if error != nil {
+				print(error!.description)
+				return
+			}
+			
+			onComplete(data: data!)
+		}
+		task.resume()
+	}
+	
 	/*
 	var _currentWeather    = WeatherData()
 	var _dailyWeatherDatas = [WeatherData]()

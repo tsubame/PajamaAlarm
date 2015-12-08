@@ -3,7 +3,18 @@
 //  PajamaAlarm
 //
 //  Created by hideki on 2015/11/06.
-//  Copyright © 2015年 Tsubaki. All rights reserved.
+//
+//	（説明）
+//		ホーム画面のコントローラクラス。
+//
+//  （依存ファイル）
+//		・Constants.swift
+//		・Functions.swift
+//		・MorningVoiceManager.swift
+//		・ShortTalkManager.swift
+//		・WeatherGetter.swift
+//		・LocationGetter.swift
+//		・VoicePlayer.swift
 //
 
 import UIKit
@@ -17,118 +28,13 @@ class HomeViewController: UIViewController {
 	@IBOutlet weak var _voiceLabel      : UILabel!
 	
 	// プライベート変数
-	var _morningVoiceManager = MorningVoiceManager()
-	var _shortTalkManager    = ShortTalkManager()
-	var _weatherGetter       = WeatherGetter()
-	var _locationGetter      = LocationGetter()
-	var _soundPlayer         = SoundPlayer()
-	
-	//var _currentWeatherName = ""
-	var _todaysWeatherData = WeatherData()
-	
-	var _morningVoiceDatas = [VoiceData]()
+	var _shortTalkBuilder = ShortTalkBuilder()
+	var _soundPlayer	  = SoundPlayer()
+	var _voiceDatas       = [VoiceData]()		// 表示するセリフデータ
 	
 	
 	//======================================================
-	// セリフの表示、再生
-	//======================================================
-	
-	// セリフを枠内に表示、音声の再生
-	func displayVoiceMsg(word: String, voiceFileName: String? = nil) {
-		_voiceFrameUIView.hidden = false
-		_voiceLabel.text = word
-
-		if voiceFileName != nil {
-			_soundPlayer.play(voiceFileName!)
-		}
-	}
-	
-	// 挨拶表示
-	func displayGreeting() {
-		let voiceData = _shortTalkManager.getGreetingVoiceData()
-		if voiceData == nil {
-			return
-		}
-		
-		displayVoiceMsg(voiceData!.text)
-	}
-	
-	// ひとこと表示
-	func displayShortTalk() {
-		if _voiceFrameUIView.hidden == false {
-			_voiceFrameUIView.hidden = true
-			_soundPlayer.stop()
-			return
-		}
-		
-		let vd = _shortTalkManager.getTalkVoiceData()
-		if vd == nil {
-			return
-		}
-		/*
-		_voiceFrameUIView.hidden = false
-		_voiceLabel.text = vd!.text
-		changeFacialEx(vd!.face)
-*/
-		changeFacialEx("笑")
-		displayVoiceMsg(vd!.text, voiceFileName: vd!.fileName)
-	}
-	
-	// おはようボイスの表示
-	func displayMorningVoice() {
-		let voiceData = _morningVoiceDatas.removeFirst()
-		let text = voiceData.text
-
-		displayVoiceMsg(text)
-	}
-	
-	//======================================================
-	//
-	//======================================================
-	
-	// 表情変更
-	func changeFacialEx(facialEx: String? = nil) {
-		var face = "笑"
-		if facialEx != nil {
-			face = facialEx!
-		}
-		
-		switch face {
-		case "笑":
-			_charaImageView.image = UIImage(named: "hotaruS.png")
-		default:
-			_charaImageView.image = UIImage(named: "hotaruN.png")
-		}
-	}
-	
-	// 位置情報の更新
-	func updateLocation() {
-		_locationGetter.exec() { lat, long in
-			if lat == nil || long == nil {
-				return
-			}
-			
-			writePref(lat,  key: PREF_KEY_LATITUDE)
-			writePref(long, key: PREF_KEY_LATITUDE)
-		}
-	}
-
-	// 天気の更新
-	func updateWeather() {
-		print("お天気を取得します")
-		_weatherGetter.exec() { dDatas in
-			//self._currentWeatherName = wData.weather
-			if dDatas.count == 0 {
-				return
-			}
-			
-			self._todaysWeatherData  = dDatas[0]
-			print(dDatas[0].weather)
-		}
-	}
-	
-	//======================================================
-	// 初期処理
+	// UIKitのアスペクトの変更
 	//======================================================
 	
 	// UI部品のアスペクトを画面に合わせる
@@ -137,36 +43,94 @@ class HomeViewController: UIViewController {
 		_voiceButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
 		self.view.setNeedsDisplay()
 	}
+
+	//======================================================
+	// セリフの表示、再生
+	//======================================================
 	
-	// オブザーバーの追加
-	func addNotifObservers() {
-		addNotifObserver(NOTIF_START_MORNING_VOICE) {
-			self._morningVoiceDatas = self._morningVoiceManager.getMorningVoiceDatas(self._todaysWeatherData.weather)
-			self.displayMorningVoice()
+	// 次のセリフを表示
+	func displayNextMsg() {
+		displayVoiceMsg(_voiceDatas.removeFirst())
+	}
+	
+	// セリフを枠内に表示、音声の再生
+	func displayVoiceMsg(var v: VoiceData) {
+		if v.face.isEmpty {
+			v.face = "笑"
 		}
-		addNotifObserver(NOTIF_PLAY_GREETING_VOICE) {
-			self.displayGreeting()
-		}
-		addNotifObserver(NOTIF_UPDATE_WEATHER) {
-			self.updateWeather()
-		}
-		addNotifObserver(NOTIF_UPDATE_LOCATION) {
-			self.updateLocation()
+		
+		changeFacialEx(v.face)
+		showMsgInFrame(v.text)
+		
+		// 音声の再生
+		if v.fileName.isEmpty == false {
+			_soundPlayer.play(v.fileName)
 		}
 	}
 	
 	//======================================================
-	// セグエ
+	// 枠の表示、非表示
 	//======================================================
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-	
+	// 枠を非表示
+	func hideMsgFrame() {
+		_voiceFrameUIView.hidden = true
+		_soundPlayer.stopAll()
+		changeFacialEx("通")
 	}
 	
-	@IBAction func backToHome(segue: UIStoryboardSegue) {
-		dispatchAfterByDouble(0.5, closure: {
-			self.displayVoiceMsg("この時間に起こせばいいんだね？　了解です♪")
-		})
+	// 枠の表示、テキストの表示
+	func showMsgInFrame(text: String? = nil) {
+		_voiceFrameUIView.hidden = false
+		
+		if text != nil {
+			_voiceLabel.text = text!
+		}
+	}
+
+	//======================================================
+	// 挨拶、ひとこと、おはようボイスの表示
+	//======================================================
+	
+	// 挨拶表示
+	func displayGreeting() {
+		let builder = ShortTalkBuilder()
+		_voiceDatas = builder.getGreetingDatas()
+		
+		changeFacialEx("笑")
+		displayNextMsg()
+	}
+	
+	// ひとこと表示
+	func displayShortTalk() {
+		_voiceDatas = _shortTalkBuilder.getShortTalkDatas()
+
+		displayNextMsg()
+	}
+	
+	// おはようボイスの表示
+	func displayMorningVoice() {
+		let builder = MorningVoiceBuilder()
+		let weather = readPref(PREF_KEY_T_WEATHER) as? String
+		_voiceDatas = builder.exec(weather)
+		
+		displayNextMsg()
+	}
+	
+	//======================================================
+	// 表情関連
+	//======================================================
+	
+	// 表情変更
+	func changeFacialEx(face: String) {
+		switch face {
+			case "笑":
+				_charaImageView.image = UIImage(named: "hotaruS.png")
+			case "眠":
+				_charaImageView.image = UIImage(named: "hotaruSLP.png")
+			default:
+				_charaImageView.image = UIImage(named: "hotaruN.png")
+		}
 	}
 	
 	//======================================================
@@ -177,26 +141,52 @@ class HomeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		// アスペクトを画面に合わせる
 		changeViewsAspectToFit()
-		addNotifObservers()
+		// オブザーバーの追加
+		addNotifObserver(NOTIF_START_MORNING_VOICE) {
+			self.displayMorningVoice()
+		}
+		addNotifObserver(NOTIF_PLAY_GREETING_VOICE) {
+			self.displayGreeting()
+		}
 		
-		dispatchAfterByDouble(0.5, closure: {
+		// 挨拶データの表示
+		delay(0.5, closure: {
 			self.displayGreeting()
 		})
 	}
-
-	// タッチ
+	
+	// タッチイベント
 	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		if _morningVoiceDatas.isEmpty {
-			displayShortTalk()
+		if _voiceDatas.isEmpty && _voiceFrameUIView.hidden == false {
+			hideMsgFrame()
+			return
+		}
+		
+		if !_voiceDatas.isEmpty {
+			displayNextMsg()
 		} else {
-			displayMorningVoice()
+			displayShortTalk()
 		}
 	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
+	
+	//======================================================
+	// セグエ
+	//======================================================
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		//
 	}
-
+	
+	@IBAction func backToHome(segue: UIStoryboardSegue) {
+		delay(0.5, closure: {
+			var voice = VoiceData()
+			voice.text = "この時間に起こせばいいんだね？　了解だよ♪"
+			voice.face = "笑"
+			self.displayVoiceMsg(voice)
+		})
+	}
+	
 }
 

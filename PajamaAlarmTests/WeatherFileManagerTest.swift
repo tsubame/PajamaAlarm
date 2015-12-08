@@ -70,4 +70,25 @@ class WeatherFileManagerTest: XCTestCase {
 		
 		XCTAssertTrue(res)
 	}
+	
+	func test_gatherWeatherDatasAndWrite() {
+		let longs = ["129.87", "132.45", "139.69", "140.8719", "141.346939",]
+		let lats  = ["32.74",  "34.39",  "35.689", "38.26889", "43.06", ]
+		
+		for (i, lat) in lats.enumerate() {
+			let pref = NSUserDefaults.standardUserDefaults()
+			pref.setObject(lat, forKey: "latitude")
+			pref.setObject(longs[i], forKey: "longitude")
+			pref.synchronize()
+			
+			let ex = self.expectationWithDescription("")
+			
+			_sut.gatherWeatherDatasAndWrite() { success in
+				XCTAssertTrue(success)
+				ex.fulfill()
+			}
+			
+			self.waitForExpectationsWithTimeout(4.0, handler: nil)
+		}
+	}
 }

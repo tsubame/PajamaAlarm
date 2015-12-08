@@ -12,8 +12,6 @@ class SetAlarmViewController: UIViewController {
 
 	@IBOutlet weak var _timePickersView: AlarmTimePickersUIView!
 
-	//var _locGetter = LocationGetter()
-	
 	
 	// アラーム用ローカル通知の作成
 	func createScheduledLocalNotif(fireDate: NSDate) {
@@ -28,34 +26,15 @@ class SetAlarmViewController: UIViewController {
 		UIApplication.sharedApplication().scheduleLocalNotification(notif)
 	}
 	
-	/*
-	// 位置情報を取得し、プリファレンスに書き込む
-	func updateLocation() {
-		let keyLat  = PREF_KEY_LATITUDE
-		let keyLong = PREF_KEY_LONGITUDE
-		
-		_locGetter.exec() { lat, long in
-			if lat == nil {
-				return
-			}
-			
-			writePref(lat,  key: keyLat)
-			writePref(long, key: keyLong)
-		}
-	}*/
-	
 	//======================================================
 	// Action
 	//======================================================
 	
 	@IBAction func _setButtonClicked(sender: AnyObject) {
-
 		// プリファレンスに書き込み
 		let alarmTime = _timePickersView.getAlarmTime()
 		writePref(alarmTime!, key: PREF_KEY_ALARM_TIME)
 		writePref("true", key: PREF_KEY_IS_ALARM_SET)
-		
-		//updateLocation()
 		
 		// イベント通知の発行
 		postLocalNotif(NOTIF_SET_ALARM_ON)
@@ -72,13 +51,12 @@ class SetAlarmViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 	
 	override func viewWillAppear(animated: Bool) {
 		//_timePickersView.alarmTimeToPicker()
+		print("show pickers.")
+		//print(readPref(PREF_KEY_ALARM_TIME))
+		//_timePickersView.makeAll()
+		//_timePickersView.movePickerIndex()
 	}
 }

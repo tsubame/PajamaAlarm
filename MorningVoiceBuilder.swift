@@ -1,8 +1,8 @@
 //
-//  MorningVoiceManager.swift
+//  MorningVoiceBuilder.swift
+//  PajamaAlarm
 //
-//  Created by hideki on 2015/11/24.
-//
+//  Created by hideki on 2015/12/05.
 //
 //	（説明）
 //		おはようボイスを管理するクラス。
@@ -22,17 +22,21 @@
 
 import UIKit
 
-class MorningVoiceManager {
+class MorningVoiceBuilder {
 	
 	// 定数
+
+
+
 	let VOICE_TEXT_FILE_NAME = "おはようボイス"								// 台本データのファイル名
 	let WEATHER_SECTION_NAME = "お天気"										// お天気セクションの名前
 	let WEATHER_FILE_NUMBERS = [ 1: "晴れ", 2: "曇り", 3: "雨", 4: "豪雨"]		// お天気セクション内の番号
-
+	
 	// プライベート変数
 	var _voiceDatas: [String: [VoiceData]]!
 	var _voiceFileManager = VoiceFileManager()
 	var _sectionNames     = [String]()
+	var _voiceUtil		  = VoiceUtil()
 	
 	
 	// 初期化
@@ -40,19 +44,17 @@ class MorningVoiceManager {
 		loadVoiceDataFromFile()
 	}
 	
-	
-	
-	// おはようボイス用の一連の音声データを返す。天気を指定すると天気関連のデータをくっつけて返す
-	func getMorningVoiceDatas(weather: String? = nil) -> [VoiceData] {
-		var voices = [VoiceData]()
-		voices.append(getHeadData())
+	// 処理実行
+	func exec(weather: String? = nil) -> [VoiceData] {
+		let orgDatas    = getMorningVoiceDatas(weather)
+		var returnDatas = [VoiceData]()
 		
-		// お天気データをくっつける
-		if weather != nil {
-			voices += getWeatherDatas(weather!)
+		for v in orgDatas {
+			let datas   = _voiceUtil.splitVoices(v)
+			returnDatas += datas
 		}
 		
-		return voices
+		return returnDatas
 	}
 	
 	//======================================================
@@ -60,8 +62,8 @@ class MorningVoiceManager {
 	//======================================================m
 	
 	// 音声データをファイルから読み込む
-	func loadVoiceDataFromFile() {
-		_voiceDatas = _voiceFileManager.loadDatasFromVoiceTextFile(VOICE_TEXT_FILE_NAME)
+	func loadVoiceDataFromFile() {		
+		_voiceDatas = _voiceFileManager.loadDatasFromVoiceListFile(VOICE_TEXT_FILE_NAME)
 		
 		for (key, _) in _voiceDatas {
 			if key == WEATHER_SECTION_NAME {
@@ -75,6 +77,21 @@ class MorningVoiceManager {
 	//======================================================
 	// その他
 	//======================================================
+	
+	// おはようボイス用の一連の音声データを返す。天気を指定すると天気関連のデータをくっつけて返す
+	func getMorningVoiceDatas(weather: String? = nil) -> [VoiceData] {
+		var voices = [VoiceData]()
+		voices.append(getHeadData())
+		
+		// お天気データをくっつける
+		if weather != nil {
+			voices += getWeatherDatas(weather!)
+// 気温データの表示テスト 
+			voices.append(getTempSample())
+		}
+		
+		return voices
+	}
 	
 	// 先頭に入る音声データを返す
 	func getHeadData() -> VoiceData {
@@ -145,4 +162,40 @@ class MorningVoiceManager {
 		return array[n] as! NSObject
 	}
 
+	//======================================================
+	// サンプル
+	//======================================================
+
+	// 気温データの表示テスト
+	func getTempSample() -> VoiceData {
+		var text = ""
+		
+		let p = readPref(PREF_KEY_T_POP) as? Int
+		if p != nil {
+			if 0 < p! {
+				text += "降水確率は\(p!)%。\n"
+			}
+		}
+		let m = readPref(PREF_KEY_T_MIN_TEMP) as? Int
+		if m != nil {
+			text += "最低気温は\(m!)℃"
+		}
+		
+		let y = readPref(PREF_KEY_Y_MIN_TEMP) as? Int
+		if y != nil && m != nil{
+			let def = m! - y!
+			var defStr = "+\(def)"
+			if def < 0 {
+				defStr = "\(def)"
+			}
+			text += "昨日に比べて \(defStr)℃"
+		}
+		
+		text += "だよ。"
+		
+		var voice = VoiceData()
+		voice.text = text
+		
+		return voice
+	}
 }

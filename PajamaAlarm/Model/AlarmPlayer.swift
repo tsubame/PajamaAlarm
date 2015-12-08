@@ -1,8 +1,7 @@
 //
-//  RingtonePlayer.swift
-//  着信音再生用クラス
+//  AlarmPlayer.swift
 //
-//  Created by hideki on 2014/11/05.
+//  Created by hideki on 2015/11/05.
 //  Copyright (c) 2014年 hideki. All rights reserved.
 //
 
@@ -21,10 +20,17 @@ class AlarmPlayer: NSObject {
 	var _soundPlayer   = SoundPlayer()
 	
 	// 以下、テスト用
-	var _alarmFile = "alarm-1.mp3"
+	var _alarmFile1 = "alarm-1.mp3"
+	var _alarmFile2 = "alarm-2.mp3"
+	var _alarmFile3 = "alarm-3.mp3"
+	
 	var _playsVibe = true
 	var _vibeTimer: NSTimer? // バイブレーション用 うまく動かない
 
+	var _alarmFiles = ["alarm-1.mp3", "alarm-2.mp3", "alarm-3.mp3"]
+	var _alarmIndex = 0
+	
+	var _snoozeTimer: NSTimer?
 	
     override init() {
         super.init()
@@ -39,18 +45,36 @@ class AlarmPlayer: NSObject {
     
     // アラームを鳴らす
     func startAlarm() {
-        _soundPlayer.play(_alarmFile)
+		_soundPlayer.play(_alarmFiles[_alarmIndex], ch: _alarmIndex, volume: 0.7, loop: true)
 		_isPlaying = true
-		
+		_snoozeTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "snooze:", userInfo: nil, repeats: true)
+				
 		// プリファレンスに書き込み
 		writePref("false", key: PREF_KEY_IS_ALARM_SET)
 	}
 	
+	func snooze(timer: NSTimer?) {
+		if _alarmFiles.count <= _alarmIndex + 1 {
+			_snoozeTimer?.invalidate()
+			_snoozeTimer = nil
+			self._soundPlayer.stopAll()
+			_alarmIndex = 0
+			
+			return
+		}
+		
+		self._soundPlayer.play(_alarmFiles[_alarmIndex + 1], ch: _alarmIndex + 1, volume: 1, loop: true)
+		self._soundPlayer.stop(_alarmIndex)
+		_alarmIndex++
+	}
+	
+	
     // アラームの停止
     func stopAlarm() {
-        _vibeTimer?.invalidate()
-        _vibeTimer = nil
+		_snoozeTimer?.invalidate()
+		_snoozeTimer = nil
 		_soundPlayer.stopAll()
+		_isPlaying = false
 		
 		//NSNotificationCenter.defaultCenter().postNotificationName("startMorningCall", object: nil)
     }

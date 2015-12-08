@@ -8,14 +8,14 @@
 
 import XCTest
 
-class MorningVoiceManagerTest: XCTestCase {
+class MorningVoiceBuilderTest: XCTestCase {
     
-	var _sut: MorningVoiceManager!
+	var _sut: MorningVoiceBuilder!
 	
 	override func setUp() {
 		super.setUp()
 		writePref("兄さん", key: PREF_KEY_NICKNAME)
-		_sut = MorningVoiceManager()
+		_sut = MorningVoiceBuilder()
 	}
 	
 	override func tearDown() {
@@ -61,6 +61,12 @@ class MorningVoiceManagerTest: XCTestCase {
 		}
 	}
 	
+	func test_loadVoiceDataFromFile() {
+		_sut.loadVoiceDataFromFile()
+		print(_sut._voiceDatas)
+	}
+	
+	/*
 	func test_loadVoiceData() {
 		_sut.loadVoiceData()
 	}
@@ -112,7 +118,7 @@ class MorningVoiceManagerTest: XCTestCase {
 			XCTAssertNil(vData)
 			print("\(p): \(vData)")
 		}
-	}
+	}*/
 
 	
 }

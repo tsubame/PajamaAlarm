@@ -74,12 +74,14 @@ class WeatherGetterTest: XCTestCase {
 			for data in wd {
 				print(data)
 			}
+			
+			print(self._sut._cityName)
 		}
 		
 		self.waitForExpectationsWithTimeout(5.1, handler: nil)
 	}
 	
-	func testGetCurrentWeather() {
+	func test_getCurrentWeather() {
 		let expectation = self.expectationWithDescription("")
 		
 		_sut.getCurrentWeather({
@@ -91,7 +93,7 @@ class WeatherGetterTest: XCTestCase {
 		self.waitForExpectationsWithTimeout(5.1, handler: nil)
 	}
 	
-	func testGet3HourWeather() {
+	func test_get3HourWeather() {
 		let expectation = self.expectationWithDescription("")
 		
 		_sut.get3HourWeather({ hd in
@@ -105,7 +107,7 @@ class WeatherGetterTest: XCTestCase {
 	
 
 	
-	func testConvertToDict() {
+	func test_convertToDict() {
 		_sut._latitude  = "32.74"
 		_sut._longiTude = "129.87"
 		
@@ -122,7 +124,7 @@ class WeatherGetterTest: XCTestCase {
 		self.waitForExpectationsWithTimeout(5.1, handler: nil)
 	}
 	
-	func testWriteToPlist() {
+	func test_writeToPlist() {
 		var path = (NSHomeDirectory() as NSString).stringByAppendingPathComponent("Documents")
 		path = (path as NSString).stringByAppendingPathComponent("dailyWeather.plist")
 		
@@ -156,54 +158,33 @@ class WeatherGetterTest: XCTestCase {
 		self.waitForExpectationsWithTimeout(5.1, handler: nil)
 	}
 
-    func testPref() {
-		let user = [
-			"Name": "Siro Chro",
-			"Age": "20",
-			"Sex": "male",
-		]
+	func test_getFromWG() {
+		let ex = self.expectationWithDescription("")
 		
-		let nsDic = user as NSDictionary
+		_sut.getFromWG() { w in
+			print(w.weather)
+			ex.fulfill()
+		}
 		
-		var path = (NSHomeDirectory() as NSString).stringByAppendingPathComponent("Documents")
-		path = (path as NSString).stringByAppendingPathComponent("prefTest23")
-		//let res  = nsDic.writeToFile(path, atomically: true)
-		let data = NSKeyedArchiver.archivedDataWithRootObject(nsDic)
-		data.writeToFile(path, atomically: true)
-		
-		/*
-		if res == true {
-			print("success!")
-		} else {
-			print("failure!")
-		}*/
-		//let pref = NSUserDefaults.standardUserDefaults()
-		//pref.setObject(_sut, forKey: "testPref")
-		//pref.synchronize()
-        /*
-        var expectation = self.expectationWithDescription("fetch posts")
-        
-        self._sut.getWeatherOfTokyo()
-        XCTAssertFalse(self._sut.hasError(), "エラーがないこと")
-        
-        var w = [String: String]()
-        
-        //expectation.fulfill()
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(6.5 * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), {
-                w = self._sut._weatherTokyo
-                expectation.fulfill()
-        })
-        self.waitForExpectationsWithTimeout(7.0, handler: nil)
+		self.waitForExpectationsWithTimeout(5.1, handler: nil)
+	}
 
-        println(w)
-        XCTAssertNotEqual(w.count, 0, "0件以上の結果が帰ってくること")
-        */
-    }
-
+	func test_writeYeasterdayData() {
+			writePref("晴れ",	key: PREF_KEY_T_WEATHER)
+			writePref(10.0,		key: PREF_KEY_T_MIN_TEMP)
+			writePref(15.0,		key: PREF_KEY_T_MAX_TEMP)
+			writePref(NSDate(timeIntervalSinceNow: -86400),  key: PREF_KEY_T_WEATHER_DATE)
+	}
+	
+	func test_sslTest() {
+		let ex = self.expectationWithDescription("")
+		
+		_sut.sslTest() { d in
+			print(d)
+			ex.fulfill()
+		}
+		
+		self.waitForExpectationsWithTimeout(5.1, handler: nil)
+	}
 
 }

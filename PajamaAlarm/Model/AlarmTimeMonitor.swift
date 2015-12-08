@@ -94,6 +94,8 @@ class AlarmTimeMonitor: NSObject {
 	func stopAllTimer() {
 		_monitorTimer?.invalidate()
 		_countDownTimer?.invalidate()
+		_monitorTimer   = nil
+		_countDownTimer = nil
 	}
 	
 	//======================================================
@@ -107,11 +109,11 @@ class AlarmTimeMonitor: NSObject {
 		// 通知発行
 		postLocalNotif(NOTIF_START_ALARM)
 		
-		dispatch_after(3, dispatch_get_main_queue(), {
+		delay(3.0) {
 			self._soundPlayer.stopMuteSound()
-		})
+		}
 		
-		print("アラームの時間です。着信音を鳴らします")
+		print("アラームの時間です。サウンドを再生します")
 	}
 	
 	// アラームキャンセル　オフにした時の処理
