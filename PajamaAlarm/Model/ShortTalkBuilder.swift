@@ -15,11 +15,14 @@ class ShortTalkBuilder {
 	let SHORT_TALK_ETC_SECTION    = "その他"		// ひとことデータで常に取得するセクション名
 	
 	// プライベート変数
-	var _stVoices   = [String: [VoiceData]]()	// ひとことデータの配列
-	var _gVoices    = [String: [VoiceData]]()	// 挨拶データの配列
+	var _stVoices   = [String: [[VoiceData]]]()	// ひとことデータの配列
+	var _gVoices    = [String: [[VoiceData]]]()	// 挨拶データの配列
+
+	
 	var _talkIndex  = 0							// ひとことデータのインデックス
 	var _timePeriod = ""						// 時間帯
-	var _voiceUtil		  = VoiceUtil()
+	
+//var _voiceUtil		  = VoiceUtil()
 	
 	
 	// 初期化
@@ -27,39 +30,79 @@ class ShortTalkBuilder {
 		loadVoiceDataFromFile()
 	}
 	
-	// 処理実行
+	//======================================================
+	// ひとことデータ、挨拶データの取得
+	//======================================================
+	
+	// ひとことデータを返す
 	func getShortTalkDatas() -> [VoiceData] {
-		let v = getShortTalkData()
-		if v == nil {
-			return [VoiceData]()
-		}
-		
-		return _voiceUtil.splitVoices(v!)
+		return getShortTalkData()
 	}
 	
-	// 処理実行
+	// 挨拶データを返す
 	func getGreetingDatas() -> [VoiceData] {
+		return getGreetingData()
+	}
+	
+	/*
+	// 挨拶データを返す
+	func getGreetingDatasOrg() -> [VoiceData] {
 		let v = getGreetingData()
 		if v == nil {
 			return [VoiceData]()
 		}
 		
 		return _voiceUtil.splitVoices(v!)
-	}
+	}*/
+	
+	//======================================================
+	//
+	//======================================================
+	
+	/*
+	func getSplitVoices(v: VoiceData) -> [VoiceData] {
+		var voices = [VoiceData]()
+		voices.append(v)
+		
+		if !isSplitedVoice(v) {
+			return voices
+		}
+		
+		let res = searchWithRegex(v.fileName, ptn: "\\d_([1-9])\\.", rangeAtIndex: 1)
+		if !res.isEmpty {
+			let index = Int(res)
+			
+		}
+		
+		return voices
+	}*/
+	/*
+	func isSplitedVoice(v: VoiceData) -> Bool {
+		let nextVoice = getShortTalkData()
+		_talkIndex--
+		
+		let res = searchWithRegex(nextVoice!.fileName, ptn: "\\d_[1-9]\\.")
+		
+		if res.isEmpty == false {
+			return true
+		}
+		
+		return false
+	}*/
 	
 	//======================================================
 	// ひとことデータ
 	//======================================================
 	
 	// ひとことデータを1つ返す
-	func getShortTalkData(date: NSDate? = nil) -> VoiceData? {
+	func getShortTalkData(date: NSDate? = nil) -> [VoiceData] {
 		// 時間帯、インデックスを設定
 		setTimePeriodAndTalkIndex(date)
 		
 		// 現在の時間帯、【その他】の音声データを取得
 		var datas = getShortTalkDatasForPeriod() + _stVoices[SHORT_TALK_ETC_SECTION]!
 		if datas.count == 0 {
-			return nil
+			return [VoiceData]()
 		}
 		
 		if datas.count <= _talkIndex {
@@ -70,10 +113,10 @@ class ShortTalkBuilder {
 	}
 	
 	// 現在の時間帯のひとことデータを配列で返す
-	func getShortTalkDatasForPeriod() -> [VoiceData] {
+	func getShortTalkDatasForPeriod() -> [[VoiceData]] {
 		if _stVoices[_timePeriod] == nil || _stVoices[SHORT_TALK_ETC_SECTION] == nil {
 			print(ERROR_MSG + "ひとことファイルの書式エラーです")
-			return [VoiceData]()
+			return [[VoiceData]]()
 		}
 		
 		return _stVoices[_timePeriod]!
@@ -84,22 +127,22 @@ class ShortTalkBuilder {
 	//======================================================
 	
 	// 挨拶データを返す
-	func getGreetingData(date: NSDate? = nil) -> VoiceData? {
+	func getGreetingData(date: NSDate? = nil) -> [VoiceData] {
 		_timePeriod = getCurrentTimePeriod(date)
 		if _gVoices[_timePeriod] == nil {
 			print("挨拶ファイルの書式エラーです。\(_timePeriod)の項目がありません")
-			return nil
+			return [VoiceData]()
 		}
 		
 		let vDatas = _gVoices[_timePeriod]!
-		var vData  = VoiceData()
+		var vData  = [VoiceData]()
 		
 		// ランダムで一つの挨拶データを返す
 		while true {
 			vData = vDatas[rand(vDatas.count)]
 			
 			// 他の呼び名が含まれていれば取得し直す
-			if hasTextOtherNickname(vData.text) == false {
+			if hasTextOtherNickname(vData[0].text) == false {
 				break
 			}
 		}
@@ -114,8 +157,8 @@ class ShortTalkBuilder {
 	// 台本からデータを読み込む
 	func loadVoiceDataFromFile() {
 		let vfm   = VoiceFileManager()
-		_stVoices = vfm.loadDatasFromVoiceListFile(SHORT_TALK_TEXT_FILE_NAME)
-		_gVoices  = vfm.loadDatasFromVoiceListFile(GREETING_TEXT_FILE_NAME)
+		_stVoices = vfm.loadVoiceListToDict(SHORT_TALK_TEXT_FILE_NAME)
+		_gVoices  = vfm.loadVoiceListToDict(GREETING_TEXT_FILE_NAME)
 	}
 	
 	// 現在の呼び名以外を含んでいるか
@@ -169,5 +212,9 @@ class ShortTalkBuilder {
 		
 		return defaultPeriod
 	}
+
+	
+	
+// 削除予定
 
 }

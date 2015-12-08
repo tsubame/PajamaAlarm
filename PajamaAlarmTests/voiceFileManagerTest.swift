@@ -36,12 +36,13 @@ class VoiceFileManagerTest: XCTestCase {
 	func test_getVoiceListsFromText() {
 		let text = "【 深夜 】\r\n\r\n" +
 		"・ひとこと_深夜_0.mp3       「んー……。すー……すー……」 <眠>\r\n\r\n" +
-		"・ひとこと_深夜_1.mp3       「んー……。すー……すー……」 <眠>\r\n\r\n" +
-		"・ひとこと_深夜_2.mp3       「んー……。すー……すー……」 <眠>\r\n\r\n" +
-		"・ひとこと_深夜_3.mp3       「んー……。すー……すー……」 <眠>\r\n\r\n"
+		"・ひとこと_深夜_1-0.mp3       「んー……。すー……すー……」 <眠>\r\n" +
+		"・ひとこと_深夜_1-1.mp3       「んー……。すー……すー……」 <眠>\r\n\r\n" +
+		"・ひとこと_深夜_2.mp3       「んー……。すー……すー……」 <眠>\r\n\r\n"
 		
 		let voiceLists = _sut.getVoiceListsFromText(text)
 		XCTAssertNotEqual(voiceLists.count, 0, "")
+		XCTAssertEqual(voiceLists.count, 3)
 		
 		print(voiceLists)
 	}
@@ -58,6 +59,27 @@ class VoiceFileManagerTest: XCTestCase {
 		}
     }
 	
+	func test_loadVoiceListToDict() {
+		let fileNames = ["ひとこと", "おはようボイス", "挨拶"]
+		for fileName in fileNames {
+			let res = _sut.loadVoiceListToDict(fileName)
+			XCTAssertNotEqual(res.count, 0, "")
+
+			for (_, vDatas) in res {
+				XCTAssertNotEqual(vDatas.count, 0, "")
+				
+				for datas in vDatas {
+					XCTAssertNotEqual(datas.count, 0, "")
+					
+					if 1 < datas.count {
+						print(datas)
+					}
+				}
+			}
+		}
+	}
+	
+	/*
 	func test_loadDatasFromVoiceListFile() {
 		let fileNames = ["ひとこと", "おはようボイス", "挨拶"]
 		for fileName in fileNames {
@@ -73,7 +95,7 @@ class VoiceFileManagerTest: XCTestCase {
 				}
 			}
 		}
-	}
+	}*/
 	
 	/*
 	func testOutputNewFiles() {

@@ -94,8 +94,7 @@ class HomeViewController: UIViewController {
 	
 	// 挨拶表示
 	func displayGreeting() {
-		let builder = ShortTalkBuilder()
-		_voiceDatas = builder.getGreetingDatas()
+		_voiceDatas = _shortTalkBuilder.getGreetingDatas()
 		
 		changeFacialEx("笑")
 		displayNextMsg()
@@ -104,7 +103,6 @@ class HomeViewController: UIViewController {
 	// ひとこと表示
 	func displayShortTalk() {
 		_voiceDatas = _shortTalkBuilder.getShortTalkDatas()
-
 		displayNextMsg()
 	}
 	

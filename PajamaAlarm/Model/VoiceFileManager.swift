@@ -40,29 +40,236 @@ class VoiceFileManager {
 		outputVoiceListFiles()
 	}
 	
+	
+	//======================================================
+	// 台本の読み込み
+	//======================================================
+	
+	// 台本ファイルを読み込んで、VoiceDataの連想配列を返す
+	func loadDatasFromVoiceTextFile(fileName: String) -> [String: [VoiceData]] {
+		var voices = [String: [VoiceData]]()
+		
+		// テキストファイルを読み込み、"【" で区切る
+		let secTexts = loadVoiceTextFileAndSplit(fileName)
+		if secTexts == nil {
+			return voices
+		}
+		
+		for secText in secTexts! {
+			let secName     = getSecNameFromStr(secText)
+			voices[secName] = [VoiceData]()
+			
+			// セリフを配列で取得
+			let voiceTexts = getVoiceTextsFromStr(secText)
+			// 連想配列に追加
+			for (i, vText) in voiceTexts.enumerate() {
+				voices[secName]! += makeVoiceDatas(vText, fileName: fileName, secName: secName, index: i)
+			}
+		}
+		
+		return voices
+	}
+	
+	// 台本ファイルを読み込み、【 】がある箇所で分割し配列にして返す
+	func loadVoiceTextFileAndSplit(fileName: String) -> [String]? {
+		let text = loadTextFromFile(fileName)
+		if text.isEmpty {
+			print(ERROR_MSG + "台本データの書式エラーです。" + fileName)
+			
+			return nil
+		}
+		
+		var texts = text.componentsSeparatedByString(VOICE_TEXT_SEC_HEAD)
+		texts.removeFirst()
+		
+		return texts
+	}
+	
+	// 台本ファイルの各セリフから、構造体 VoiceData() の配列を生成
+	func makeVoiceDatas(vText: String, fileName: String, secName: String, index: Int) -> [VoiceData] {
+		var voice      = VoiceData()
+		voice.fileName = createVoiceFileName(fileName, prefix1: secName, index: index)
+		voice.text     = vText
+		let voices	   = splitVoices(voice)
+		
+		return voices
+	}
+	
+	//======================================================
+	// 音声リストの読み込み
+	//======================================================
+	
+	func loadVoiceListToDict(fileName: String) -> [String: [[VoiceData]]] {
+		var dict = [String: [[VoiceData]]]()
+		
+		// テキストファイルを読み込み、"【" で区切る
+		let texts = loadVoiceListFileAndSplit(fileName)
+		if texts == nil {
+			return dict
+		}
+		
+		for text in texts! {
+			let secName   = getSecNameFromStr(text)
+			dict[secName] = [[VoiceData]]()
+			
+			// 各行を配列で取得
+			let blocks = getVoiceListsFromText(text)
+			for block in blocks {
+				var voices = [VoiceData]()
+				let lines = block.componentsSeparatedByString(VOICE_LIST_LINE_HEAD)
+				
+				for line in lines {
+					let voice = makeVoiceDataFromVoiceListLine(line)
+					voices.append(voice)
+				}
+				
+				dict[secName]?.append(voices)
+			}
+		}
+		
+		return dict
+	}
+	
+	/*
+	func loadDatasFromVoiceListFileWithSplit(fileName: String) -> [String: [[VoiceData]]] {
+		var dict = [String: [[VoiceData]]]()
+		
+		// テキストファイルを読み込み、"【" で区切る
+		let texts = loadVoiceListFileAndSplit(fileName)
+		if texts == nil {
+			return dict
+		}
+		
+		for text in texts! {
+			let secName   = getSecNameFromStr(text)
+			dict[secName] = [[VoiceData]]()
+			
+			// 各行を配列で取得
+			let blocks = getVoiceListsFromText(text)
+			for block in blocks {
+				var voices = [VoiceData]()
+				let lines = block.componentsSeparatedByString(VOICE_LIST_LINE_HEAD)
+				
+				for line in lines {
+					let voice = makeVoiceDataFromVoiceListLine(line)
+					voices.append(voice)
+				}
+				
+				dict[secName]?.append(voices)
+			}
+		}
+		
+		return dict
+	}*/
+	
+	/*
+	func isSplitedVoice(v: VoiceData) -> Bool {
+		let res = searchWithRegex(v.fileName, ptn: "\\d_[1-9]\\.")
+		
+		if res.isEmpty == false {
+			return true
+		}
+		
+		return false
+	}*/
+	
+	/*
+	// 音声リストを読み込み、VoiceData の連想配列を返す
+	func loadDatasFromVoiceListFile(fileName: String) -> [String: [VoiceData]] {
+		var voices = [String: [VoiceData]]()
+		
+		// テキストファイルを読み込み、"【" で区切る
+		let texts = loadVoiceListFileAndSplit(fileName)
+		if texts == nil {
+			return voices
+		}
+		
+		for text in texts! {
+			let secName     = getSecNameFromStr(text)
+			voices[secName] = [VoiceData]()
+			
+			// 各行を配列で取得
+			let lines = getVoiceListsFromText(text)
+
+			for line in lines {
+				let voice = makeVoiceDataFromVoiceListLine(line)
+				voices[secName]?.append(voice)
+			}
+		}
+		
+		return voices
+	}*/
+	
+	// 音声ファイルリストを読み込み、【 】がある箇所で分割し配列にして返す
+	func loadVoiceListFileAndSplit(fileName: String) -> [String]? {
+		let path = VOICE_LIST_DIR_PATH.stringByAppendingPathComponent(fileName + VOICE_LIST_FILE_SUFFIX)
+		
+		do {
+			let text = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+			if text.isEmpty {
+				return nil
+			}
+			
+			var texts = text.componentsSeparatedByString(VOICE_TEXT_SEC_HEAD)
+			texts.removeFirst()
+			
+			return texts
+		} catch {
+			print(ERROR_MSG + "音声ファイルリストの読み込みエラーです。\(fileName)")
+		}
+		
+		return nil
+	}
+	
+	// VoiceDataを音声ファイルリストの行から取得
+	func makeVoiceDataFromVoiceListLine(line: String) -> VoiceData {
+		var voice      = VoiceData()
+		voice.fileName = searchWithRegex(line, ptn: "^.+" + VOICE_SOUND_FILE_SUFFIX)
+		voice.text     = searchWithRegex(line, ptn: "「.+」")
+		voice.face     = searchWithRegex(line, ptn: "<(.+)>", rangeAtIndex: 1)
+		
+		return voice
+	}
+	
+	// 音声ファイルリストの行のみを返す　連番の行は複数行で返す
+	func getVoiceListsFromText(text: String) -> [String] {
+		var vTexts = [String]()
+		
+		var texts = text.componentsSeparatedByString(CRLF + CRLF + VOICE_LIST_LINE_HEAD)
+		texts.removeFirst()
+
+		// 改行を削除？
+		for str in texts {
+			let res = str.componentsSeparatedByString(CRLF + CRLF)
+			vTexts.append(res[0])
+		}
+		
+		return vTexts
+	}
+	
 	//======================================================
 	// 音声リストの出力
 	//======================================================
-
+	
 	// 全ての台本から音声リストファイルを作成
 	func outputVoiceListFiles() -> Bool {
 		
 		for fileName in VOICE_TEXT_FILE_NAMES {
-			var text = ""
-			// 台本を読み込む
-			let vDatas = loadDatasFromVoiceTextFile(fileName)
-	
-			for (sec, datas) in vDatas {
-				text += "\(CRLF)【 \(sec) 】\(CRLF)"
+			var output = ""
+			// 台本読み込み
+			let dict = loadDatasFromVoiceTextFile(fileName)
+			
+			for (sec, datas) in dict {
+				output += "\(CRLF)【 \(sec) 】\(CRLF)"
 				
 				for v in datas {
-					text += createVoiceListLine(v)
+					output += createVoiceListLine(v)
 				}
-				text += "\(CRLF)\(CRLF)\(CRLF)"
+				output += "\(CRLF)\(CRLF)\(CRLF)"
 			}
 			
 			// ファイルを出力
-			if writeVoiceListFile(text, fileName: fileName) == false {
+			if writeVoiceListFile(output, fileName: fileName) == false {
 				return false
 			}
 		}
@@ -105,135 +312,7 @@ class VoiceFileManager {
 		
 		return res
 	}
-	
-	//======================================================
-	// 台本の読み込み
-	//======================================================
-	
-	// 台本ファイルを読み込んで、VoiceDataの連想配列を返す
-	func loadDatasFromVoiceTextFile(fileName: String) -> [String: [VoiceData]] {
-		var voices = [String: [VoiceData]]()
-		
-		// テキストファイルを読み込み、"【" で区切る
-		let secTexts = loadVoiceTextFileAndSplit(fileName)
-		if secTexts == nil {
-			return voices
-		}
-		
-		for secText in secTexts! {
-			let secName     = getSecNameFromStr(secText)
-			voices[secName] = [VoiceData]()
-			
-			// セリフを配列で取得
-			let voiceTexts = getVoiceTextsFromStr(secText)
-			
-			// 連想配列に追加
-			for (i, vText) in voiceTexts.enumerate() {
-				voices[secName] = voices[secName]! + makeVoiceDatas(vText, fileName: fileName, secName: secName, index: i)
-			}
-		}
-		
-		return voices
-	}
-	
-	// 台本ファイルを読み込み、【 】がある箇所で分割し配列にして返す
-	func loadVoiceTextFileAndSplit(fileName: String) -> [String]? {
-		let text = loadTextFromFile(fileName)
-		if text.isEmpty {
-			return nil
-		}
-		
-		var texts = text.componentsSeparatedByString(VOICE_TEXT_SEC_HEAD)
-		texts.removeFirst()
-		
-		return texts
-	}
-	
-	//
-	func makeVoiceDatas(vText: String, fileName: String, secName: String, index: Int) -> [VoiceData] {
-		var voice      = VoiceData()
-		voice.fileName = createVoiceFileName(fileName, prefix1: secName, index: index)
-		voice.text     = vText
-		let voices	   = splitVoices(voice)
-		
-		return voices
-	}
-	
-	//======================================================
-	// 音声ファイルリストの読み込み
-	//======================================================
-	
-	// 音声ファイルリストを読み込み、VoiceData の連想配列を返す
-	func loadDatasFromVoiceListFile(fileName: String) -> [String: [VoiceData]] {
-		var voices = [String: [VoiceData]]()
-		
-		// テキストファイルを読み込み、"【" で区切る
-		let secTexts = loadVoiceListFileAndSplit(fileName)
-		if secTexts == nil {
-			return voices
-		}
-		
-		for secText in secTexts! {
-			let secName     = getSecNameFromStr(secText)
-			voices[secName] = [VoiceData]()
-			
-			// 各行を配列で取得
-			let lines = getVoiceListsFromText(secText)
 
-			for line in lines {
-				let voice = makeVoiceDataFromVoiceListLine(line)
-				voices[secName]?.append(voice)
-			}
-		}
-		
-		return voices
-	}
-	
-	// 音声ファイルリストを読み込み、【 】がある箇所で分割し配列にして返す
-	func loadVoiceListFileAndSplit(fileName: String) -> [String]? {
-		let path = VOICE_LIST_DIR_PATH.stringByAppendingPathComponent(fileName + VOICE_LIST_FILE_SUFFIX)
-		
-		do {
-			let text = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-			if text.isEmpty {
-				return nil
-			}
-			
-			var texts = text.componentsSeparatedByString(VOICE_TEXT_SEC_HEAD)
-			texts.removeFirst()
-			
-			return texts
-		} catch {
-			print(ERROR_MSG + "音声ファイルリストの読み込みエラーです。\(fileName)")
-		}
-		
-		return nil
-	}
-	
-	// VoiceDataを音声ファイルリストの行から取得
-	func makeVoiceDataFromVoiceListLine(line: String) -> VoiceData {
-		var voice      = VoiceData()
-		voice.fileName = searchWithRegex(line, ptn: "^.+" + VOICE_SOUND_FILE_SUFFIX)
-		voice.text     = searchWithRegex(line, ptn: "「.+」")
-		voice.face     = searchWithRegex(line, ptn: "<(.+)>", rangeAtIndex: 1)
-		
-		return voice
-	}
-	
-	// 音声ファイルリストの行のみを返す
-	func getVoiceListsFromText(text: String) -> [String] {
-		var vTexts = [String]()
-		
-		var strs = text.componentsSeparatedByString(VOICE_LIST_LINE_HEAD)
-		strs.removeFirst()
-
-		for v in strs {
-			let res = v.componentsSeparatedByString(CRLF)
-			vTexts.append(res[0])
-		}
-		
-		return vTexts
-	}
 	
 	//======================================================
 	// テキスト処理

@@ -25,15 +25,14 @@ import UIKit
 class MorningVoiceBuilder {
 	
 	// 定数
-
-
-
 	let VOICE_TEXT_FILE_NAME = "おはようボイス"								// 台本データのファイル名
 	let WEATHER_SECTION_NAME = "お天気"										// お天気セクションの名前
 	let WEATHER_FILE_NUMBERS = [ 1: "晴れ", 2: "曇り", 3: "雨", 4: "豪雨"]		// お天気セクション内の番号
 	
 	// プライベート変数
-	var _voiceDatas: [String: [VoiceData]]!
+//var _voiceDatas: [String: [VoiceData]]!
+
+	var _voiceDict: [String: [[VoiceData]]]!
 	var _voiceFileManager = VoiceFileManager()
 	var _sectionNames     = [String]()
 	var _voiceUtil		  = VoiceUtil()
@@ -46,15 +45,7 @@ class MorningVoiceBuilder {
 	
 	// 処理実行
 	func exec(weather: String? = nil) -> [VoiceData] {
-		let orgDatas    = getMorningVoiceDatas(weather)
-		var returnDatas = [VoiceData]()
-		
-		for v in orgDatas {
-			let datas   = _voiceUtil.splitVoices(v)
-			returnDatas += datas
-		}
-		
-		return returnDatas
+		return getMorningVoiceDatas(weather)
 	}
 	
 	//======================================================
@@ -63,9 +54,10 @@ class MorningVoiceBuilder {
 	
 	// 音声データをファイルから読み込む
 	func loadVoiceDataFromFile() {		
-		_voiceDatas = _voiceFileManager.loadDatasFromVoiceListFile(VOICE_TEXT_FILE_NAME)
+		//_voiceDatas = _voiceFileManager.loadDatasFromVoiceListFile(VOICE_TEXT_FILE_NAME)
+		_voiceDict  = _voiceFileManager.loadVoiceListToDict(VOICE_TEXT_FILE_NAME)
 		
-		for (key, _) in _voiceDatas {
+		for (key, _) in _voiceDict {
 			if key == WEATHER_SECTION_NAME {
 				continue
 			}
@@ -81,7 +73,8 @@ class MorningVoiceBuilder {
 	// おはようボイス用の一連の音声データを返す。天気を指定すると天気関連のデータをくっつけて返す
 	func getMorningVoiceDatas(weather: String? = nil) -> [VoiceData] {
 		var voices = [VoiceData]()
-		voices.append(getHeadData())
+		voices = getHeadDatas()
+		//voices.append(getHeadData())
 		
 		// お天気データをくっつける
 		if weather != nil {
@@ -94,45 +87,47 @@ class MorningVoiceBuilder {
 	}
 	
 	// 先頭に入る音声データを返す
-	func getHeadData() -> VoiceData {
+	func getHeadDatas() -> [VoiceData] {
+		var voices = [VoiceData]()
 		// セクション名をランダムで取得
 		let sec = getRandomlyFromArray(_sectionNames) as! String
 		// セクション内のデータをランダムで取得
-		let n     = rand(_voiceDatas[sec]!.count)
-		let voice = _voiceDatas[sec]![n]
-		
+		let n  = rand(_voiceDict[sec]!.count)
+		voices = _voiceDict[sec]![n]
+
 		// 現在の呼び名以外が入っていれば取得し直す
-		if isOtherNicknameIn(voice.text) {
-			return getHeadData()
+		if isOtherNicknameIn(voices[0].text) {
+			voices = getHeadDatas()
 		}
 		
-		return voice
+		return voices
 	}
-	
+
 	// お天気関連のデータを配列で返す
 	func getWeatherDatas(weather: String) -> [VoiceData] {
 		var voices = [VoiceData]()
 		
-		let vData = getWeatherData(weather)
-		if vData == nil {
-			return voices
-		}
+		let head  = _voiceDict[WEATHER_SECTION_NAME]![0][0]
+		let tails = getWeatherTailVoices(weather)
 		
-		voices.append(_voiceDatas[WEATHER_SECTION_NAME]![0])
-		voices.append(vData!)
+		// 先頭のデータ
+		voices.append(head)
+		voices += tails
 		
 		return voices
 	}
 	
 	// 指定された天気に関連するデータを返す
-	func getWeatherData(weather: String) -> VoiceData? {
+	func getWeatherTailVoices(weather: String) -> [VoiceData] {
+		let voices = [VoiceData]()
+		
 		for (n, w) in WEATHER_FILE_NUMBERS {
 			if weather == w {
-				return  _voiceDatas[WEATHER_SECTION_NAME]![n]
+				return _voiceDict[WEATHER_SECTION_NAME]![n]
 			}
 		}
 		
-		return nil
+		return voices
 	}
 	
 	// 他の呼び名が入っているか
@@ -161,6 +156,8 @@ class MorningVoiceBuilder {
 		
 		return array[n] as! NSObject
 	}
+	
+
 
 	//======================================================
 	// サンプル
@@ -198,4 +195,31 @@ class MorningVoiceBuilder {
 		
 		return voice
 	}
+	
+	
+	
+	
+	
+	
+	// 削除予定
+	// 先頭に入る音声データを返す
+	func getHeadData() -> VoiceData {
+		/*
+		// セクション名をランダムで取得
+		let sec = getRandomlyFromArray(_sectionNames) as! String
+		// セクション内のデータをランダムで取得
+		let n     = rand(_voiceDatas[sec]!.count)
+		let voice = _voiceDatas[sec]![n]
+		
+		// 現在の呼び名以外が入っていれば取得し直す
+		if isOtherNicknameIn(voice.text) {
+		return getHeadData()
+		}*/
+		let voice = VoiceData()
+		
+		return voice
+	}
+	
+	
+	
 }

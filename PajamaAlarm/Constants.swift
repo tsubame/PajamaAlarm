@@ -67,7 +67,7 @@ let MUTE_SOUND_FILENAME = "nosound.mp3"
 // サウンド
 let ALARM_SOUND = "kirakira"
 
-let SET_ALARM_MINUTE_INTERVAL = 2
+let SET_ALARM_MINUTE_INTERVAL = 1 //2
 
 //======================================================
 // その他
@@ -83,6 +83,6 @@ let ERROR_MSG = "== ERROR!! == "
 let PATH_TO_DOCUMENTS = (NSHomeDirectory() as NSString).stringByAppendingPathComponent("Documents") as NSString
 
 
-let ERROR_MSG_PREFIX = "=== error! === "
+//let ERROR_MSG_PREFIX = "=== error! === "
 
 let NICKNAMES        = ["兄さん", "お姉ちゃん"]

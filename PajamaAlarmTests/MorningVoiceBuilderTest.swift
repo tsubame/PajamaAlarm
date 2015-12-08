@@ -61,9 +61,16 @@ class MorningVoiceBuilderTest: XCTestCase {
 		}
 	}
 	
+	func test_getHeadDatas() {
+		for _ in 0...20 {
+			let res = _sut.getHeadDatas()
+			XCTAssertNotEqual(res.count, 0, "")
+		}
+	}
+	
 	func test_loadVoiceDataFromFile() {
 		_sut.loadVoiceDataFromFile()
-		print(_sut._voiceDatas)
+		//print(_sut._voiceDict)
 	}
 	
 	/*
