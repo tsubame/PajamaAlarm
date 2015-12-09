@@ -24,25 +24,20 @@ class HomeViewController: UIViewController {
 	@IBOutlet weak var _charaImageView  : UIImageView!
 	@IBOutlet weak var _alarmButton     : UIButton!
 	@IBOutlet weak var _voiceButton     : UIButton!
-	@IBOutlet weak var _voiceFrameUIView: UIView!
+	//@IBOutlet weak var _voiceFrameUIView: UIView!
 	@IBOutlet weak var _voiceLabel      : UILabel!
 	
+	
+	
+	@IBOutlet weak var _msgWindowUIView: UIImageView!
+	
 	// プライベート変数
-	var _shortTalkBuilder = ShortTalkBuilder()
-	var _soundPlayer	  = SoundPlayer()
+	var _shortTalkBuilder = ShortTalkBuilder()	// ひとことデータ表示用
+	var _soundPlayer	  = SoundPlayer()		// 音声再生用
 	var _voiceDatas       = [VoiceData]()		// 表示するセリフデータ
 	
 	
-	//======================================================
-	// UIKitのアスペクトの変更
-	//======================================================
-	
-	// UI部品のアスペクトを画面に合わせる
-	func changeViewsAspectToFit() {
-		_alarmButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-		_voiceButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-		self.view.setNeedsDisplay()
-	}
+
 
 	//======================================================
 	// セリフの表示、再生
@@ -59,6 +54,9 @@ class HomeViewController: UIViewController {
 			v.face = "笑"
 		}
 		
+		
+print(_voiceLabel.frame) // 親ビューからの位置？
+//print(_voiceLabel.bounds)
 		changeFacialEx(v.face)
 		showMsgInFrame(v.text)
 		
@@ -74,17 +72,25 @@ class HomeViewController: UIViewController {
 	
 	// 枠を非表示
 	func hideMsgFrame() {
-		_voiceFrameUIView.hidden = true
+		_msgWindowUIView.hidden = true
 		_soundPlayer.stopAll()
 		changeFacialEx("通")
 	}
 	
 	// 枠の表示、テキストの表示
 	func showMsgInFrame(text: String? = nil) {
-		_voiceFrameUIView.hidden = false
+		_msgWindowUIView.hidden = false
 		
 		if text != nil {
 			_voiceLabel.text = text!
+//_voiceLabel.attributedText. = text!
+			for _ in 0...100 {
+				_voiceLabel.text! += "\n　"
+				//_voiceLabel.attributedText +=
+			}
+			_voiceLabel.text! += "."
+			//_voiceLabel.numberOfLines = 0
+			//_voiceLabel.sizeToFit()
 		}
 	}
 
@@ -132,15 +138,68 @@ class HomeViewController: UIViewController {
 	}
 	
 	//======================================================
+	// UIKit関連
+	//======================================================
+	
+	// UI部品のアスペクトを画面に合わせる
+	func changeViewsAspectToFit() {
+		_alarmButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+		_voiceButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+		self.view.setNeedsDisplay()
+	}
+	
+	func makeMsgWindow() {
+		//let attr = _voiceLabel.attributedText.
+		//attr.
+		_voiceLabel.removeFromSuperview()
+		//_voiceLabel = label
+		//_voiceLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
+		_msgWindowUIView.addSubview(_voiceLabel)
+
+		let helper = AutoLayoutHelper()
+		helper.addAutoLayoutSizing(_voiceLabel, toItem: _msgWindowUIView, wRatio: 0.75, hRatio: 0.6)
+		helper.addAutoLayoutCentering(_voiceLabel, toItem: _msgWindowUIView)
+		//_msgWindowUIView.layer.borderColor  = UIColor.grayColor().CGColor
+		//_msgWindowUIView.layer.borderWidth  = 1.0
+		//_voiceLabel.layer.borderColor  = UIColor.grayColor().CGColor
+		//_voiceLabel.layer.borderWidth  = 1.0
+		//_voiceLabel.layer.cornerRadius = 4.0
+		//self.view.setNeedsDisplay()
+		/*
+				myLabel.layer.borderColor = [UIColor whiteColor].CGColor;  //ボーダー色（白）
+		myLabel.layer.borderWidth = 2.0;  //ボーダー幅（２ピクセル）
+		myLabel.layer.cornerRadius = 10.0;  //角丸半径（10ピクセル）
+		*/
+	}
+	
+	//func makeLabel(pos: CGPoint, text: String, font: UIFont? = nil) -> UILabel {
+	func makeLabel() -> UILabel {
+		let label = UILabel()
+		label.frame = CGRectMake(0, 0, 250, 100)
+		label.numberOfLines = 0
+		label.sizeToFit()
+		
+		_voiceLabel.layer.borderColor = UIColor.grayColor().CGColor
+		_voiceLabel.layer.borderWidth = 1.0
+		_voiceLabel.layer.cornerRadius = 4.0
+		
+		return label
+	}
+	
+	//======================================================
 	// UI
 	//======================================================
 	
 	// ロード時に実行
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
+		// メッセージウィンドウ
+		makeMsgWindow()
 		// アスペクトを画面に合わせる
 		changeViewsAspectToFit()
+
+		
 		// オブザーバーの追加
 		addNotifObserver(NOTIF_START_MORNING_VOICE) {
 			self.displayMorningVoice()
@@ -160,7 +219,7 @@ class HomeViewController: UIViewController {
 	
 	// タッチイベント
 	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		if _voiceDatas.isEmpty && _voiceFrameUIView.hidden == false {
+		if _voiceDatas.isEmpty && _msgWindowUIView.hidden == false {
 			hideMsgFrame()
 			return
 		}

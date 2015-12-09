@@ -42,52 +42,73 @@
                                     <constraint firstAttribute="width" secondItem="sCe-7J-06R" secondAttribute="height" multiplier="94:67" id="4d4-gX-zHd"/>
                                 </constraints>
                                 <state key="normal" image="buttonVoice.png"/>
+                                <connections>
+                                    <segue destination="Tz1-fq-0wd" kind="showDetail" id="mWC-Be-k8w"/>
+                                </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R7P-JF-wFf">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="voiceFrame.png" translatesAutoresizingMaskIntoConstraints="NO" id="kgu-rl-MLY">
-                                        <rect key="frame" x="0.0" y="391" width="375" height="276"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHY-fI-dGO">
-                                        <rect key="frame" x="15" y="445" width="264" height="169"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="メッセージウィンドウ.png" translatesAutoresizingMaskIntoConstraints="NO" id="sU5-5u-HI0">
+                                <rect key="frame" x="0.0" y="412" width="375" height="205"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" restorationIdentifier="1010" usesAttributedText="YES" lineBreakMode="characterWrap" numberOfLines="6" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHY-fI-dGO">
+                                <rect key="frame" x="47" y="475" width="344" height="54"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottomMargin" secondItem="YHY-fI-dGO" secondAttribute="bottom" constant="80" id="5Ub-hV-gTH"/>
-                                    <constraint firstAttribute="bottom" secondItem="kgu-rl-MLY" secondAttribute="bottom" constant="20" id="7fg-Y3-lyM"/>
-                                    <constraint firstItem="kgu-rl-MLY" firstAttribute="centerX" secondItem="R7P-JF-wFf" secondAttribute="centerX" id="Gfc-SI-wO4"/>
-                                    <constraint firstItem="YHY-fI-dGO" firstAttribute="centerX" secondItem="R7P-JF-wFf" secondAttribute="centerX" id="KTz-O6-W0q"/>
-                                    <constraint firstItem="YHY-fI-dGO" firstAttribute="width" secondItem="R7P-JF-wFf" secondAttribute="width" multiplier="0.75" id="Mbu-FD-zeC"/>
+                                    <constraint firstAttribute="height" constant="169" id="mue-7A-BE5"/>
                                 </constraints>
-                            </view>
+                                <attributedString key="attributedText">
+                                    <fragment content="水戸ホーリーホックは、">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="18" name="HiraKakuProN-W3"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="6" headIndent="18" lineHeightMultiple="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="DF">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="18" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="6" headIndent="18" lineHeightMultiple="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="高木を本日獲得。">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="18" name="HiraKakuProN-W3"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="6" headIndent="18" lineHeightMultiple="1"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="mue-7A-BE5"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="R7P-JF-wFf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1Xp-ye-MQy"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="R7P-JF-wFf" secondAttribute="bottom" id="4AL-da-ae6"/>
                             <constraint firstItem="4r1-T0-xg2" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="6xU-HK-msj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sCe-7J-06R" secondAttribute="trailing" constant="-14" id="ClA-Nx-tbG"/>
                             <constraint firstItem="4rw-YY-uo9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-14" id="HNu-VE-zLf"/>
                             <constraint firstItem="4r1-T0-xg2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JMu-dQ-zlM"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="R7P-JF-wFf" secondAttribute="bottom" constant="50" id="K7F-6Z-9xA"/>
                             <constraint firstItem="4r1-T0-xg2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-40" id="MA2-Pr-Rms"/>
+                            <constraint firstItem="sU5-5u-HI0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OKx-4a-e7p"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sCe-7J-06R" secondAttribute="bottom" constant="65" id="SCH-OL-lTF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sU5-5u-HI0" secondAttribute="bottom" constant="10" id="Tak-fn-n0q"/>
                             <constraint firstItem="4r1-T0-xg2" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="UE7-tj-EEt"/>
+                            <constraint firstItem="sU5-5u-HI0" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Vw6-b2-sXN"/>
                             <constraint firstItem="4rw-YY-uo9" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="bmK-R6-AnH"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sU5-5u-HI0" secondAttribute="bottom" id="bp2-f5-6uQ"/>
                             <constraint firstItem="bnS-29-hXQ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="fRj-Ru-Vbi"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4rw-YY-uo9" secondAttribute="bottom" constant="65" id="hj5-LW-qf1"/>
                             <constraint firstItem="bnS-29-hXQ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="hvp-zZ-tOX"/>
-                            <constraint firstItem="R7P-JF-wFf" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="kCx-Qn-VKP"/>
+                            <constraint firstItem="sU5-5u-HI0" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.4" id="onD-ld-yIu"/>
                             <constraint firstItem="sCe-7J-06R" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="qXx-Vo-REX"/>
-                            <constraint firstItem="R7P-JF-wFf" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="zs9-4f-WMP"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="K7F-6Z-9xA"/>
+                                <exclude reference="OKx-4a-e7p"/>
+                                <exclude reference="bp2-f5-6uQ"/>
                             </mask>
                         </variation>
                     </view>
@@ -95,8 +116,8 @@
                     <connections>
                         <outlet property="_alarmButton" destination="4rw-YY-uo9" id="ta0-LR-dyo"/>
                         <outlet property="_charaImageView" destination="4r1-T0-xg2" id="wEP-hO-eYm"/>
+                        <outlet property="_msgWindowUIView" destination="sU5-5u-HI0" id="1zX-DT-7pp"/>
                         <outlet property="_voiceButton" destination="sCe-7J-06R" id="n0E-b6-DyE"/>
-                        <outlet property="_voiceFrameUIView" destination="R7P-JF-wFf" id="XLy-WO-BBJ"/>
                         <outlet property="_voiceLabel" destination="YHY-fI-dGO" id="g2y-uQ-53a"/>
                     </connections>
                 </viewController>
@@ -151,14 +172,55 @@
             </objects>
             <point key="canvasLocation" x="500.5" y="410.5"/>
         </scene>
+        <!--Sample View Controller-->
+        <scene sceneID="FcI-Jp-t8v">
+            <objects>
+                <viewController id="Tz1-fq-0wd" customClass="SampleViewController" customModule="PajamaAlarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cz2-46-JTf"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xn1-Ux-eLC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ReO-aM-qlb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="メッセージウィンドウ.png" translatesAutoresizingMaskIntoConstraints="NO" id="E9M-aG-TiP">
+                                <rect key="frame" x="0.0" y="63" width="382" height="324"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Labelですよ〜。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4v-Hg-PhB" customClass="FadeLabel" customModule="PajamaAlarm" customModuleProvider="target">
+                                <rect key="frame" x="67" y="164" width="224" height="74"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZ0-b7-SFc">
+                                <rect key="frame" x="176" y="420" width="30" height="30"/>
+                                <state key="normal" title="戻る"/>
+                                <connections>
+                                    <segue destination="QVw-YD-6uo" kind="unwind" unwindAction="backToHome:" id="FAh-6z-QhR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="_fadeLabel" destination="u4v-Hg-PhB" id="5y5-pu-o2Z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ZK-4B-DOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="QVw-YD-6uo" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="313.5" y="1159.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="buttonAlarm.png" width="375" height="267"/>
         <image name="buttonVoice.png" width="375" height="267"/>
         <image name="hotaruN.png" width="750" height="992"/>
         <image name="set.png" width="143" height="63"/>
-        <image name="voiceFrame.png" width="293" height="176"/>
         <image name="アラームセット画面.png" width="750" height="1334"/>
         <image name="ホーム画面背景.png" width="750" height="1334"/>
+        <image name="メッセージウィンドウ.png" width="750" height="454"/>
     </resources>
 </document>

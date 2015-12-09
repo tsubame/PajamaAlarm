@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AutoLayoutHelper: NSObject {
+class AutoLayoutHelper {
 	
 	
 	// オートレイアウト サイズ調整 addSubview()後に実行
