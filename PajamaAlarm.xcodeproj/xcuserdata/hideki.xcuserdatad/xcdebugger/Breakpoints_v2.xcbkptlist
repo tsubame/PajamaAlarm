@@ -510,11 +510,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/ShortTalkBuilder.swift"
-            timestampString = "471275588.800328"
+            timestampString = "471342221.820859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221">
+            startingLineNumber = "171"
+            endingLineNumber = "171">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -524,12 +524,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/VoiceFileManager.swift"
-            timestampString = "471275588.800328"
+            timestampString = "471342221.820859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "loadDatasFromVoiceTextFile(_:)"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "loadVoiceTextFile(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -540,12 +540,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/VoiceFileManager.swift"
-            timestampString = "471275588.800328"
+            timestampString = "471342221.820859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "loadDatasFromVoiceTextFile(_:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "loadVoiceTextFile(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -556,11 +556,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PajamaAlarm/Model/VoiceFileManager.swift"
-            timestampString = "471275588.800328"
+            timestampString = "471342221.820859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "splitVoices(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -588,11 +588,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MorningVoiceBuilder.swift"
-            timestampString = "471275588.800328"
+            timestampString = "471342221.820859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "getHeadDatas()"
             landmarkType = "5">
          </BreakpointContent>

@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B80568001C181E36003F4E68 /* おはようボイス_可愛い_0_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B80567FE1C181E36003F4E68 /* おはようボイス_可愛い_0_0.mp3 */; };
+		B80568011C181E36003F4E68 /* おはようボイス_可愛い_0_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B80567FF1C181E36003F4E68 /* おはようボイス_可愛い_0_1.mp3 */; };
+		B80568041C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B80568021C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 */; };
+		B80568051C18226A003F4E68 /* おはようボイス_可愛い_2_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B80568031C18226A003F4E68 /* おはようボイス_可愛い_2_2.mp3 */; };
 		B81D60C71C041B4000726CA8 /* AlarmTimeMonitorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D60C61C041B4000726CA8 /* AlarmTimeMonitorTest.swift */; };
 		B81D60CC1C044A4200726CA8 /* おはようボイス.txt in Resources */ = {isa = PBXBuildFile; fileRef = B81D60CB1C044A4200726CA8 /* おはようボイス.txt */; };
 		B81D60CD1C044A4200726CA8 /* おはようボイス.txt in Resources */ = {isa = PBXBuildFile; fileRef = B81D60CB1C044A4200726CA8 /* おはようボイス.txt */; };
-		B81D60D11C046A0C00726CA8 /* MorningVoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D60D01C046A0C00726CA8 /* MorningVoiceManager.swift */; };
-		B81D60D21C046A0C00726CA8 /* MorningVoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D60D01C046A0C00726CA8 /* MorningVoiceManager.swift */; };
 		B81D60D41C046AB000726CA8 /* MorningVoiceBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D60D31C046AB000726CA8 /* MorningVoiceBuilderTest.swift */; };
 		B81D60D91C04886B00726CA8 /* ひとこと_夜_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D60D81C04886B00726CA8 /* ひとこと_夜_0.mp3 */; };
 		B81D60DA1C04886B00726CA8 /* ひとこと_夜_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D60D81C04886B00726CA8 /* ひとこと_夜_0.mp3 */; };
@@ -36,15 +38,11 @@
 		B8274CDA1BEBA7FE000FEADE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CD81BEBA7FE000FEADE /* SwiftyJSON.swift */; };
 		B8274CE31BEBAC6D000FEADE /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CE21BEBAC6D000FEADE /* Functions.swift */; };
 		B8274CE41BEBAC6D000FEADE /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8274CE21BEBAC6D000FEADE /* Functions.swift */; };
-		B83D3D811C15CF5200A0E8B1 /* おはようボイス_可愛い_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B83D3D7F1C15CF5200A0E8B1 /* おはようボイス_可愛い_0.mp3 */; };
-		B83D3D821C15CF5200A0E8B1 /* おはようボイス_可愛い_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B83D3D7F1C15CF5200A0E8B1 /* おはようボイス_可愛い_0.mp3 */; };
 		B83D3D831C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B83D3D801C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 */; };
 		B83D3D841C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B83D3D801C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 */; };
 		B85707741BF2034F000E6639 /* AutoLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85707731BF2034F000E6639 /* AutoLayoutHelper.swift */; };
 		B87321761C12D4C100454678 /* hotaruSLP.png in Resources */ = {isa = PBXBuildFile; fileRef = B87321751C12D4C100454678 /* hotaruSLP.png */; };
 		B87321771C12D4C100454678 /* hotaruSLP.png in Resources */ = {isa = PBXBuildFile; fileRef = B87321751C12D4C100454678 /* hotaruSLP.png */; };
-		B873217C1C12F52800454678 /* VoiceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = B873217B1C12F52800454678 /* VoiceUtil.swift */; };
-		B873217D1C12F52800454678 /* VoiceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = B873217B1C12F52800454678 /* VoiceUtil.swift */; };
 		B87321851C12F5CF00454678 /* MorningVoiceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87321841C12F5CF00454678 /* MorningVoiceBuilder.swift */; };
 		B87321861C12F5CF00454678 /* MorningVoiceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87321841C12F5CF00454678 /* MorningVoiceBuilder.swift */; };
 		B87321881C12F8C300454678 /* ShortTalkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87321871C12F8C200454678 /* ShortTalkBuilder.swift */; };
@@ -67,8 +65,6 @@
 		B887A3271C036FE90065FF6D /* ShortTalkBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B887A3261C036FE90065FF6D /* ShortTalkBuilderTest.swift */; };
 		B88C995A1C02D08F000581CA /* greeting.txt in Resources */ = {isa = PBXBuildFile; fileRef = B88C99591C02D08F000581CA /* greeting.txt */; };
 		B88C995B1C02D08F000581CA /* greeting.txt in Resources */ = {isa = PBXBuildFile; fileRef = B88C99591C02D08F000581CA /* greeting.txt */; };
-		B89F08171BF99A8B00BEC64C /* ShortTalkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08161BF99A8B00BEC64C /* ShortTalkManager.swift */; };
-		B89F08181BF99A8B00BEC64C /* ShortTalkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08161BF99A8B00BEC64C /* ShortTalkManager.swift */; };
 		B89F08251BF9A60F00BEC64C /* Regexp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08241BF9A60F00BEC64C /* Regexp.swift */; };
 		B89F08261BF9A60F00BEC64C /* Regexp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08241BF9A60F00BEC64C /* Regexp.swift */; };
 		B89F08331BF9FAC100BEC64C /* WeatherGetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08321BF9FAC100BEC64C /* WeatherGetterTest.swift */; };
@@ -115,9 +111,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B80567FE1C181E36003F4E68 /* おはようボイス_可愛い_0_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_可愛い_0_0.mp3"; sourceTree = "<group>"; };
+		B80567FF1C181E36003F4E68 /* おはようボイス_可愛い_0_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_可愛い_0_1.mp3"; sourceTree = "<group>"; };
+		B80568021C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_可愛い_2_1.mp3"; sourceTree = "<group>"; };
+		B80568031C18226A003F4E68 /* おはようボイス_可愛い_2_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_可愛い_2_2.mp3"; sourceTree = "<group>"; };
 		B81D60C61C041B4000726CA8 /* AlarmTimeMonitorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTimeMonitorTest.swift; sourceTree = "<group>"; };
 		B81D60CB1C044A4200726CA8 /* おはようボイス.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "おはようボイス.txt"; sourceTree = "<group>"; };
-		B81D60D01C046A0C00726CA8 /* MorningVoiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorningVoiceManager.swift; sourceTree = "<group>"; };
 		B81D60D31C046AB000726CA8 /* MorningVoiceBuilderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorningVoiceBuilderTest.swift; sourceTree = "<group>"; };
 		B81D60D81C04886B00726CA8 /* ひとこと_夜_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ひとこと_夜_0.mp3"; sourceTree = "<group>"; };
 		B81D60DB1C04888100726CA8 /* ひとこと_夜_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ひとこと_夜_1.mp3"; sourceTree = "<group>"; };
@@ -140,11 +139,9 @@
 		B8274CD51BEBA7C3000FEADE /* WeatherGetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherGetter.swift; sourceTree = "<group>"; };
 		B8274CD81BEBA7FE000FEADE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		B8274CE21BEBAC6D000FEADE /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
-		B83D3D7F1C15CF5200A0E8B1 /* おはようボイス_可愛い_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_可愛い_0.mp3"; sourceTree = "<group>"; };
 		B83D3D801C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_可愛い_1.mp3"; sourceTree = "<group>"; };
 		B85707731BF2034F000E6639 /* AutoLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutHelper.swift; sourceTree = "<group>"; };
 		B87321751C12D4C100454678 /* hotaruSLP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotaruSLP.png; sourceTree = "<group>"; };
-		B873217B1C12F52800454678 /* VoiceUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceUtil.swift; sourceTree = "<group>"; };
 		B87321841C12F5CF00454678 /* MorningVoiceBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MorningVoiceBuilder.swift; path = ../../MorningVoiceBuilder.swift; sourceTree = "<group>"; };
 		B87321871C12F8C200454678 /* ShortTalkBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortTalkBuilder.swift; sourceTree = "<group>"; };
 		B873EF951BFF489A00B8DDE7 /* WeatherFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherFileManager.swift; sourceTree = "<group>"; };
@@ -158,7 +155,6 @@
 		B87E7A151C03427600D492D2 /* ひとこと.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ひとこと.txt"; sourceTree = "<group>"; };
 		B887A3261C036FE90065FF6D /* ShortTalkBuilderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortTalkBuilderTest.swift; sourceTree = "<group>"; };
 		B88C99591C02D08F000581CA /* greeting.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = greeting.txt; sourceTree = "<group>"; };
-		B89F08161BF99A8B00BEC64C /* ShortTalkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortTalkManager.swift; sourceTree = "<group>"; };
 		B89F08241BF9A60F00BEC64C /* Regexp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regexp.swift; sourceTree = "<group>"; };
 		B89F08321BF9FAC100BEC64C /* WeatherGetterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherGetterTest.swift; sourceTree = "<group>"; };
 		B89F083A1BFA140700BEC64C /* LocationGetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationGetter.swift; sourceTree = "<group>"; };
@@ -319,9 +315,6 @@
 		B873218A1C12FFAA00454678 /* trash */ = {
 			isa = PBXGroup;
 			children = (
-				B873217B1C12F52800454678 /* VoiceUtil.swift */,
-				B81D60D01C046A0C00726CA8 /* MorningVoiceManager.swift */,
-				B89F08161BF99A8B00BEC64C /* ShortTalkManager.swift */,
 			);
 			name = trash;
 			sourceTree = "<group>";
@@ -329,7 +322,10 @@
 		B87DC8BA1BF4F4CD005FBC8C /* voice */ = {
 			isa = PBXGroup;
 			children = (
-				B83D3D7F1C15CF5200A0E8B1 /* おはようボイス_可愛い_0.mp3 */,
+				B80568021C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 */,
+				B80568031C18226A003F4E68 /* おはようボイス_可愛い_2_2.mp3 */,
+				B80567FE1C181E36003F4E68 /* おはようボイス_可愛い_0_0.mp3 */,
+				B80567FF1C181E36003F4E68 /* おはようボイス_可愛い_0_1.mp3 */,
 				B83D3D801C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 */,
 				B81D60D81C04886B00726CA8 /* ひとこと_夜_0.mp3 */,
 				B81D60DB1C04888100726CA8 /* ひとこと_夜_1.mp3 */,
@@ -500,13 +496,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80568041C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 in Resources */,
 				B81D60D91C04886B00726CA8 /* ひとこと_夜_0.mp3 in Resources */,
 				B8D915791BFB540700630DD5 /* hotaruN.png in Resources */,
-				B83D3D811C15CF5200A0E8B1 /* おはようボイス_可愛い_0.mp3 in Resources */,
 				B81D60E21C0499F500726CA8 /* alarm-3.mp3 in Resources */,
 				B81D60DC1C04888100726CA8 /* ひとこと_夜_1.mp3 in Resources */,
 				B8D915771BFB53ED00630DD5 /* set.png in Resources */,
 				B8C11E171C05DF650064C8A1 /* koron.wav in Resources */,
+				B80568051C18226A003F4E68 /* おはようボイス_可愛い_2_2.mp3 in Resources */,
 				B83D3D831C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 in Resources */,
 				B8274CA81BEBA716000FEADE /* LaunchScreen.storyboard in Resources */,
 				B8D915691BFB537700630DD5 /* buttonVoice.png in Resources */,
@@ -516,8 +513,10 @@
 				B81D60E01C0499F500726CA8 /* alarm-2.mp3 in Resources */,
 				B87E7A161C03427600D492D2 /* ひとこと.txt in Resources */,
 				B87E7A131C03415900D492D2 /* 挨拶.txt in Resources */,
+				B80568011C181E36003F4E68 /* おはようボイス_可愛い_0_1.mp3 in Resources */,
 				B8274CA51BEBA716000FEADE /* Assets.xcassets in Resources */,
 				B8D915751BFB53DF00630DD5 /* buttonAlarm.png in Resources */,
+				B80568001C181E36003F4E68 /* おはようボイス_可愛い_0_0.mp3 in Resources */,
 				B81D60CC1C044A4200726CA8 /* おはようボイス.txt in Resources */,
 				B8D9156E1BFB537700630DD5 /* ホーム画面背景.png in Resources */,
 				B8D9156D1BFB537700630DD5 /* アラームセット画面.png in Resources */,
@@ -536,7 +535,6 @@
 				B87E7A141C03415900D492D2 /* 挨拶.txt in Resources */,
 				B83D3D841C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 in Resources */,
 				B87E7A171C03427600D492D2 /* ひとこと.txt in Resources */,
-				B83D3D821C15CF5200A0E8B1 /* おはようボイス_可愛い_0.mp3 in Resources */,
 				B81D60E11C0499F500726CA8 /* alarm-2.mp3 in Resources */,
 				B81D60DD1C04888100726CA8 /* ひとこと_夜_1.mp3 in Resources */,
 				B81D60DA1C04886B00726CA8 /* ひとこと_夜_0.mp3 in Resources */,
@@ -566,15 +564,12 @@
 				B89F083B1BFA140800BEC64C /* LocationGetter.swift in Sources */,
 				B8274CA01BEBA716000FEADE /* HomeViewController.swift in Sources */,
 				B8274CD61BEBA7C3000FEADE /* WeatherGetter.swift in Sources */,
-				B89F08171BF99A8B00BEC64C /* ShortTalkManager.swift in Sources */,
 				B89F08251BF9A60F00BEC64C /* Regexp.swift in Sources */,
-				B81D60D11C046A0C00726CA8 /* MorningVoiceManager.swift in Sources */,
 				B87CB7E11BFC4D7D0059872C /* Constants.swift in Sources */,
 				B8274CD01BEBA78D000FEADE /* SoundPlayer.swift in Sources */,
 				B8274CD91BEBA7FE000FEADE /* SwiftyJSON.swift in Sources */,
 				B87321851C12F5CF00454678 /* MorningVoiceBuilder.swift in Sources */,
 				B87DC8B41BF4D754005FBC8C /* AlarmTimeMonitor.swift in Sources */,
-				B873217C1C12F52800454678 /* VoiceUtil.swift in Sources */,
 				B8A7A4591BF4AF55003A8723 /* SetAlarmViewController.swift in Sources */,
 				B8C11E191C06D4B50064C8A1 /* SWXMLHash.swift in Sources */,
 				B87321881C12F8C300454678 /* ShortTalkBuilder.swift in Sources */,
@@ -606,7 +601,6 @@
 				B87CB7E21BFC4D7D0059872C /* Constants.swift in Sources */,
 				B87E7A0F1C0329A500D492D2 /* VoiceFileManager.swift in Sources */,
 				B89F08331BF9FAC100BEC64C /* WeatherGetterTest.swift in Sources */,
-				B89F08181BF99A8B00BEC64C /* ShortTalkManager.swift in Sources */,
 				B87DC8B51BF4D754005FBC8C /* AlarmTimeMonitor.swift in Sources */,
 				B81D60C71C041B4000726CA8 /* AlarmTimeMonitorTest.swift in Sources */,
 				B873EF991BFF4C1800B8DDE7 /* WeatherFileManagerTest.swift in Sources */,
@@ -616,8 +610,6 @@
 				B8274CB31BEBA716000FEADE /* PajamaAlarmTests.swift in Sources */,
 				B8274CDA1BEBA7FE000FEADE /* SwiftyJSON.swift in Sources */,
 				B887A3271C036FE90065FF6D /* ShortTalkBuilderTest.swift in Sources */,
-				B873217D1C12F52800454678 /* VoiceUtil.swift in Sources */,
-				B81D60D21C046A0C00726CA8 /* MorningVoiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

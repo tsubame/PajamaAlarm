@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
 		
 		// 音声の再生
 		if v.fileName.isEmpty == false {
-			_soundPlayer.play(v.fileName)
+			_soundPlayer.playVoices([v.fileName])
 		}
 	}
 	
@@ -147,6 +147,9 @@ class HomeViewController: UIViewController {
 		}
 		addNotifObserver(NOTIF_PLAY_GREETING_VOICE) {
 			self.displayGreeting()
+		}
+		addNotifObserver("voicePlayEnded") {
+			self.displayNextMsg()
 		}
 		
 		// 挨拶データの表示

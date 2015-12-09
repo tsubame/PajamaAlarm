@@ -17,13 +17,9 @@ class ShortTalkBuilder {
 	// プライベート変数
 	var _stVoices   = [String: [[VoiceData]]]()	// ひとことデータの配列
 	var _gVoices    = [String: [[VoiceData]]]()	// 挨拶データの配列
-
-	
 	var _talkIndex  = 0							// ひとことデータのインデックス
 	var _timePeriod = ""						// 時間帯
-	
-//var _voiceUtil		  = VoiceUtil()
-	
+
 	
 	// 初期化
 	init() {
@@ -43,52 +39,6 @@ class ShortTalkBuilder {
 	func getGreetingDatas() -> [VoiceData] {
 		return getGreetingData()
 	}
-	
-	/*
-	// 挨拶データを返す
-	func getGreetingDatasOrg() -> [VoiceData] {
-		let v = getGreetingData()
-		if v == nil {
-			return [VoiceData]()
-		}
-		
-		return _voiceUtil.splitVoices(v!)
-	}*/
-	
-	//======================================================
-	//
-	//======================================================
-	
-	/*
-	func getSplitVoices(v: VoiceData) -> [VoiceData] {
-		var voices = [VoiceData]()
-		voices.append(v)
-		
-		if !isSplitedVoice(v) {
-			return voices
-		}
-		
-		let res = searchWithRegex(v.fileName, ptn: "\\d_([1-9])\\.", rangeAtIndex: 1)
-		if !res.isEmpty {
-			let index = Int(res)
-			
-		}
-		
-		return voices
-	}*/
-	/*
-	func isSplitedVoice(v: VoiceData) -> Bool {
-		let nextVoice = getShortTalkData()
-		_talkIndex--
-		
-		let res = searchWithRegex(nextVoice!.fileName, ptn: "\\d_[1-9]\\.")
-		
-		if res.isEmpty == false {
-			return true
-		}
-		
-		return false
-	}*/
 	
 	//======================================================
 	// ひとことデータ
