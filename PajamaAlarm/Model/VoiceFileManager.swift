@@ -143,7 +143,7 @@ class VoiceFileManager {
 	func makeVoiceDataFromVoiceListLine(line: String) -> VoiceData {
 		var voice      = VoiceData()
 		voice.fileName = searchWithRegex(line, ptn: "^.+" + VOICE_SOUND_FILE_SUFFIX)
-		voice.text     = searchWithRegex(line, ptn: "「(.+)」", rangeAtIndex: 1) //searchWithRegex(line, ptn: "「.+」")
+		voice.text     = searchWithRegex(line, ptn: "「.+」") //searchWithRegex(line, ptn: "「(.+)」", rangeAtIndex: 1) //searchWithRegex(line, ptn: "「.+」")
 		voice.text     = replaceSpaceToCRLF(voice.text)
 		voice.face     = searchWithRegex(line, ptn: "<(.+)>", rangeAtIndex: 1)
 		
@@ -264,16 +264,19 @@ class VoiceFileManager {
 		return voices
 	}
 	
-	// 改行をスペースに変換
+	// 改行を特定の文字に変換
 	func replaceCRLFtoSpace(text: String) -> String {
-		let vText = text.stringByReplacingOccurrencesOfString("\r\n", withString: "　", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+		let crlfReplaceStr = "■"
+		let vText = text.stringByReplacingOccurrencesOfString("\r\n", withString: crlfReplaceStr, options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
 		
 		return vText
 	}
 	
 	// 全角スペースを改行に変換
 	func replaceSpaceToCRLF(text: String) -> String {
-		let vText = text.stringByReplacingOccurrencesOfString("　", withString: "\r\n", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+		let crlfReplaceStr = "■"
+		var vText = text.stringByReplacingOccurrencesOfString(crlfReplaceStr, withString: "\r\n　", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+		//vText = text.stringByReplacingOccurrencesOfString("\r\n\r\n", withString: "\r\n", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
 		
 		return vText
 	}

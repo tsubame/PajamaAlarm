@@ -7,6 +7,15 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HuiFont29.ttf">
+            <string>HuiFont</string>
+            <string>HuiFont</string>
+        </mutableArray>
+        <mutableArray key="MTLmr3m.ttf">
+            <string>MotoyaLMaru-W3-90ms-RKSJ-H</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -46,37 +55,26 @@
                                     <segue destination="Tz1-fq-0wd" kind="showDetail" id="mWC-Be-k8w"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="メッセージウィンドウ.png" translatesAutoresizingMaskIntoConstraints="NO" id="sU5-5u-HI0">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="メッセージウィンドウ2.png" translatesAutoresizingMaskIntoConstraints="NO" id="sU5-5u-HI0">
                                 <rect key="frame" x="0.0" y="412" width="375" height="205"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="sU5-5u-HI0" secondAttribute="height" multiplier="75:41" id="ig7-HF-7be"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" restorationIdentifier="1010" usesAttributedText="YES" lineBreakMode="characterWrap" numberOfLines="6" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHY-fI-dGO">
-                                <rect key="frame" x="47" y="475" width="344" height="54"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ztx-gv-xgs">
+                                <rect key="frame" x="278" y="33" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="_testButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ytw-A2-7Og"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" restorationIdentifier="1010" text="「水戸ホーリーホックは、高木を本日獲得。" lineBreakMode="characterWrap" numberOfLines="6" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHY-fI-dGO" customClass="UIOutlineLabel" customModule="PajamaAlarm" customModuleProvider="target">
+                                <rect key="frame" x="30" y="435" width="314" height="142"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="169" id="mue-7A-BE5"/>
                                 </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="水戸ホーリーホックは、">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="HiraKakuProN-W3"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="6" headIndent="18" lineHeightMultiple="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="DF">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="Helvetica"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="6" headIndent="18" lineHeightMultiple="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="高木を本日獲得。">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="HiraKakuProN-W3"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="6" headIndent="18" lineHeightMultiple="1"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                                <fontDescription key="fontDescription" name="MotoyaLMaru-W3-90ms-RKSJ-H" family="MotoyaLMaru" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -104,10 +102,12 @@
                             <constraint firstItem="bnS-29-hXQ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="hvp-zZ-tOX"/>
                             <constraint firstItem="sU5-5u-HI0" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.4" id="onD-ld-yIu"/>
                             <constraint firstItem="sCe-7J-06R" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="qXx-Vo-REX"/>
+                            <constraint firstItem="sU5-5u-HI0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yNN-9G-mq4"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="OKx-4a-e7p"/>
+                                <exclude reference="onD-ld-yIu"/>
                                 <exclude reference="bp2-f5-6uQ"/>
                             </mask>
                         </variation>
@@ -123,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="42.5" y="410.5"/>
+            <point key="canvasLocation" x="59.5" y="410.5"/>
         </scene>
         <!--Set Alarm View Controller-->
         <scene sceneID="Ttq-nu-AdA">
@@ -184,28 +184,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="メッセージウィンドウ.png" translatesAutoresizingMaskIntoConstraints="NO" id="E9M-aG-TiP">
-                                <rect key="frame" x="0.0" y="63" width="382" height="324"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="ホーム画面背景.png" translatesAutoresizingMaskIntoConstraints="NO" id="fS1-sA-Wz3">
+                                <rect key="frame" x="0.0" y="-333" width="375" height="1334"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Labelですよ〜。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4v-Hg-PhB" customClass="FadeLabel" customModule="PajamaAlarm" customModuleProvider="target">
-                                <rect key="frame" x="67" y="164" width="224" height="74"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" image="hotaruN.png" translatesAutoresizingMaskIntoConstraints="NO" id="iql-4s-tLX">
+                                <rect key="frame" x="0.0" y="5" width="375" height="568"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="メッセージウィンドウ.png" translatesAutoresizingMaskIntoConstraints="NO" id="E9M-aG-TiP">
+                                <rect key="frame" x="-4" y="326" width="382" height="324"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZ0-b7-SFc">
-                                <rect key="frame" x="176" y="420" width="30" height="30"/>
+                                <rect key="frame" x="290" y="19" width="30" height="30"/>
+                                <fontDescription key="fontDescription" name="HuiFont" family="HuiFont" pointSize="15"/>
                                 <state key="normal" title="戻る"/>
                                 <connections>
                                     <segue destination="QVw-YD-6uo" kind="unwind" unwindAction="backToHome:" id="FAh-6z-QhR"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Labelですよ〜。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4v-Hg-PhB" customClass="UIOutlineLabel" customModule="PajamaAlarm" customModuleProvider="target">
+                                <rect key="frame" x="52" y="420" width="224" height="74"/>
+                                <fontDescription key="fontDescription" name="HuiFont" family="HuiFont" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iql-4s-tLX" firstAttribute="width" secondItem="ReO-aM-qlb" secondAttribute="width" id="Zzu-Ok-aHF"/>
+                            <constraint firstItem="iql-4s-tLX" firstAttribute="height" secondItem="ReO-aM-qlb" secondAttribute="height" id="eOl-8P-JF9"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="_fadeLabel" destination="u4v-Hg-PhB" id="5y5-pu-o2Z"/>
+                        <outlet property="_label" destination="u4v-Hg-PhB" id="OL9-Sg-XIg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ZK-4B-DOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -222,5 +233,6 @@
         <image name="アラームセット画面.png" width="750" height="1334"/>
         <image name="ホーム画面背景.png" width="750" height="1334"/>
         <image name="メッセージウィンドウ.png" width="750" height="454"/>
+        <image name="メッセージウィンドウ2.png" width="750" height="377"/>
     </resources>
 </document>

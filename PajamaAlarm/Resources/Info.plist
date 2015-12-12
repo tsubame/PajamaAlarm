@@ -22,6 +22,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>HuiFont29.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -38,12 +42,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>お天気情報の取得時に利用します。</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>このアプリは位置情報を常に使うアプリです</string>
-	
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -51,37 +53,34 @@
 			<key>taltal.catfood.jp</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
-				<true />
+				<true/>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true />
+				<true/>
 			</dict>
 			<key>api.openweathermap.org</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
-				<true />
+				<true/>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true />
+				<true/>
 			</dict>
 			<key>api.wunderground.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
-				<true />
+				<true/>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true />
+				<true/>
 			</dict>
 			<key>catfood-taltal.ssl-lolipop.jp</key>
 			<dict>
-				<key>NSIncludesSubdomains</key><true/>
-				<!--<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key><true/>-->
-				<key>NSExceptionRequiresForwardSecrecy</key><false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
 			</dict>
 		</dict>
 		<key>NSTemporaryExceptionMinimumTLSVersion</key>
 		<string>TLSv1.1</string>
-<!--
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
--->
 	</dict>
 </dict>
 </plist>

@@ -26,7 +26,7 @@ class MorningVoiceBuilder {
 	
 	// 定数
 	let VOICE_TEXT_FILE_NAME = "おはようボイス"								// 台本データのファイル名
-	let WEATHER_SECTION_NAME = "お天気"										// お天気セクションの名前
+	let WEATHER_SECTION_NAME = "天気"										// お天気セクションの名前
 	let WEATHER_FILE_NUMBERS = [ 1: "晴れ", 2: "曇り", 3: "雨", 4: "豪雨"]		// お天気セクション内の番号
 	
 	// プライベート変数

@@ -28,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func writeInitialDataToPref() {
 		let pref = NSUserDefaults.standardUserDefaults()
 		pref.setObject("兄さん", forKey: PREF_KEY_NICKNAME)
-
+		pref.setObject("お姉ちゃん", forKey: PREF_KEY_NICKNAME)
+		
 		#if DEBUG
 			print("位置情報を追加")
 			let lat  = "32.74"

@@ -25,18 +25,25 @@ class HomeViewController: UIViewController {
 	@IBOutlet weak var _alarmButton     : UIButton!
 	@IBOutlet weak var _voiceButton     : UIButton!
 	//@IBOutlet weak var _voiceFrameUIView: UIView!
-	@IBOutlet weak var _voiceLabel      : UILabel!
+	@IBOutlet weak var _voiceLabel      : UIOutlineLabel!//UILabel!
 	
 	
 	
 	@IBOutlet weak var _msgWindowUIView: UIImageView!
 	
+	
+	let _enableMouseMove = true
+	
 	// プライベート変数
 	var _shortTalkBuilder = ShortTalkBuilder()	// ひとことデータ表示用
 	var _soundPlayer	  = SoundPlayer()		// 音声再生用
 	var _voiceDatas       = [VoiceData]()		// 表示するセリフデータ
+	var _nowFaceImage	  = ""
+	var _mouseMoveTimer: NSTimer?
 	
-	
+	@IBAction func _testButtonClicked(sender: AnyObject) {
+		startMouseMove()
+	}
 
 
 	//======================================================
@@ -45,6 +52,8 @@ class HomeViewController: UIViewController {
 	
 	// 次のセリフを表示
 	func displayNextMsg() {
+		stopMouseMove()
+		startMouseMove()
 		displayVoiceMsg(_voiceDatas.removeFirst())
 	}
 	
@@ -53,15 +62,13 @@ class HomeViewController: UIViewController {
 		if v.face.isEmpty {
 			v.face = "笑"
 		}
-		
-		
-print(_voiceLabel.frame) // 親ビューからの位置？
-//print(_voiceLabel.bounds)
+
 		changeFacialEx(v.face)
 		showMsgInFrame(v.text)
 		
 		// 音声の再生
 		if v.fileName.isEmpty == false {
+			_soundPlayer.stopVoice()
 			_soundPlayer.playVoices([v.fileName])
 		}
 	}
@@ -75,23 +82,26 @@ print(_voiceLabel.frame) // 親ビューからの位置？
 		_msgWindowUIView.hidden = true
 		_soundPlayer.stopAll()
 		changeFacialEx("通")
+		
+		stopMouseMove()
 	}
 	
 	// 枠の表示、テキストの表示
 	func showMsgInFrame(text: String? = nil) {
 		_msgWindowUIView.hidden = false
-		
 		if text != nil {
-			_voiceLabel.text = text!
-//_voiceLabel.attributedText. = text!
-			for _ in 0...100 {
-				_voiceLabel.text! += "\n　"
-				//_voiceLabel.attributedText +=
+			/*_voiceLabel.text = text!*/
+			var str = text!
+			for _ in 0...10 {
+				str += "\n　"
 			}
-			_voiceLabel.text! += "."
-			//_voiceLabel.numberOfLines = 0
-			//_voiceLabel.sizeToFit()
+			str += "."
+			
+			var attr = _voiceLabel.attributedText
+			attr = NSMutableAttributedString(string: str, attributes: attr?.attributesAtIndex(0, effectiveRange: nil))
+			_voiceLabel.attributedText = attr
 		}
+
 	}
 
 	//======================================================
@@ -127,14 +137,50 @@ print(_voiceLabel.frame) // 親ビューからの位置？
 	
 	// 表情変更
 	func changeFacialEx(face: String) {
+		
 		switch face {
 			case "笑":
-				_charaImageView.image = UIImage(named: "hotaruS.png")
+				_nowFaceImage = "hotaruSML.png"
+				_charaImageView.image = UIImage(named: _nowFaceImage)
 			case "眠":
-				_charaImageView.image = UIImage(named: "hotaruSLP.png")
+				_nowFaceImage = "hotaruSLP.png"
+				_charaImageView.image = UIImage(named: _nowFaceImage)
 			default:
-				_charaImageView.image = UIImage(named: "hotaruN.png")
+				_nowFaceImage = "hotaruN.png"
+				_charaImageView.image = UIImage(named: _nowFaceImage)
 		}
+	}
+	
+	//======================================================
+	// 口パク
+	//======================================================
+	
+	// 口パクテスト
+	func moveMouse(timer: NSTimer) {
+		let faces = ["hotaruSML.png", "hotaruSML_1.png", "hotaruSML_2.png"]
+		let r = rand(faces.count - 1)
+		let face = faces[r]
+		
+		if face == _nowFaceImage {
+			moveMouse(timer)
+		} else {
+			_nowFaceImage = face
+			_charaImageView.image = UIImage(named: face)
+		}
+	}
+	
+	func startMouseMove() {
+		if !_enableMouseMove {
+			return
+		}
+		let timerInterval = 0.2
+		_mouseMoveTimer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: "moveMouse:", userInfo: nil, repeats: true)
+	}
+	
+	func stopMouseMove() {
+		_mouseMoveTimer?.invalidate()
+		//changeFacialEx("笑")
+		_charaImageView.image = UIImage(named: "hotaruSML_2.png")
 	}
 	
 	//======================================================
@@ -149,27 +195,33 @@ print(_voiceLabel.frame) // 親ビューからの位置？
 	}
 	
 	func makeMsgWindow() {
-		//let attr = _voiceLabel.attributedText.
-		//attr.
+
+		var aText = NSMutableAttributedString(string: _voiceLabel.text!)//_voiceLabel.attributedText
+		//let attrs = aText.attributesAtIndex(0, effectiveRange: nil)
+		let pStyle = NSMutableParagraphStyle()
+		pStyle.lineHeightMultiple = 1.5
+		pStyle.headIndent = 18
+		aText.addAttribute(NSParagraphStyleAttributeName, value: pStyle, range: NSMakeRange(0, aText.length))
+
+		_voiceLabel.attributedText = aText
+		_voiceLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+		_voiceLabel.outlineColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)
+		_voiceLabel.outlineSize = 0.0
+		
+		_voiceLabel.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).CGColor
+		_voiceLabel.layer.borderWidth = 0
+		_msgWindowUIView.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).CGColor
+		_msgWindowUIView.layer.borderWidth = 0
+		//_voiceLabel.layer.
+		
+		//NSMutableAttributedString(string: <#T##String#>, attributes: <#T##[String : AnyObject]?#>)
 		_voiceLabel.removeFromSuperview()
-		//_voiceLabel = label
-		//_voiceLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
 		_msgWindowUIView.addSubview(_voiceLabel)
 
 		let helper = AutoLayoutHelper()
-		helper.addAutoLayoutSizing(_voiceLabel, toItem: _msgWindowUIView, wRatio: 0.75, hRatio: 0.6)
+		helper.addAutoLayoutSizing(_voiceLabel, toItem: _msgWindowUIView, wRatio: 0.9, hRatio: 0.7)
 		helper.addAutoLayoutCentering(_voiceLabel, toItem: _msgWindowUIView)
-		//_msgWindowUIView.layer.borderColor  = UIColor.grayColor().CGColor
-		//_msgWindowUIView.layer.borderWidth  = 1.0
-		//_voiceLabel.layer.borderColor  = UIColor.grayColor().CGColor
-		//_voiceLabel.layer.borderWidth  = 1.0
-		//_voiceLabel.layer.cornerRadius = 4.0
-		//self.view.setNeedsDisplay()
-		/*
-				myLabel.layer.borderColor = [UIColor whiteColor].CGColor;  //ボーダー色（白）
-		myLabel.layer.borderWidth = 2.0;  //ボーダー幅（２ピクセル）
-		myLabel.layer.cornerRadius = 10.0;  //角丸半径（10ピクセル）
-		*/
+
 	}
 	
 	//func makeLabel(pos: CGPoint, text: String, font: UIFont? = nil) -> UILabel {
@@ -242,7 +294,7 @@ print(_voiceLabel.frame) // 親ビューからの位置？
 	@IBAction func backToHome(segue: UIStoryboardSegue) {
 		delay(0.5, closure: {
 			var voice = VoiceData()
-			voice.text = "この時間に起こせばいいんだね？　了解だよ♪"
+			voice.text = "「この時間に起こせばいいんだね？　了解だよ♪」"
 			voice.face = "笑"
 			self.displayVoiceMsg(voice)
 		})

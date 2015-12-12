@@ -111,6 +111,13 @@ func searchWithRegex(text: String, ptn: String, rangeAtIndex: Int = 0) -> String
 	return ""
 }
 
+// 正規表現で置換
+func replaceWithRegex(text: String, ptn: String, replaceStr: String) -> String {
+	let nsText = text as NSString
+	
+	return text.stringByReplacingOccurrencesOfString(ptn, withString: replaceStr, options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+}
+
 // Double型を指定できる dispatch_after   （使い方）delay(2.0) { println("test.") }
 func delay(delaySec: Double, closure:()->()) {
 	dispatch_after(

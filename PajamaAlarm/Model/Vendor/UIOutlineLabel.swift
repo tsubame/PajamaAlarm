@@ -28,9 +28,6 @@ class UIOutlineLabel: UILabel {
     override func drawTextInRect(rect: CGRect) {
         var cr = UIGraphicsGetCurrentContext()
         let textColor = self.textColor
-        
-    //CGContextRef cr = UIGraphicsGetCurrentContext();
-    //UIColor *textColor = self.textColor;
     
 		CGContextSetLineWidth(cr, outlineSize)
 		CGContextSetLineJoin(cr, CGLineJoin.Round)
