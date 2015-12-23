@@ -20,14 +20,14 @@ class AlarmPlayer: NSObject {
 	var _soundPlayer   = SoundPlayer()
 	
 	// 以下、テスト用
-	var _alarmFile1 = "alarm-1.mp3"
+	var _alarmFile1 = "めざましボイス_0.mp3" //"alarm-1.mp3"
 	var _alarmFile2 = "alarm-2.mp3"
 	var _alarmFile3 = "alarm-3.mp3"
 	
 	var _playsVibe = true
 	var _vibeTimer: NSTimer? // バイブレーション用 うまく動かない
 
-	var _alarmFiles = ["alarm-1.mp3", "alarm-2.mp3", "alarm-3.mp3"]
+	var _alarmFiles = ["めざましボイス_2.mp3", "alarm-2.mp3", "alarm-3.mp3"]
 	var _alarmIndex = 0
 	
 	var _snoozeTimer: NSTimer?
@@ -47,10 +47,20 @@ class AlarmPlayer: NSObject {
     func startAlarm() {
 		_soundPlayer.play(_alarmFiles[_alarmIndex], ch: _alarmIndex, volume: 0.7, loop: true)
 		_isPlaying = true
-		_snoozeTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "snooze:", userInfo: nil, repeats: true)
+		_snoozeTimer = NSTimer.scheduledTimerWithTimeInterval(110, target: self, selector: "snooze:", userInfo: nil, repeats: true)
 				
 		// プリファレンスに書き込み
 		writePref("false", key: PREF_KEY_IS_ALARM_SET)
+		
+		// テスト用
+		let imgName = "album.png"
+		let path = NSBundle.mainBundle().pathForResource(imgName, ofType: "")
+		
+		if path != nil {
+			print("■ 画像のパスは……")
+			print(path)
+			_soundPlayer.showInfoToControleCenter("目覚ましボイス", imgName: path)
+		}
 	}
 	
 	func snooze(timer: NSTimer?) {

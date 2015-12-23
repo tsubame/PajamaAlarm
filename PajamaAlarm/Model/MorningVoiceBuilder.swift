@@ -75,7 +75,7 @@ class MorningVoiceBuilder {
 		if weather != nil {
 			voices += getWeatherDatas(weather!)
 // 気温データの表示テスト 
-			voices.append(getTempSample())
+//voices.append(getTempSample())
 		}
 		
 		return voices

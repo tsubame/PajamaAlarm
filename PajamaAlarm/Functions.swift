@@ -128,6 +128,18 @@ func delay(delaySec: Double, closure:()->()) {
 		dispatch_get_main_queue(), closure)
 }
 
+func animation(view: UIView, duration: Double, closure:()->()) {
+	UIView.transitionWithView(view,
+		duration: duration,
+		options: UIViewAnimationOptions.TransitionCrossDissolve,
+		animations: {
+			closure()
+		},
+		completion: { _ in
+			//onComplete()!
+	})
+}
+
 // 乱数取得 rand(3) → 0, 1, 2のどれかが返る
 func rand(num: Int) -> Int {
     var result:Int

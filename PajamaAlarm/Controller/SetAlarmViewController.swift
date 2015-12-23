@@ -12,6 +12,7 @@ class SetAlarmViewController: UIViewController {
 
 	@IBOutlet weak var _timePickersView: AlarmTimePickersUIView!
 
+	var _soundPlayer = SoundPlayer()
 	
 	// アラーム用ローカル通知の作成
 	func createScheduledLocalNotif(fireDate: NSDate) {
@@ -55,6 +56,8 @@ class SetAlarmViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		//_timePickersView.alarmTimeToPicker()
 		print("show pickers.")
+		
+		//_soundPlayer.play("めざましセット_0.mp3")
 		//print(readPref(PREF_KEY_ALARM_TIME))
 		//_timePickersView.makeAll()
 		//_timePickersView.movePickerIndex()

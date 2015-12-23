@@ -143,7 +143,7 @@ class VoiceFileManager {
 	func makeVoiceDataFromVoiceListLine(line: String) -> VoiceData {
 		var voice      = VoiceData()
 		voice.fileName = searchWithRegex(line, ptn: "^.+" + VOICE_SOUND_FILE_SUFFIX)
-		voice.text     = searchWithRegex(line, ptn: "「.+」") //searchWithRegex(line, ptn: "「(.+)」", rangeAtIndex: 1) //searchWithRegex(line, ptn: "「.+」")
+		voice.text     = searchWithRegex(line, ptn: "「(.+)」", rangeAtIndex: 1) //searchWithRegex(line, ptn: "「.+」")
 		voice.text     = replaceSpaceToCRLF(voice.text)
 		voice.face     = searchWithRegex(line, ptn: "<(.+)>", rangeAtIndex: 1)
 		

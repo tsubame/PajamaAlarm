@@ -7,7 +7,7 @@
 
 import Foundation
 import AVFoundation
-
+import MediaPlayer
 
 enum SoundPlayerErrorCode:Int {
 	case NoError
@@ -517,6 +517,24 @@ print("\(dispTime)秒後にフェードアウトします")
 	func backgroundAudioOFF() {
 		try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategorySoloAmbient, withOptions: [])
 		try! AVAudioSession.sharedInstance().setActive(false)
+	}
+	
+	//======================================================
+	// コントロールセンター
+	//======================================================
+	
+	// コントロールセンターに情報を表示　呼び出し時の引数 ["ファイル名", "画像ファイルパス"]
+	func showInfoToControleCenter(title: String, imgName: String? = nil) {
+		let mpic = MPNowPlayingInfoCenter.defaultCenter()
+		mpic.nowPlayingInfo = [
+			MPMediaItemPropertyTitle: title,
+		]
+		
+		//var artwork: MPMediaItemArtwork? = nil
+		if imgName != nil {
+			var artwork = MPMediaItemArtwork(image: UIImage(named: imgName!)!)
+			mpic.nowPlayingInfo![MPMediaItemPropertyArtwork] = artwork
+		}
 	}
 	
 	//======================================================

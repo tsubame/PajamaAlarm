@@ -41,7 +41,7 @@ let PREF_KEY_CHECK_FILES    = "checkFileExists" // ファイルの存在確認�
 
 let LOCAL_NOTIF_BODY   = "アラームの時間です" // ローカル通知メッセージ
 let LOCAL_NOTIF_ACTION = "アプリを起動"	   // ローカル通知アクション
-let LOCAL_NOTIF_SOUND  = "koron.wav"
+let LOCAL_NOTIF_SOUND  = "アラーム通知音_0.aif" //"koron.wav"
 
 //======================================================
 // 通知センター
@@ -68,6 +68,14 @@ let MUTE_SOUND_FILENAME = "nosound.mp3"
 let ALARM_SOUND = "kirakira"
 
 let SET_ALARM_MINUTE_INTERVAL = 1 //2
+
+//======================================================
+// デバッグ用
+//======================================================
+
+// 固定で流す目覚ましボイス
+let DEBUG_USE_FIXED_SOUND	  = true
+let DEBUG_FIXED_MORNING_VOICE = "おはようボイス_ささやき_0.mp3"
 
 //======================================================
 // その他

@@ -13,12 +13,43 @@
 		B80568051C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B80568031C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 */; };
 		B80568071C184E52003F4E68 /* おはようボイス_ささやき_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B80568061C184E52003F4E68 /* おはようボイス_ささやき_0.mp3 */; };
 		B80568111C1871C9003F4E68 /* メッセージウィンドウ.png in Resources */ = {isa = PBXBuildFile; fileRef = B80568101C1871C9003F4E68 /* メッセージウィンドウ.png */; };
-		B80568141C187A33003F4E68 /* FadeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80568131C187A33003F4E68 /* FadeLabel.swift */; };
-		B80568151C187A33003F4E68 /* FadeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80568131C187A33003F4E68 /* FadeLabel.swift */; };
+		B80568141C187A33003F4E68 /* FadeLabelOrg.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80568131C187A33003F4E68 /* FadeLabelOrg.swift */; };
+		B80568151C187A33003F4E68 /* FadeLabelOrg.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80568131C187A33003F4E68 /* FadeLabelOrg.swift */; };
 		B80568171C187A8C003F4E68 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80568161C187A8C003F4E68 /* SampleViewController.swift */; };
 		B80568181C187A8C003F4E68 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80568161C187A8C003F4E68 /* SampleViewController.swift */; };
 		B805681A1C187F56003F4E68 /* UIOutlineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80568191C187F56003F4E68 /* UIOutlineLabel.swift */; };
 		B805681B1C187F56003F4E68 /* UIOutlineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80568191C187F56003F4E68 /* UIOutlineLabel.swift */; };
+		B81D2D521C1C01710086E22A /* 挨拶_深夜_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D421C1C01710086E22A /* 挨拶_深夜_0.mp3 */; };
+		B81D2D531C1C01710086E22A /* 挨拶_深夜_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D431C1C01710086E22A /* 挨拶_深夜_1.mp3 */; };
+		B81D2D541C1C01710086E22A /* 挨拶_深夜_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D441C1C01710086E22A /* 挨拶_深夜_2.mp3 */; };
+		B81D2D551C1C01710086E22A /* 挨拶_早朝_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D451C1C01710086E22A /* 挨拶_早朝_0.mp3 */; };
+		B81D2D561C1C01710086E22A /* 挨拶_早朝_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D461C1C01710086E22A /* 挨拶_早朝_1.mp3 */; };
+		B81D2D571C1C01710086E22A /* 挨拶_早朝_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D471C1C01710086E22A /* 挨拶_早朝_2.mp3 */; };
+		B81D2D581C1C01710086E22A /* 挨拶_昼_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D481C1C01710086E22A /* 挨拶_昼_0.mp3 */; };
+		B81D2D591C1C01710086E22A /* 挨拶_昼_0B.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D491C1C01710086E22A /* 挨拶_昼_0B.mp3 */; };
+		B81D2D5A1C1C01710086E22A /* 挨拶_昼_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D4A1C1C01710086E22A /* 挨拶_昼_1.mp3 */; };
+		B81D2D5B1C1C01710086E22A /* 挨拶_昼_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D4B1C1C01710086E22A /* 挨拶_昼_2.mp3 */; };
+		B81D2D5C1C1C01710086E22A /* 挨拶_朝_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D4C1C1C01710086E22A /* 挨拶_朝_0.mp3 */; };
+		B81D2D5D1C1C01710086E22A /* 挨拶_朝_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D4D1C1C01710086E22A /* 挨拶_朝_1.mp3 */; };
+		B81D2D5E1C1C01710086E22A /* 挨拶_朝_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D4E1C1C01710086E22A /* 挨拶_朝_2.mp3 */; };
+		B81D2D5F1C1C01710086E22A /* 挨拶_夜_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D4F1C1C01710086E22A /* 挨拶_夜_0.mp3 */; };
+		B81D2D601C1C01710086E22A /* 挨拶_夜_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D501C1C01710086E22A /* 挨拶_夜_1.mp3 */; };
+		B81D2D611C1C01710086E22A /* 挨拶_夜_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D511C1C01710086E22A /* 挨拶_夜_2.mp3 */; };
+		B81D2D6A1C1C05130086E22A /* 挨拶_昼_2_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D681C1C05130086E22A /* 挨拶_昼_2_0.mp3 */; };
+		B81D2D6B1C1C05130086E22A /* 挨拶_昼_2_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D691C1C05130086E22A /* 挨拶_昼_2_1.mp3 */; };
+		B81D2D6D1C1C06D30086E22A /* めざましセット_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D6C1C1C06D30086E22A /* めざましセット_0.mp3 */; };
+		B81D2D701C1C095B0086E22A /* 挨拶_昼_1_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D6E1C1C095B0086E22A /* 挨拶_昼_1_0.mp3 */; };
+		B81D2D711C1C095B0086E22A /* 挨拶_昼_1_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D6F1C1C095B0086E22A /* 挨拶_昼_1_1.mp3 */; };
+		B81D2D741C1C0C5D0086E22A /* めざましボイス_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D731C1C0C5D0086E22A /* めざましボイス_0.mp3 */; };
+		B81D2D7A1C1C0E8A0086E22A /* アラーム通知音_0.aif in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D791C1C0E8A0086E22A /* アラーム通知音_0.aif */; };
+		B81D2D7C1C1C0F2E0086E22A /* めざましセット_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D7B1C1C0F2E0086E22A /* めざましセット_1.mp3 */; };
+		B81D2D811C1C106B0086E22A /* おはようボイス_天気_1_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D7D1C1C106B0086E22A /* おはようボイス_天気_1_0.mp3 */; };
+		B81D2D821C1C106B0086E22A /* おはようボイス_天気_1_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D7E1C1C106B0086E22A /* おはようボイス_天気_1_1.mp3 */; };
+		B81D2D831C1C106B0086E22A /* おはようボイス_天気_2_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D7F1C1C106B0086E22A /* おはようボイス_天気_2_0.mp3 */; };
+		B81D2D841C1C106B0086E22A /* おはようボイス_天気_2_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D801C1C106B0086E22A /* おはようボイス_天気_2_1.mp3 */; };
+		B81D2D871C1C13B40086E22A /* めざましボイス_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D851C1C13B40086E22A /* めざましボイス_1.mp3 */; };
+		B81D2D881C1C13B40086E22A /* めざましボイス_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D861C1C13B40086E22A /* めざましボイス_2.mp3 */; };
+		B81D2D8D1C1C29640086E22A /* album.png in Resources */ = {isa = PBXBuildFile; fileRef = B81D2D8C1C1C29640086E22A /* album.png */; };
 		B81D60C71C041B4000726CA8 /* AlarmTimeMonitorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D60C61C041B4000726CA8 /* AlarmTimeMonitorTest.swift */; };
 		B81D60CC1C044A4200726CA8 /* おはようボイス.txt in Resources */ = {isa = PBXBuildFile; fileRef = B81D60CB1C044A4200726CA8 /* おはようボイス.txt */; };
 		B81D60CD1C044A4200726CA8 /* おはようボイス.txt in Resources */ = {isa = PBXBuildFile; fileRef = B81D60CB1C044A4200726CA8 /* おはようボイス.txt */; };
@@ -67,8 +98,6 @@
 		B87E7A161C03427600D492D2 /* ひとこと.txt in Resources */ = {isa = PBXBuildFile; fileRef = B87E7A151C03427600D492D2 /* ひとこと.txt */; };
 		B87E7A171C03427600D492D2 /* ひとこと.txt in Resources */ = {isa = PBXBuildFile; fileRef = B87E7A151C03427600D492D2 /* ひとこと.txt */; };
 		B887A3271C036FE90065FF6D /* ShortTalkBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B887A3261C036FE90065FF6D /* ShortTalkBuilderTest.swift */; };
-		B88C995A1C02D08F000581CA /* greeting.txt in Resources */ = {isa = PBXBuildFile; fileRef = B88C99591C02D08F000581CA /* greeting.txt */; };
-		B88C995B1C02D08F000581CA /* greeting.txt in Resources */ = {isa = PBXBuildFile; fileRef = B88C99591C02D08F000581CA /* greeting.txt */; };
 		B89F08251BF9A60F00BEC64C /* Regexp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08241BF9A60F00BEC64C /* Regexp.swift */; };
 		B89F08261BF9A60F00BEC64C /* Regexp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08241BF9A60F00BEC64C /* Regexp.swift */; };
 		B89F08331BF9FAC100BEC64C /* WeatherGetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89F08321BF9FAC100BEC64C /* WeatherGetterTest.swift */; };
@@ -128,7 +157,14 @@
 		B8D915751BFB53DF00630DD5 /* buttonAlarm.png in Resources */ = {isa = PBXBuildFile; fileRef = B8D915741BFB53DF00630DD5 /* buttonAlarm.png */; };
 		B8D915771BFB53ED00630DD5 /* set.png in Resources */ = {isa = PBXBuildFile; fileRef = B8D915761BFB53ED00630DD5 /* set.png */; };
 		B8D915791BFB540700630DD5 /* hotaruN.png in Resources */ = {isa = PBXBuildFile; fileRef = B8D915781BFB540700630DD5 /* hotaruN.png */; };
-		B8D9157C1BFB542600630DD5 /* sample-utf8.txt in Resources */ = {isa = PBXBuildFile; fileRef = B8D9157B1BFB542600630DD5 /* sample-utf8.txt */; };
+		B8F299C51C240538004C34D8 /* お天気枠.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F299BF1C240538004C34D8 /* お天気枠.png */; };
+		B8F299C71C240775004C34D8 /* お天気アイコン-晴れ.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F299C61C240775004C34D8 /* お天気アイコン-晴れ.png */; };
+		B8F299CC1C240CAD004C34D8 /* お天気アイコン-雨.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F299C81C240CAD004C34D8 /* お天気アイコン-雨.png */; };
+		B8F299CD1C240CAD004C34D8 /* お天気アイコン-豪雨.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F299C91C240CAD004C34D8 /* お天気アイコン-豪雨.png */; };
+		B8F299CE1C240CAD004C34D8 /* お天気アイコン-晴れ時々曇り.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F299CA1C240CAD004C34D8 /* お天気アイコン-晴れ時々曇り.png */; };
+		B8F299CF1C240CAD004C34D8 /* お天気アイコン-曇り.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F299CB1C240CAD004C34D8 /* お天気アイコン-曇り.png */; };
+		B8F299D11C24143C004C34D8 /* メッセージ枠-半透明.png in Resources */ = {isa = PBXBuildFile; fileRef = B8F299D01C24143C004C34D8 /* メッセージ枠-半透明.png */; };
+		B8F299D31C241850004C34D8 /* FadeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F299D21C241850004C34D8 /* FadeLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,9 +191,40 @@
 		B80568031C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_可愛い_2_1.mp3"; sourceTree = "<group>"; };
 		B80568061C184E52003F4E68 /* おはようボイス_ささやき_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_ささやき_0.mp3"; sourceTree = "<group>"; };
 		B80568101C1871C9003F4E68 /* メッセージウィンドウ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "メッセージウィンドウ.png"; sourceTree = "<group>"; };
-		B80568131C187A33003F4E68 /* FadeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeLabel.swift; sourceTree = "<group>"; };
+		B80568131C187A33003F4E68 /* FadeLabelOrg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeLabelOrg.swift; sourceTree = "<group>"; };
 		B80568161C187A8C003F4E68 /* SampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		B80568191C187F56003F4E68 /* UIOutlineLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIOutlineLabel.swift; sourceTree = "<group>"; };
+		B81D2D421C1C01710086E22A /* 挨拶_深夜_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_深夜_0.mp3"; sourceTree = "<group>"; };
+		B81D2D431C1C01710086E22A /* 挨拶_深夜_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_深夜_1.mp3"; sourceTree = "<group>"; };
+		B81D2D441C1C01710086E22A /* 挨拶_深夜_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_深夜_2.mp3"; sourceTree = "<group>"; };
+		B81D2D451C1C01710086E22A /* 挨拶_早朝_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_早朝_0.mp3"; sourceTree = "<group>"; };
+		B81D2D461C1C01710086E22A /* 挨拶_早朝_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_早朝_1.mp3"; sourceTree = "<group>"; };
+		B81D2D471C1C01710086E22A /* 挨拶_早朝_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_早朝_2.mp3"; sourceTree = "<group>"; };
+		B81D2D481C1C01710086E22A /* 挨拶_昼_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_昼_0.mp3"; sourceTree = "<group>"; };
+		B81D2D491C1C01710086E22A /* 挨拶_昼_0B.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_昼_0B.mp3"; sourceTree = "<group>"; };
+		B81D2D4A1C1C01710086E22A /* 挨拶_昼_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_昼_1.mp3"; sourceTree = "<group>"; };
+		B81D2D4B1C1C01710086E22A /* 挨拶_昼_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_昼_2.mp3"; sourceTree = "<group>"; };
+		B81D2D4C1C1C01710086E22A /* 挨拶_朝_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_朝_0.mp3"; sourceTree = "<group>"; };
+		B81D2D4D1C1C01710086E22A /* 挨拶_朝_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_朝_1.mp3"; sourceTree = "<group>"; };
+		B81D2D4E1C1C01710086E22A /* 挨拶_朝_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_朝_2.mp3"; sourceTree = "<group>"; };
+		B81D2D4F1C1C01710086E22A /* 挨拶_夜_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_夜_0.mp3"; sourceTree = "<group>"; };
+		B81D2D501C1C01710086E22A /* 挨拶_夜_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_夜_1.mp3"; sourceTree = "<group>"; };
+		B81D2D511C1C01710086E22A /* 挨拶_夜_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_夜_2.mp3"; sourceTree = "<group>"; };
+		B81D2D681C1C05130086E22A /* 挨拶_昼_2_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_昼_2_0.mp3"; sourceTree = "<group>"; };
+		B81D2D691C1C05130086E22A /* 挨拶_昼_2_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_昼_2_1.mp3"; sourceTree = "<group>"; };
+		B81D2D6C1C1C06D30086E22A /* めざましセット_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "めざましセット_0.mp3"; sourceTree = "<group>"; };
+		B81D2D6E1C1C095B0086E22A /* 挨拶_昼_1_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_昼_1_0.mp3"; sourceTree = "<group>"; };
+		B81D2D6F1C1C095B0086E22A /* 挨拶_昼_1_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "挨拶_昼_1_1.mp3"; sourceTree = "<group>"; };
+		B81D2D731C1C0C5D0086E22A /* めざましボイス_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "めざましボイス_0.mp3"; sourceTree = "<group>"; };
+		B81D2D791C1C0E8A0086E22A /* アラーム通知音_0.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "アラーム通知音_0.aif"; sourceTree = "<group>"; };
+		B81D2D7B1C1C0F2E0086E22A /* めざましセット_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "めざましセット_1.mp3"; sourceTree = "<group>"; };
+		B81D2D7D1C1C106B0086E22A /* おはようボイス_天気_1_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_天気_1_0.mp3"; sourceTree = "<group>"; };
+		B81D2D7E1C1C106B0086E22A /* おはようボイス_天気_1_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_天気_1_1.mp3"; sourceTree = "<group>"; };
+		B81D2D7F1C1C106B0086E22A /* おはようボイス_天気_2_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_天気_2_0.mp3"; sourceTree = "<group>"; };
+		B81D2D801C1C106B0086E22A /* おはようボイス_天気_2_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "おはようボイス_天気_2_1.mp3"; sourceTree = "<group>"; };
+		B81D2D851C1C13B40086E22A /* めざましボイス_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "めざましボイス_1.mp3"; sourceTree = "<group>"; };
+		B81D2D861C1C13B40086E22A /* めざましボイス_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "めざましボイス_2.mp3"; sourceTree = "<group>"; };
+		B81D2D8C1C1C29640086E22A /* album.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album.png; sourceTree = "<group>"; };
 		B81D60C61C041B4000726CA8 /* AlarmTimeMonitorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTimeMonitorTest.swift; sourceTree = "<group>"; };
 		B81D60CB1C044A4200726CA8 /* おはようボイス.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "おはようボイス.txt"; sourceTree = "<group>"; };
 		B81D60D31C046AB000726CA8 /* MorningVoiceBuilderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorningVoiceBuilderTest.swift; sourceTree = "<group>"; };
@@ -195,7 +262,6 @@
 		B87E7A121C03415900D492D2 /* 挨拶.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "挨拶.txt"; sourceTree = "<group>"; };
 		B87E7A151C03427600D492D2 /* ひとこと.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ひとこと.txt"; sourceTree = "<group>"; };
 		B887A3261C036FE90065FF6D /* ShortTalkBuilderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortTalkBuilderTest.swift; sourceTree = "<group>"; };
-		B88C99591C02D08F000581CA /* greeting.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = greeting.txt; sourceTree = "<group>"; };
 		B89F08241BF9A60F00BEC64C /* Regexp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regexp.swift; sourceTree = "<group>"; };
 		B89F08321BF9FAC100BEC64C /* WeatherGetterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherGetterTest.swift; sourceTree = "<group>"; };
 		B89F083A1BFA140700BEC64C /* LocationGetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationGetter.swift; sourceTree = "<group>"; };
@@ -232,7 +298,14 @@
 		B8D915741BFB53DF00630DD5 /* buttonAlarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonAlarm.png; sourceTree = "<group>"; };
 		B8D915761BFB53ED00630DD5 /* set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set.png; sourceTree = "<group>"; };
 		B8D915781BFB540700630DD5 /* hotaruN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotaruN.png; sourceTree = "<group>"; };
-		B8D9157B1BFB542600630DD5 /* sample-utf8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sample-utf8.txt"; sourceTree = "<group>"; };
+		B8F299BF1C240538004C34D8 /* お天気枠.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "お天気枠.png"; sourceTree = "<group>"; };
+		B8F299C61C240775004C34D8 /* お天気アイコン-晴れ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "お天気アイコン-晴れ.png"; sourceTree = "<group>"; };
+		B8F299C81C240CAD004C34D8 /* お天気アイコン-雨.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "お天気アイコン-雨.png"; sourceTree = "<group>"; };
+		B8F299C91C240CAD004C34D8 /* お天気アイコン-豪雨.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "お天気アイコン-豪雨.png"; sourceTree = "<group>"; };
+		B8F299CA1C240CAD004C34D8 /* お天気アイコン-晴れ時々曇り.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "お天気アイコン-晴れ時々曇り.png"; sourceTree = "<group>"; };
+		B8F299CB1C240CAD004C34D8 /* お天気アイコン-曇り.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "お天気アイコン-曇り.png"; sourceTree = "<group>"; };
+		B8F299D01C24143C004C34D8 /* メッセージ枠-半透明.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "メッセージ枠-半透明.png"; sourceTree = "<group>"; };
+		B8F299D21C241850004C34D8 /* FadeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +333,77 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B81D2D411C1C01660086E22A /* 挨拶 */ = {
+			isa = PBXGroup;
+			children = (
+				B81D2D421C1C01710086E22A /* 挨拶_深夜_0.mp3 */,
+				B81D2D431C1C01710086E22A /* 挨拶_深夜_1.mp3 */,
+				B81D2D441C1C01710086E22A /* 挨拶_深夜_2.mp3 */,
+				B81D2D451C1C01710086E22A /* 挨拶_早朝_0.mp3 */,
+				B81D2D461C1C01710086E22A /* 挨拶_早朝_1.mp3 */,
+				B81D2D471C1C01710086E22A /* 挨拶_早朝_2.mp3 */,
+				B81D2D481C1C01710086E22A /* 挨拶_昼_0.mp3 */,
+				B81D2D491C1C01710086E22A /* 挨拶_昼_0B.mp3 */,
+				B81D2D681C1C05130086E22A /* 挨拶_昼_2_0.mp3 */,
+				B81D2D691C1C05130086E22A /* 挨拶_昼_2_1.mp3 */,
+				B81D2D4A1C1C01710086E22A /* 挨拶_昼_1.mp3 */,
+				B81D2D6E1C1C095B0086E22A /* 挨拶_昼_1_0.mp3 */,
+				B81D2D6F1C1C095B0086E22A /* 挨拶_昼_1_1.mp3 */,
+				B81D2D4B1C1C01710086E22A /* 挨拶_昼_2.mp3 */,
+				B81D2D4C1C1C01710086E22A /* 挨拶_朝_0.mp3 */,
+				B81D2D4D1C1C01710086E22A /* 挨拶_朝_1.mp3 */,
+				B81D2D4E1C1C01710086E22A /* 挨拶_朝_2.mp3 */,
+				B81D2D4F1C1C01710086E22A /* 挨拶_夜_0.mp3 */,
+				B81D2D501C1C01710086E22A /* 挨拶_夜_1.mp3 */,
+				B81D2D511C1C01710086E22A /* 挨拶_夜_2.mp3 */,
+			);
+			name = "挨拶";
+			sourceTree = "<group>";
+		};
+		B81D2D621C1C01760086E22A /* おはようボイス */ = {
+			isa = PBXGroup;
+			children = (
+				B81D2D7D1C1C106B0086E22A /* おはようボイス_天気_1_0.mp3 */,
+				B81D2D7E1C1C106B0086E22A /* おはようボイス_天気_1_1.mp3 */,
+				B81D2D7F1C1C106B0086E22A /* おはようボイス_天気_2_0.mp3 */,
+				B81D2D801C1C106B0086E22A /* おはようボイス_天気_2_1.mp3 */,
+				B8B126321C18B7E600375D95 /* おはようボイス_あまめ_0_0.mp3 */,
+				B8B126331C18B7E600375D95 /* おはようボイス_あまめ_0_1.mp3 */,
+				B8B126341C18B7E600375D95 /* おはようボイス_あまめ_0_2.mp3 */,
+				B80568061C184E52003F4E68 /* おはようボイス_ささやき_0.mp3 */,
+				B80567FE1C181E36003F4E68 /* おはようボイス_可愛い_0_0.mp3 */,
+				B80567FF1C181E36003F4E68 /* おはようボイス_可愛い_0_1.mp3 */,
+				B83D3D801C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 */,
+				B80568021C18226A003F4E68 /* おはようボイス_可愛い_2_0.mp3 */,
+				B80568031C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 */,
+				B8B126351C18B7E600375D95 /* おはようボイス_天気_0.mp3 */,
+				B8B126361C18B7E600375D95 /* おはようボイス_天気_1.mp3 */,
+				B8B126371C18B7E600375D95 /* おはようボイス_天気_2.mp3 */,
+				B8B126381C18B7E600375D95 /* おはようボイス_天気_3.mp3 */,
+				B8B126391C18B7E600375D95 /* おはようボイス_天気_4.mp3 */,
+			);
+			name = "おはようボイス";
+			sourceTree = "<group>";
+		};
+		B81D2D631C1C02F10086E22A /* 目覚ましセット */ = {
+			isa = PBXGroup;
+			children = (
+				B81D2D6C1C1C06D30086E22A /* めざましセット_0.mp3 */,
+				B81D2D7B1C1C0F2E0086E22A /* めざましセット_1.mp3 */,
+			);
+			name = "目覚ましセット";
+			sourceTree = "<group>";
+		};
+		B81D2D721C1C0C4F0086E22A /* めざましボイス */ = {
+			isa = PBXGroup;
+			children = (
+				B81D2D731C1C0C5D0086E22A /* めざましボイス_0.mp3 */,
+				B81D2D851C1C13B40086E22A /* めざましボイス_1.mp3 */,
+				B81D2D861C1C13B40086E22A /* めざましボイス_2.mp3 */,
+			);
+			name = "めざましボイス";
+			sourceTree = "<group>";
+		};
 		B8274C911BEBA716000FEADE = {
 			isa = PBXGroup;
 			children = (
@@ -341,9 +485,9 @@
 				B87DC8B31BF4D754005FBC8C /* AlarmTimeMonitor.swift */,
 				B85707731BF2034F000E6639 /* AutoLayoutHelper.swift */,
 				B89F083A1BFA140700BEC64C /* LocationGetter.swift */,
-				B87321841C12F5CF00454678 /* MorningVoiceBuilder.swift */,
 				B87321871C12F8C200454678 /* ShortTalkBuilder.swift */,
 				B8274CCF1BEBA78D000FEADE /* SoundPlayer.swift */,
+				B87321841C12F5CF00454678 /* MorningVoiceBuilder.swift */,
 				B87E7A0D1C0329A500D492D2 /* VoiceFileManager.swift */,
 				B873EF951BFF489A00B8DDE7 /* WeatherFileManager.swift */,
 				B8274CD51BEBA7C3000FEADE /* WeatherGetter.swift */,
@@ -382,20 +526,10 @@
 		B87DC8BA1BF4F4CD005FBC8C /* voice */ = {
 			isa = PBXGroup;
 			children = (
-				B8B126321C18B7E600375D95 /* おはようボイス_あまめ_0_0.mp3 */,
-				B8B126331C18B7E600375D95 /* おはようボイス_あまめ_0_1.mp3 */,
-				B8B126341C18B7E600375D95 /* おはようボイス_あまめ_0_2.mp3 */,
-				B80568061C184E52003F4E68 /* おはようボイス_ささやき_0.mp3 */,
-				B80567FE1C181E36003F4E68 /* おはようボイス_可愛い_0_0.mp3 */,
-				B80567FF1C181E36003F4E68 /* おはようボイス_可愛い_0_1.mp3 */,
-				B83D3D801C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 */,
-				B80568021C18226A003F4E68 /* おはようボイス_可愛い_2_0.mp3 */,
-				B80568031C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 */,
-				B8B126351C18B7E600375D95 /* おはようボイス_天気_0.mp3 */,
-				B8B126361C18B7E600375D95 /* おはようボイス_天気_1.mp3 */,
-				B8B126371C18B7E600375D95 /* おはようボイス_天気_2.mp3 */,
-				B8B126381C18B7E600375D95 /* おはようボイス_天気_3.mp3 */,
-				B8B126391C18B7E600375D95 /* おはようボイス_天気_4.mp3 */,
+				B81D2D721C1C0C4F0086E22A /* めざましボイス */,
+				B81D2D631C1C02F10086E22A /* 目覚ましセット */,
+				B81D2D621C1C01760086E22A /* おはようボイス */,
+				B81D2D411C1C01660086E22A /* 挨拶 */,
 			);
 			path = voice;
 			sourceTree = "<group>";
@@ -403,7 +537,8 @@
 		B87DC8BF1BF4F4FE005FBC8C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				B80568131C187A33003F4E68 /* FadeLabel.swift */,
+				B80568131C187A33003F4E68 /* FadeLabelOrg.swift */,
+				B8F299D21C241850004C34D8 /* FadeLabel.swift */,
 				B89F08241BF9A60F00BEC64C /* Regexp.swift */,
 				B8C11E181C06D4B50064C8A1 /* SWXMLHash.swift */,
 				B8274CD81BEBA7FE000FEADE /* SwiftyJSON.swift */,
@@ -430,6 +565,14 @@
 		B8D915621BFB537700630DD5 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				B8F299C61C240775004C34D8 /* お天気アイコン-晴れ.png */,
+				B8F299C81C240CAD004C34D8 /* お天気アイコン-雨.png */,
+				B8F299C91C240CAD004C34D8 /* お天気アイコン-豪雨.png */,
+				B8F299CA1C240CAD004C34D8 /* お天気アイコン-晴れ時々曇り.png */,
+				B8F299CB1C240CAD004C34D8 /* お天気アイコン-曇り.png */,
+				B8F299BF1C240538004C34D8 /* お天気枠.png */,
+				B8F299D01C24143C004C34D8 /* メッセージ枠-半透明.png */,
+				B81D2D8C1C1C29640086E22A /* album.png */,
 				B8D915741BFB53DF00630DD5 /* buttonAlarm.png */,
 				B8D915631BFB537700630DD5 /* buttonVoice.png */,
 				B8D915781BFB540700630DD5 /* hotaruN.png */,
@@ -449,6 +592,7 @@
 		B8D9156F1BFB538D00630DD5 /* se */ = {
 			isa = PBXGroup;
 			children = (
+				B81D2D791C1C0E8A0086E22A /* アラーム通知音_0.aif */,
 				B8D915721BFB539800630DD5 /* alarm-1.mp3 */,
 				B81D60DE1C0499F500726CA8 /* alarm-2.mp3 */,
 				B81D60DF1C0499F500726CA8 /* alarm-3.mp3 */,
@@ -461,8 +605,6 @@
 		B8D9157A1BFB542600630DD5 /* text */ = {
 			isa = PBXGroup;
 			children = (
-				B88C99591C02D08F000581CA /* greeting.txt */,
-				B8D9157B1BFB542600630DD5 /* sample-utf8.txt */,
 				B81D60CB1C044A4200726CA8 /* おはようボイス.txt */,
 				B87E7A151C03427600D492D2 /* ひとこと.txt */,
 				B87E7A121C03415900D492D2 /* 挨拶.txt */,
@@ -582,51 +724,87 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F299CE1C240CAD004C34D8 /* お天気アイコン-晴れ時々曇り.png in Resources */,
+				B81D2D5B1C1C01710086E22A /* 挨拶_昼_2.mp3 in Resources */,
 				B80568041C18226A003F4E68 /* おはようボイス_可愛い_2_0.mp3 in Resources */,
+				B81D2D831C1C106B0086E22A /* おはようボイス_天気_2_0.mp3 in Resources */,
 				B8D915791BFB540700630DD5 /* hotaruN.png in Resources */,
 				B81D60E21C0499F500726CA8 /* alarm-3.mp3 in Resources */,
+				B81D2D821C1C106B0086E22A /* おはようボイス_天気_1_1.mp3 in Resources */,
+				B8F299D11C24143C004C34D8 /* メッセージ枠-半透明.png in Resources */,
+				B81D2D571C1C01710086E22A /* 挨拶_早朝_2.mp3 in Resources */,
+				B8F299CF1C240CAD004C34D8 /* お天気アイコン-曇り.png in Resources */,
+				B8F299C51C240538004C34D8 /* お天気枠.png in Resources */,
 				B8B126261C18A57100375D95 /* MTLc3m.ttf in Resources */,
 				B8B126441C18B7E600375D95 /* おはようボイス_天気_2.mp3 in Resources */,
+				B81D2D871C1C13B40086E22A /* めざましボイス_1.mp3 in Resources */,
+				B81D2D701C1C095B0086E22A /* 挨拶_昼_1_0.mp3 in Resources */,
 				B8D915771BFB53ED00630DD5 /* set.png in Resources */,
 				B8C11E171C05DF650064C8A1 /* koron.wav in Resources */,
 				B80568051C18226A003F4E68 /* おはようボイス_可愛い_2_1.mp3 in Resources */,
+				B8F299CC1C240CAD004C34D8 /* お天気アイコン-雨.png in Resources */,
+				B81D2D8D1C1C29640086E22A /* album.png in Resources */,
 				B83D3D831C15CF5200A0E8B1 /* おはようボイス_可愛い_1.mp3 in Resources */,
 				B8B1263A1C18B7E600375D95 /* おはようボイス_あまめ_0_0.mp3 in Resources */,
 				B8274CA81BEBA716000FEADE /* LaunchScreen.storyboard in Resources */,
 				B8B1263E1C18B7E600375D95 /* おはようボイス_あまめ_0_2.mp3 in Resources */,
 				B8B126191C18A0E600375D95 /* HuiFont29.ttf in Resources */,
 				B8D915691BFB537700630DD5 /* buttonVoice.png in Resources */,
+				B81D2D591C1C01710086E22A /* 挨拶_昼_0B.mp3 in Resources */,
 				B8B1262E1C18AD2700375D95 /* hotaruSML_2.png in Resources */,
+				B81D2D7A1C1C0E8A0086E22A /* アラーム通知音_0.aif in Resources */,
+				B81D2D5A1C1C01710086E22A /* 挨拶_昼_1.mp3 in Resources */,
+				B81D2D541C1C01710086E22A /* 挨拶_深夜_2.mp3 in Resources */,
+				B81D2D581C1C01710086E22A /* 挨拶_昼_0.mp3 in Resources */,
 				B8D9156B1BFB537700630DD5 /* hotaruSML.png in Resources */,
 				B8B126301C18AD2700375D95 /* hotaruSML_1.png in Resources */,
-				B88C995A1C02D08F000581CA /* greeting.txt in Resources */,
 				B8B126241C18A57100375D95 /* azuki.ttf in Resources */,
+				B81D2D5C1C1C01710086E22A /* 挨拶_朝_0.mp3 in Resources */,
 				B8B1263C1C18B7E600375D95 /* おはようボイス_あまめ_0_1.mp3 in Resources */,
 				B8B1262A1C18A57100375D95 /* APJapanesefont.ttf in Resources */,
 				B8D915731BFB539800630DD5 /* alarm-1.mp3 in Resources */,
+				B81D2D6A1C1C05130086E22A /* 挨拶_昼_2_0.mp3 in Resources */,
+				B81D2D531C1C01710086E22A /* 挨拶_深夜_1.mp3 in Resources */,
 				B8B1264B1C19738100375D95 /* メッセージウィンドウ2.png in Resources */,
+				B81D2D5E1C1C01710086E22A /* 挨拶_朝_2.mp3 in Resources */,
 				B80568071C184E52003F4E68 /* おはようボイス_ささやき_0.mp3 in Resources */,
 				B81D60E01C0499F500726CA8 /* alarm-2.mp3 in Resources */,
+				B81D2D6B1C1C05130086E22A /* 挨拶_昼_2_1.mp3 in Resources */,
 				B87E7A161C03427600D492D2 /* ひとこと.txt in Resources */,
+				B81D2D6D1C1C06D30086E22A /* めざましセット_0.mp3 in Resources */,
+				B81D2D551C1C01710086E22A /* 挨拶_早朝_0.mp3 in Resources */,
 				B87E7A131C03415900D492D2 /* 挨拶.txt in Resources */,
+				B81D2D711C1C095B0086E22A /* 挨拶_昼_1_1.mp3 in Resources */,
 				B80568111C1871C9003F4E68 /* メッセージウィンドウ.png in Resources */,
+				B81D2D521C1C01710086E22A /* 挨拶_深夜_0.mp3 in Resources */,
 				B8B126421C18B7E600375D95 /* おはようボイス_天気_1.mp3 in Resources */,
 				B80568011C181E36003F4E68 /* おはようボイス_可愛い_0_1.mp3 in Resources */,
+				B8F299C71C240775004C34D8 /* お天気アイコン-晴れ.png in Resources */,
 				B8274CA51BEBA716000FEADE /* Assets.xcassets in Resources */,
 				B8D915751BFB53DF00630DD5 /* buttonAlarm.png in Resources */,
 				B80568001C181E36003F4E68 /* おはようボイス_可愛い_0_0.mp3 in Resources */,
+				B81D2D5D1C1C01710086E22A /* 挨拶_朝_1.mp3 in Resources */,
 				B8B126461C18B7E600375D95 /* おはようボイス_天気_3.mp3 in Resources */,
+				B81D2D811C1C106B0086E22A /* おはようボイス_天気_1_0.mp3 in Resources */,
 				B81D60CC1C044A4200726CA8 /* おはようボイス.txt in Resources */,
 				B8D9156E1BFB537700630DD5 /* ホーム画面背景.png in Resources */,
 				B8B126201C18A57100375D95 /* GeosansLight.ttf in Resources */,
+				B81D2D841C1C106B0086E22A /* おはようボイス_天気_2_1.mp3 in Resources */,
+				B81D2D7C1C1C0F2E0086E22A /* めざましセット_1.mp3 in Resources */,
 				B8B126401C18B7E600375D95 /* おはようボイス_天気_0.mp3 in Resources */,
 				B8D9156D1BFB537700630DD5 /* アラームセット画面.png in Resources */,
+				B81D2D561C1C01710086E22A /* 挨拶_早朝_1.mp3 in Resources */,
 				B8B126221C18A57100375D95 /* NfMotoyaAporoStd-W1.otf in Resources */,
+				B81D2D5F1C1C01710086E22A /* 挨拶_夜_0.mp3 in Resources */,
 				B8D915711BFB538D00630DD5 /* nosound.mp3 in Resources */,
+				B81D2D611C1C01710086E22A /* 挨拶_夜_2.mp3 in Resources */,
 				B87321761C12D4C100454678 /* hotaruSLP.png in Resources */,
+				B8F299CD1C240CAD004C34D8 /* お天気アイコン-豪雨.png in Resources */,
+				B81D2D741C1C0C5D0086E22A /* めざましボイス_0.mp3 in Resources */,
+				B81D2D601C1C01710086E22A /* 挨拶_夜_1.mp3 in Resources */,
 				B8B126481C18B7E600375D95 /* おはようボイス_天気_4.mp3 in Resources */,
+				B81D2D881C1C13B40086E22A /* めざましボイス_2.mp3 in Resources */,
 				B8274CA31BEBA716000FEADE /* Main.storyboard in Resources */,
-				B8D9157C1BFB542600630DD5 /* sample-utf8.txt in Resources */,
 				B8B126281C18A57100375D95 /* MTLmr3m.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,7 +836,6 @@
 				B8B1263B1C18B7E600375D95 /* おはようボイス_あまめ_0_0.mp3 in Resources */,
 				B8B126271C18A57100375D95 /* MTLc3m.ttf in Resources */,
 				B8B126451C18B7E600375D95 /* おはようボイス_天気_2.mp3 in Resources */,
-				B88C995B1C02D08F000581CA /* greeting.txt in Resources */,
 				B8B1263D1C18B7E600375D95 /* おはようボイス_あまめ_0_1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -680,13 +857,14 @@
 				B805681A1C187F56003F4E68 /* UIOutlineLabel.swift in Sources */,
 				B80568171C187A8C003F4E68 /* SampleViewController.swift in Sources */,
 				B85707741BF2034F000E6639 /* AutoLayoutHelper.swift in Sources */,
-				B80568141C187A33003F4E68 /* FadeLabel.swift in Sources */,
+				B80568141C187A33003F4E68 /* FadeLabelOrg.swift in Sources */,
 				B87DC8C11BF4F542005FBC8C /* AlarmPlayer.swift in Sources */,
 				B89F083B1BFA140800BEC64C /* LocationGetter.swift in Sources */,
 				B8274CA01BEBA716000FEADE /* HomeViewController.swift in Sources */,
 				B8274CD61BEBA7C3000FEADE /* WeatherGetter.swift in Sources */,
 				B89F08251BF9A60F00BEC64C /* Regexp.swift in Sources */,
 				B87CB7E11BFC4D7D0059872C /* Constants.swift in Sources */,
+				B8F299D31C241850004C34D8 /* FadeLabel.swift in Sources */,
 				B8274CD01BEBA78D000FEADE /* SoundPlayer.swift in Sources */,
 				B8274CD91BEBA7FE000FEADE /* SwiftyJSON.swift in Sources */,
 				B87321851C12F5CF00454678 /* MorningVoiceBuilder.swift in Sources */,
@@ -719,7 +897,7 @@
 				B89F08261BF9A60F00BEC64C /* Regexp.swift in Sources */,
 				B89F083E1BFAA01B00BEC64C /* LocationGetterTest.swift in Sources */,
 				B81D60D41C046AB000726CA8 /* MorningVoiceBuilderTest.swift in Sources */,
-				B80568151C187A33003F4E68 /* FadeLabel.swift in Sources */,
+				B80568151C187A33003F4E68 /* FadeLabelOrg.swift in Sources */,
 				B87CB7E21BFC4D7D0059872C /* Constants.swift in Sources */,
 				B87E7A0F1C0329A500D492D2 /* VoiceFileManager.swift in Sources */,
 				B89F08331BF9FAC100BEC64C /* WeatherGetterTest.swift in Sources */,
